@@ -1,0 +1,154 @@
+<nav class="navbar navbar-inverse">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+          aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a routerLink="/">
+          <img border="0" alt="Asset Management" src="assets/images/TM_logo_reverse.png" width="180" height="45">
+        </a>
+        <!--<img style="width: 180px" href="/" src="assets/images/Logo1.png" alt="Asset Management" />-->
+        <!--<a class="navbar-brand" href="/">Digital Asset Mapping Tool</a>-->
+      </div>
+      <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          <li [routerLinkActive]="['active']">
+            <a routerLink="/">Home</a>
+          </li>
+          <li class="dropdown" *ngIf="!disableadmin">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">Bus Transport
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li [routerLinkActive]="['active']">
+                <a routerLink="/employee/requestbus">Raise Request Bus</a>
+              </li>
+              <li [routerLinkActive]="['active']">
+                <a routerLink="/employee/availability">View Availability</a>
+              </li>
+              <li [routerLinkActive]="['active']">
+                <a routerLink="/Site">View History</a>
+              </li>
+              <li [routerLinkActive]="['active']">
+                <a routerLink="/AddRole">Cancel Request</a>
+              </li>
+              <li>
+                <a routerLink="/AddAction">Print Bus Pass</a>
+              </li>
+  
+            </ul>
+          </li>
+          <li class="dropdown" *ngIf="!disableadmin">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">Cab Management System
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li>
+                <a routerLink="/Category">Raise Cab Request</a>
+              </li>
+              <li>
+                <a routerLink="/Site">View History</a>
+              </li>
+  
+              <li>
+                <a routerLink="/Site">Manager Approval</a>
+              </li>
+            </ul>
+          </li>
+          <li class="dropdown" *ngIf="!disableadmin">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">Transport Team
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li>
+                <a routerLink="/Category">Routes</a>
+              </li>
+              <li>
+                <a routerLink="/Category">Boarding Points</a>
+              </li>
+              <li>
+                <a routerLink="/Category">Add Boarding Point To Route</a>
+              </li>
+              <li>
+                <a routerLink="/Site">Assign Bus To Route</a>
+              </li>
+              <li>
+                <a routerLink="/Category">Approve Vehicle</a>
+              </li>
+              <li>
+                <a routerLink="/Category">Acknowwledge Cab Request</a>
+              </li>
+              <li>
+                <a routerLink="/Category">Vendor Registration</a>
+              </li>
+              <li>
+                <a routerLink="/Category">Organization</a>
+              </li>
+              <li>
+                <a routerLink="/Category">Journey City</a>
+              </li>
+              <li>
+                <a routerLink="/Category">Journey Location</a>
+              </li>
+              <li>
+                <a routerLink="/Category">Shift Details</a>
+              </li>
+              <li>
+                <a routerLink="/Category">Service Type</a>
+              </li>
+              <li>
+                <a routerLink="/Category">Journey Type</a>
+              </li>
+            </ul>
+          </li>
+          <li class="dropdown" *ngIf="!disableadmin">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">Vendor Team
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li>
+                <a routerLink="/Category">Register Vehicle</a>
+              </li>
+              <li>
+                <a routerLink="/Site">Register Driver</a>
+              </li>
+              <li>
+                  <a routerLink="/Category">Driver Allocation</a>
+                </li>
+                <li>
+                  <a routerLink="/Site">Accept Vendor Request</a>
+                </li>
+            </ul>
+          </li>
+        </ul>
+  
+        <ul class="nav navbar-nav navbar-right">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Welcome, Partha Saradhi Gajula
+              <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+              <li>
+                <a routerLink="/UpdateProfile">
+                  <i class="icon-envelope"></i> Update Profile</a>
+              </li>
+              <li>
+                <a routerLink="/ChangePassword">
+                  <i class="icon-envelope"></i> Change Password</a>
+              </li>
+              <li class="divider"></li>
+              <li>
+                <a routerLink="/login">
+                  <i class="icon-off"></i> Logout</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <!--/.navbar-collapse -->
+    </div>
+  </nav>

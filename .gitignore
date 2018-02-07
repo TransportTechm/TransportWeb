@@ -1,5 +1,5 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
-
+add 'node_modules' to .gitignore file
 # compiled output
 /dist
 /dist-server
