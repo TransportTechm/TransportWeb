@@ -2,31 +2,45 @@
 <div class="container">
   <div class="panel panel-primary">
     <div class="panel-heading">
-      <h3 class="panel-title">Bus Facility Request</h3>
+      <h3 class="panel-title">Raise Request</h3>
     </div>
     <div class="panel-body">
-      <form class="form-inline">
+      <form class="form">
+          <div class="col-md-12 col-sm-12">
+              <div class="form-group col-md-4 col-sm-4">
+                <label class="control-label" for="name">Associate ID </label>
+                <input type="text" class="form-control" placeholder="99999" disabled>
+              </div>
+              <div class="form-group col-md-4 col-sm-4">
+                <label class="control-label" for="email">Name</label>
+                  <input type="text" class="form-control" placeholder="TechM" disabled>
+              </div>
+              <div class="form-group col-md-4 col-sm-4">
+                  <label for="email">Gender</label>
+                  <input type="text" class="form-control" placeholder="Male" disabled>
+                </div>
+            </div>
         <div class="col-md-12 col-sm-12">
-          <div class="form-group col-md-6 col-sm-6">
-            <label for="name">Journey City </label>
-            <input type="text" class="form-control input-sm" id="name" placeholder="">
+          <div class="form-group col-md-4 col-sm-4">
+            <label class="control-label" for="name">Journey City </label>
+            <select class="form-control input-sm" id="years">
+              <option>-- Select City --</option>
+              <option>Bangalore</option>
+              <option>Hyderabad</option>
+            </select>
           </div>
-          <div class="form-group col-md-6 col-sm-6">
-            <label for="email">Journey Location</label>
+          <div class="form-group col-md-4 col-sm-4">
+            <label class="control-label" for="email">Journey Location</label>
             <select class="form-control input-sm" id="years">
               <option>-- Select Journey Location --</option>
               <option>TechM</option>
               <option>SEZ</option>
             </select>
           </div>
-          <div class="form-group col-md-6 col-sm-6">
-            <label for="email">akshay</label>
-            <select class="form-control input-sm" id="years">
-              <option>-- Select Journey Location --</option>
-              <option>TechM</option>
-              <option>SEZ</option>
-            </select>
-          </div>
+          <div class="form-group col-md-4 col-sm-4">
+              <label class="control-label" for="name">Contact Number </label>
+              <input type="text" class="form-control" placeholder="Enter Contact Number">
+            </div>
         </div>
       </form>
     </div>
