@@ -8,18 +8,10 @@ const employeeroutes: Routes = [
   {
     path: '',
     children: [
-      {
-        path: 'requestbus',
-        component: RequestBusComponent
-      },
-      {
-        path: 'availability',
-        component: ViewAvailabilityComponent
-      }
+      {path: 'requestbus',component: RequestBusComponent},
+      {path: 'availability',component: ViewAvailabilityComponent}
     ]
   }
-  // { path: 'requestbus', component: RequestBusComponent },
-  // { path: 'availability', component: ViewAvailabilityComponent }
 ];
 
 @NgModule({
