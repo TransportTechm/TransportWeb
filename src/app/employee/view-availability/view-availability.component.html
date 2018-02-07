@@ -1,7 +1,59 @@
 <app-nav></app-nav>
 <div class="container">
-  <h1>
-    view-availability works!
-  </h1>
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h3 class="panel-title">View Availability</h3>
+        </div>
+        <div class="panel-body">
+          <form class="form">
+              <div class="col-md-12 col-sm-12">
+                  <div class="form-group col-md-4 col-sm-4">
+                      <label class="control-label" for="city">City Name</label>
+                      <select class="form-control input-sm" id="years">
+                        <option>-- Select City --</option>
+                        <option>Bangalore</option>
+                        <option>Hyderabad</option>
+                      </select>
+                  </div>
+                  <div class="form-group col-md-4 col-sm-4">
+                      <label class="control-label" for="location">Journey Location</label>
+                      <select class="form-control input-sm" id="years">
+                        <option>-- Select Journey Location --</option>
+                        <option>TechM</option>
+                        <option>SEZ</option>
+                      </select>
+                  </div>
+                  <div class="form-group col-md-4 col-sm-4">
+                      <label for="gender">Ticket Type</label>
+                      <div class="radio-inline">
+                          <label><input type="radio" name="YJT">Yearly Journey Ticket</label>
+                        </div>
+                        <div class="radio-inline">
+                          <label><input type="radio" name="SJT">Single Journey Ticket</label>
+                        </div>
+                    </div>
+                </div>
+            <div class="col-md-12 col-sm-12">
+              <div class="form-group col-md-4 col-sm-4">
+                <label class="control-label" for="city">Route No.</label>
+                <input type="text" class="form-control" placeholder="Enter Route Number">
+              </div>
+              <div class="form-group col-md-4 col-sm-4">
+                <label class="control-label" for="location">From</label>
+                <input type="text" class="form-control" placeholder="Enter From Location">
+              </div>
+              <div class="form-group col-md-4 col-sm-4">
+                  <label class="control-label" for="contact">To</label>
+                  <input type="text" class="form-control" placeholder="Enter To Location">
+                </div>
+            </div>
+          </form>
+          <div style="text-align:center">
+              <button type="submit" class="btn btn-primary">Submit</button>
+              <button type="button" class="btn btn-default">Cancel</button>
+          </div>
+        </div>
+      </div>
+
 </div>
 

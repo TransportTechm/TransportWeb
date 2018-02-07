@@ -8,21 +8,21 @@
       <form class="form">
           <div class="col-md-12 col-sm-12">
               <div class="form-group col-md-4 col-sm-4">
-                <label class="control-label" for="name">Associate ID </label>
+                <label class="control-label" for="GID">Associate ID </label>
                 <input type="text" class="form-control" placeholder="99999" disabled>
               </div>
               <div class="form-group col-md-4 col-sm-4">
-                <label class="control-label" for="email">Name</label>
+                <label class="control-label" for="name">Name</label>
                   <input type="text" class="form-control" placeholder="TechM" disabled>
               </div>
               <div class="form-group col-md-4 col-sm-4">
-                  <label for="email">Gender</label>
+                  <label for="gender">Gender</label>
                   <input type="text" class="form-control" placeholder="Male" disabled>
                 </div>
             </div>
         <div class="col-md-12 col-sm-12">
           <div class="form-group col-md-4 col-sm-4">
-            <label class="control-label" for="name">Journey City </label>
+            <label class="control-label" for="city">Journey City </label>
             <select class="form-control input-sm" id="years">
               <option>-- Select City --</option>
               <option>Bangalore</option>
@@ -30,7 +30,7 @@
             </select>
           </div>
           <div class="form-group col-md-4 col-sm-4">
-            <label class="control-label" for="email">Journey Location</label>
+            <label class="control-label" for="location">Journey Location</label>
             <select class="form-control input-sm" id="years">
               <option>-- Select Journey Location --</option>
               <option>TechM</option>
@@ -38,9 +38,66 @@
             </select>
           </div>
           <div class="form-group col-md-4 col-sm-4">
-              <label class="control-label" for="name">Contact Number </label>
+              <label class="control-label" for="contact">Contact Number </label>
               <input type="text" class="form-control" placeholder="Enter Contact Number">
             </div>
         </div>
+        <font><strong style="color: Red">NOTE:</strong></font>
+         Single Journey is limited to 7 days only(7 time usage ) after that the usage will be charged for Full month (band wise)
+        <td>
+        <font><strong style="color: Red">NOTE:</strong></font>
+         Revised Single Journey charges for PUNE location: Rs.100/- per day
       </form>
+      <div style="text-align:center">
+          <button type="submit" class="btn btn-primary">Submit</button>
+          <button type="button" class="btn btn-default">Cancel</button>
+      </div>
     </div>
+  </div>
+<!-- Start of second panel -->
+  <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3 class="panel-title">Raise Request</h3>
+      </div>
+      <div class="panel-body">
+        <form class="form">
+            <button type="button" class="btn btn-block btn-info btn-xs" style="width:270px" data-toggle="modal" data-target="#infomodal">Click to view the procedure before registering</button>
+            <div class="col-md-12 col-sm-12">
+              <div class="form-group col-md-4 col-sm-4">
+                <label class="control-label" for="ticket_type">Please select the Journey Type: </label>
+              </div>
+              <div class="form-group col-md-8 col-sm-8">
+                <label class="radio-inline">
+                    <input type="radio" name="YJT">Yearly Journey Ticket
+                  </label>
+                  <label class="radio-inline">
+                    <input type="radio" name="SJT">Single Journey Ticket
+                  </label>
+                </div>
+              </div>
+        </form>
+        <div style="text-align:center">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+      </div>
+    </div>
+    <!-- End of second panel -->
+
+    <div class="modal fade" id="infomodal" tabindex="-1" role="dialog">
+        <div class="modal-dialog bigmodal" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-primary">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title">Info</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row clearfix">
+                      <p>Hello please read this</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
