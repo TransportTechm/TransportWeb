@@ -33,7 +33,16 @@ export class RequestBusComponent implements OnInit {
       DepartuteTime : "9:30 AM",
       PickupPoint: ["Ecity", "BTM", "sarjapur"]
   }]
-
+  }
+  togglepickpoint(pickpoint1){
+    console.log(pickpoint1);
+  }
+  onSelect(selectedItem: any) {
+    console.log("Route No: ", selectedItem.RouteNo);
+    console.log("Origin: ", selectedItem.Origin);
+    console.log("Destination: ", selectedItem.Destination);
+    console.log("Departure Time: ", selectedItem.DepartuteTime);
+    console.log("Pickup/Drop Point: ", selectedItem.pickpoint1)
   }
   public register(model) {
     console.log(model);
@@ -41,16 +50,17 @@ export class RequestBusComponent implements OnInit {
     private buildForm(): void {
       this.registerForm = this._formBuilder.group({
         'gid': ['4900', [Validators.required]],
-        'emp_name': ['', [Validators.required]],
-        'gender': ['', [Validators.required]],
+        'emp_name': ['empname', [Validators.required]],
+        'gender': ['male', [Validators.required]],
         'journeycity': ['', [Validators.required]],
         'journeylocation': ['', [Validators.required]],
         'ContactNumber': ['', [Validators.required]],
         'ticket_type': ['', [Validators.required]],
-        // 'Route No': ['', [Validators.required]],
+        'Route No': ['', [Validators.required]],
         // 'Pickup Point': ['', [Validators.required]]
       });
   }
+  
 }
   
 
