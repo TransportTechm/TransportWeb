@@ -8,6 +8,9 @@ import { ReactiveFormsModule, FormGroup, FormControl, Validators, FormBuilder, F
 })
 export class RequestBusComponent implements OnInit {
   public registerForm: FormGroup;
+  public showme: boolean = false;
+  public pickupPoint: any;
+  public json1: JSON;
   public routes_list : [{
     RouteNo: string,
     Origin : string,
@@ -35,18 +38,26 @@ export class RequestBusComponent implements OnInit {
   }]
   }
   togglepickpoint(pickpoint1){
-    console.log(pickpoint1);
+    this.pickupPoint = pickpoint1;
   }
   onSelect(selectedItem: any) {
+    console.log(selectedItem);
     console.log("Route No: ", selectedItem.RouteNo);
     console.log("Origin: ", selectedItem.Origin);
     console.log("Destination: ", selectedItem.Destination);
     console.log("Departure Time: ", selectedItem.DepartuteTime);
-    console.log("Pickup/Drop Point: ", selectedItem.pickpoint1)
+    console.log("Pickup/Drop Point: ", this.pickupPoint)
   }
   public register(model) {
     console.log(model);
   }
+  showpanel(){
+    this.showme = true;
+  }
+  reset() {
+    this.showme = false;
+  }
+
     private buildForm(): void {
       this.registerForm = this._formBuilder.group({
         'gid': ['4900', [Validators.required]],

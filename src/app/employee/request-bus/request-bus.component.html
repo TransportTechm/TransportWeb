@@ -47,19 +47,20 @@
             <input formControlName="ContactNumber" type="text" class="form-control" placeholder="Enter Contact Number" required>
           </div>
         </div>
-        <font><strong class="textcolor">NOTE:</strong></font>
+        <font><b class="textcolor">NOTE:</b></font>
         Single Journey is limited to 7 days only(7 time usage ) after that the usage will be charged for Full month (band wise)
         <td>
-          <font><strong class="textcolor">NOTE:</strong></font>
+          <font><b class="textcolor">NOTE:</b></font>
           Revised Single Journey charges for PUNE location: Rs.100/- per day
           <div class="centeralign">
-            <button type="button" class="btn btn-primary">Proceed</button>
-            <button type="reset" class="btn btn-default">Reset</button>
+            <button type="button" (click)="showpanel()" class="btn btn-primary" >Proceed</button>
+            <button type="reset" (click)="reset()" class="btn btn-default">Reset</button>
           </div>
       <!-- </form> -->
     </div>
   </div>
   <!-- Start of second panel -->
+  <div *ngIf="showme">
   <div class="panel panel-primary">
     <div class="panel-heading">
       <h3 class="panel-title">Registration for February 2018</h3>
@@ -130,7 +131,8 @@
                     </td>
                     <td align="center" valign="middle">
                       <select class="form-control input-sm" (change)="togglepickpoint($event.target.value)">
-                        <option *ngFor="let options of routes.PickupPoint; let j = index">{{routes.PickupPoint[j]}}</option>
+                        <option></option>
+                        <option *ngFor="let options of routes.PickupPoint; let j = index" [value]="routes.PickupPoint[j]">{{routes.PickupPoint[j]}}</option>
                       </select>
                     </td>
                 </tr>
@@ -154,6 +156,7 @@
       </div>
       <!-- grid ends -->
     </div>
+  </div>
   </div>
   <!-- End of second panel -->
   <!-- popup start -->
