@@ -19,6 +19,7 @@ export class NavComponent implements OnInit {
     if(userData === undefined){
       this.router.navigate(['/login']);
     }
+    if(userData){
     this.userName=userData[0]['first_name'] + " "+  userData[0]['last_name'];
     userData.forEach(element => {
       if(element.role_name === 'Employee'){
@@ -29,7 +30,9 @@ export class NavComponent implements OnInit {
       }else if(element.role_name === 'Transport Team'){
         this.disableVendor = false;
       }
+    
     });
+  }
   }
   logOut(){
     localStorage.removeItem('userData');
