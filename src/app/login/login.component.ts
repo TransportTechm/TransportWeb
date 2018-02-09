@@ -13,11 +13,12 @@ export class LoginComponent implements OnInit {
   loading = false;
   error = '';
   userResult: any = [];
-  url:any;
+  url: any;
   constructor(
     private router: Router,
-    private loginService: LoginService) {}
+    private loginService: LoginService) { }
   ngOnInit() {
+    localStorage.removeItem('userData');
   }
   login() {
     this.loading = true;

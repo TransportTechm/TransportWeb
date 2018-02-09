@@ -10,6 +10,7 @@ export class StartComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    console.log(JSON.parse(localStorage.getItem('userData')))
   }
 
 }

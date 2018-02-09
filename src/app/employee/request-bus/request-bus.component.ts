@@ -61,9 +61,9 @@ export class RequestBusComponent implements OnInit {
   }
   private buildForm(): void {
     this.registerForm = this._formBuilder.group({
-      'gid': ['4900', [Validators.required]],
-      'emp_name': ['empname', [Validators.required]],
-      'gender': ['male', [Validators.required]],
+      'gid': [{value: '326608', disabled: true}, [Validators.required]],
+      'emp_name': [{value: 'Partha Saradhi Gajula', disabled: true}, [Validators.required]],
+      'gender': [{value: 'Male', disabled: true}, [Validators.required]],
       'journeycity': ['', [Validators.required]],
       'journeylocation': ['', [Validators.required]],
       'ContactNumber': ['', [Validators.required]],
