@@ -12,14 +12,14 @@ export class LoginService {
   constructor(private http: Http) {
   }
   authenticate(login) {
-    this.url="http://localhost:3000/api/1.0/authenticate?email="+login.email+"&password="+login.password+""
+    this.url="http://localhost:3000/transportationapi/employee/1.0/users/login?username="+login.username+"&password="+login.password+""
     return this.http.get(this.url)
     .map(response => response.json())
     .catch(this.handleError);
   }
 
   private handleError(error: Response | any) {
-    const errMsg = (error.message) ? error.message :
+    const errMsg = (error._body) ? error._body :
         error.status ? `${error.status} - ${error.statusText}` : 'Server error';
     return Observable.throw(errMsg);
 }

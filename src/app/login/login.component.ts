@@ -13,10 +13,24 @@ export class LoginComponent implements OnInit {
   loading = false;
   error = '';
   userResult: any = [];
-  constructor() { }
+  url:any;
+  constructor(
+    private router: Router,
+    private loginService: LoginService) {}
   ngOnInit() {
   }
   login() {
     this.loading = true;
+    this.loginService.authenticate(this.model).subscribe(user => {
+      let userJson = user;
+      console.log(user);
+      localStorage.setItem('userData', JSON.stringify(user))
+      this.loading = false;
+      this.router.navigate(['/']);
+    }, err => {
+      var errJson = JSON.parse(err);
+      this.error = errJson.message;
+      this.loading = false;
+    })
   }
 }
