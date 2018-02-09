@@ -14,15 +14,20 @@ export class RequestBusComponent implements OnInit {
   ngOnInit() {
     this.buildForm();
   }
-
+  public register(model) {
+    console.log(model);
+  }
     private buildForm(): void {
       this.registerForm = this._formBuilder.group({
-        'Journey City': ['', [Validators.required]],
-        'Journey Location': ['', [Validators.required]],
-        'Contact Number': ['', [Validators.required]],
-        'Journey Type': ['', [Validators.required]],
+        'gid': ['', [Validators.required]],
+        'emp_name': ['', [Validators.required]],
+        'gender': ['', [Validators.required]],
+        'journeycity': ['', [Validators.required]],
+        'journeylocation': ['', [Validators.required]],
+        'ContactNumber': ['', [Validators.required]],
+        /* 'ticket_type': ['', [Validators.required]],
         'Route No': ['', [Validators.required]],
-        'Pickup Point': ['', [Validators.required]]
+        'Pickup Point': ['', [Validators.required]] */
       });
   }
 
