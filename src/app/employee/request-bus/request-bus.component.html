@@ -1,12 +1,14 @@
 <app-nav></app-nav>
 <div class="container">
+    <form [formGroup]="registerForm" role="form" name="form" (ngSubmit)="register(registerForm.value)" #f="ngForm" novalidate
+    class="form">
   <div class="panel panel-primary">
     <div class="panel-heading">
       <h3 class="panel-title">Raise Request</h3>
     </div>
     <div class="panel-body">
-      <form [formGroup]="registerForm" role="form" name="form" (ngSubmit)="register(registerForm.value)" #f="ngForm" novalidate
-        class="form">
+      <!-- <form [formGroup]="registerForm" role="form" name="form" (ngSubmit)="register(registerForm.value)" #f="ngForm" novalidate
+        class="form"> -->
         <div class="col-md-12 col-sm-12">
           <div class="col-md-4 col-sm-4">
             <div class="form-group">
@@ -51,10 +53,10 @@
           <font><strong class="textcolor">NOTE:</strong></font>
           Revised Single Journey charges for PUNE location: Rs.100/- per day
           <div class="centeralign">
-            <button type="submit" class="btn btn-primary">Proceed</button>
-            <button type="button" class="btn btn-default">Reset</button>
+            <button type="button" class="btn btn-primary">Proceed</button>
+            <button type="reset" class="btn btn-default">Reset</button>
           </div>
-      </form>
+      <!-- </form> -->
     </div>
   </div>
   <!-- Start of second panel -->
@@ -63,7 +65,7 @@
       <h3 class="panel-title">Registration for February 2018</h3>
     </div>
     <div class="panel-body">
-      <form class="form">
+      <!-- <form class="form"> -->
         <div class="width">
           <button type="button" class="btn btn-block btn-info btn-xs" data-toggle="modal" data-target="#infomodal">Click to view the procedure before registering</button>
         </div>
@@ -80,9 +82,9 @@
                   </label>
           </div>
         </div>
-      </form>
+      <!-- </form> -->
       <div>
-        <button type="submit" class="btn btn-primary center-block">Select</button>
+        <button type="button" class="btn btn-primary center-block">Select</button>
       </div>
       <!-- grid start -->
       <div class="box">
@@ -97,7 +99,7 @@
             <tr>
               <td>
                 <div class="width">
-                  <button type="submit" class="btn btn-block btn-info btn-xs">Click here to download Route details</button>
+                  <button type="button" class="btn btn-block btn-info btn-xs">Click here to download Route details</button>
                 </div>
               </td>
             </tr>
@@ -115,83 +117,26 @@
                   <th>View Pickup/Drop points</th>
                   <th>Pickup point</th>
                 </tr>
-                <tr>
-                  <td align="center" valign="middle"> <input type="radio" name="route"></td>
-                  <td align="center" valign="middle">1</td>
-                  <td align="center" valign="middle">TMEC</td>
-                  <td align="center" valign="middle">Nagalanda Circle</td>
-                  <td align="center" valign="middle">8:50AM</td>
-                  <td align="center" valign="middle">
-                    <a href="#" class="btn btn-info btn-sm">
-                      <span class="glyphicon glyphicon-list-alt"></span> View
-                    </a>
-                  </td>
-                  <td align="center" valign="middle">
-                    <select class="form-control input-sm" id="years">
-                      <option></option>
-                      <option>Nagalanda Junction</option>
-                      <option>Madiwala</option>
-                      <option>Marathahalli</option>
-                      <option>Bangalore Cant</option>
-                    </select>
-                  </td>
-                </tr>
-                <tr>
-                  <td align="center" valign="middle"> <input type="radio" name="route"></td>
-                  <td align="center" valign="middle">2</td>
-                  <td align="center" valign="middle">TMEC</td>
-                  <td align="center" valign="middle">Konappana Agrahara</td>
-                  <td align="center" valign="middle">9:30AM</td>
-                  <td align="center" valign="middle">
-                    <a href="#" class="btn btn-info btn-sm">
-                          <span class="glyphicon glyphicon-list-alt"></span> View
-                        </a>
-                  </td>
-                  <td align="center" valign="middle">
-                    <select class="form-control input-sm" id="years">
-                        <option></option>
-                        <option>BTM Layout</option>
-                        <option>Silk Board</option>
+                <tr *ngFor="let routes of routes_list; let i = index">
+                    <td align="center" valign="middle"> <input type="radio" name="route"></td>
+                    <td align="center" valign="middle">{{routes.RouteNo}}</td>
+                    <td align="center" valign="middle">{{routes.Origin}}</td>
+                    <td align="center" valign="middle">{{routes.Destination}}</td>
+                    <td align="center" valign="middle">{{routes.DepartuteTime}}</td>
+                    <td align="center" valign="middle">
+                      <a href="#" class="btn btn-info btn-sm">
+                        <span class="glyphicon glyphicon-list-alt"></span> View
+                      </a>
+                    </td>
+                    <td align="center" valign="middle">
+                      <select class="form-control input-sm" id="years">
+                        <option *ngFor="let options of routes.PickupPoint; let j = index">{{routes.PickupPoint[j]}}</option>
+                        <!-- <option>Nagalanda Junction</option>
+                        <option>Madiwala</option>
+                        <option>Marathahalli</option>
+                        <option>Bangalore Cant</option> -->
                       </select>
-                  </td>
-                </tr>
-                <tr>
-                  <td align="center" valign="middle"> <input type="radio" name="route"></td>
-                  <td align="center" valign="middle">3</td>
-                  <td align="center" valign="middle">TMEC</td>
-                  <td align="center" valign="middle">Sarjapur</td>
-                  <td align="center" valign="middle">9:20AM</td>
-                  <td align="center" valign="middle">
-                    <a href="#" class="btn btn-info btn-sm">
-                          <span class="glyphicon glyphicon-list-alt"></span> View
-                        </a>
-                  </td>
-                  <td align="center" valign="middle">
-                    <select class="form-control input-sm" id="years">
-                        <option></option>
-                        <option>Nice Road</option>
-                        <option>E.City Toll</option>
-                      </select>
-                  </td>
-                </tr>
-                <tr>
-                  <td align="center" valign="middle"> <input type="radio" name="route"></td>
-                  <td align="center" valign="middle">4</td>
-                  <td align="center" valign="middle">TMEC</td>
-                  <td align="center" valign="middle">Bommasandra</td>
-                  <td align="center" valign="middle">7:50AM</td>
-                  <td align="center" valign="middle">
-                    <a href="#" class="btn btn-info btn-sm">
-                          <span class="glyphicon glyphicon-list-alt"></span> View
-                        </a>
-                  </td>
-                  <td align="center" valign="middle">
-                    <select class="form-control input-sm" id="years">
-                        <option></option>
-                        <option>Majestic</option>
-                        <option>Koramangala</option>
-                      </select>
-                  </td>
+                    </td>
                 </tr>
               </tbody>
             </table>
@@ -236,4 +181,5 @@
       </div>
     </div>
   </div>
+</form>
 </div>
