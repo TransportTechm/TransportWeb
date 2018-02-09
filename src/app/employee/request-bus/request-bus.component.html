@@ -13,16 +13,16 @@
           <div class="col-md-4 col-sm-4">
             <div class="form-group">
               <label class="control-label" for="gid">Associate ID </label>
-              <input type="text" formControlName="gid" class="form-control" placeholder="99999">
+              <input type="text" formControlName="gid" class="form-control" disabled>
             </div>
           </div>
           <div class="form-group col-md-4 col-sm-4">
             <label class="control-label" for="emp_name">Name</label>
-            <input type="text" formControlName="emp_name" class="form-control" placeholder="TechM">
+            <input type="text" formControlName="emp_name" class="form-control" disabled>
           </div>
           <div class="form-group col-md-4 col-sm-4">
             <label for="gender">Gender</label>
-            <input type="text" formControlName="gender" class="form-control" placeholder="Male">
+            <input type="text" formControlName="gender" class="form-control" disabled>
           </div>
         </div>
         <div class="col-md-12 col-sm-12">
@@ -36,7 +36,7 @@
           </div>
           <div class="form-group col-md-4 col-sm-4">
             <label class="control-label" for="journeylocation">Journey Location</label>
-            <select formControlName="journeylocation" class="form-control input-sm" id="years">
+            <select formControlName="journeylocation" class="form-control input-sm">
               <option>-- Select Journey Location --</option>
               <option>TechM</option>
               <option>SEZ</option>
@@ -75,10 +75,10 @@
           </div>
           <div class="form-group col-md-8 col-sm-8">
             <label class="radio-inline">
-                    <input type="radio" name="ticket_type" value="YJT">Yearly Journey Ticket
+                    <input formControlName="ticket_type" type="radio" name="ticket_type" value="YJT">Yearly Journey Ticket
                   </label>
             <label class="radio-inline">
-                    <input type="radio" name="ticket_type" value="SJT">Single Journey Ticket
+                    <input formControlName="ticket_type" type="radio" name="ticket_type" value="SJT">Single Journey Ticket
                   </label>
           </div>
         </div>
@@ -115,10 +115,10 @@
                   <th>Destination</th>
                   <th>Departure Time</th>
                   <th>View Pickup/Drop points</th>
-                  <th>Pickup point</th>
+                  <th>Pickup/Drop point</th>
                 </tr>
                 <tr *ngFor="let routes of routes_list; let i = index">
-                    <td align="center" valign="middle"> <input type="radio" name="route"></td>
+                    <td align="center" valign="middle"> <input type="radio" name="route" (click)="onSelect(routes)"></td>
                     <td align="center" valign="middle">{{routes.RouteNo}}</td>
                     <td align="center" valign="middle">{{routes.Origin}}</td>
                     <td align="center" valign="middle">{{routes.Destination}}</td>
@@ -129,12 +129,8 @@
                       </a>
                     </td>
                     <td align="center" valign="middle">
-                      <select class="form-control input-sm" id="years">
+                      <select class="form-control input-sm" (change)="togglepickpoint($event.target.value)">
                         <option *ngFor="let options of routes.PickupPoint; let j = index">{{routes.PickupPoint[j]}}</option>
-                        <!-- <option>Nagalanda Junction</option>
-                        <option>Madiwala</option>
-                        <option>Marathahalli</option>
-                        <option>Bangalore Cant</option> -->
                       </select>
                     </td>
                 </tr>
@@ -160,7 +156,7 @@
     </div>
   </div>
   <!-- End of second panel -->
-
+  <!-- popup start -->
   <div class="modal fade" id="infomodal" tabindex="-1" role="dialog">
     <div class="modal-dialog bigmodal" role="document">
       <div class="modal-content">
@@ -181,5 +177,6 @@
       </div>
     </div>
   </div>
+  <!-- popup ends -->
 </form>
 </div>
