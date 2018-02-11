@@ -1,0 +1,24 @@
+[
+    {
+      "RouteNo": "1",
+      "Origin": "TMEC",
+      "Destination": "Nagalanda Circle",
+      "DepartuteTime": "8:50 AM",
+      "PickupPoint": [
+            "Nagalanda Junction",
+            "Madiwala",
+            "Silk Board"
+        ]
+    },
+    {
+      "RouteNo": "2",
+      "Origin": "TMEC",
+      "Destination": "Konappana Agrahara",
+      "DepartuteTime": "9:30 AM",
+      "PickupPoint": [
+            "Ecity",
+            "BTM",
+            "sarjapur"
+        ]
+    }
+]

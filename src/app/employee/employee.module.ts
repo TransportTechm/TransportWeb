@@ -5,6 +5,7 @@ import { EmployeeRoutingModule } from './employee-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { RequestBusComponent } from './request-bus/request-bus.component';
 import { ViewAvailabilityComponent } from './view-availability/view-availability.component';
+import { RequestBusService } from './services/request-bus.service';
 
 
 @NgModule({
@@ -13,6 +14,9 @@ import { ViewAvailabilityComponent } from './view-availability/view-availability
     SharedModule,
     EmployeeRoutingModule
   ],
-  declarations: [RequestBusComponent, ViewAvailabilityComponent]
+  declarations: [RequestBusComponent, ViewAvailabilityComponent],
+  providers: [
+    RequestBusService
+  ]
 })
 export class EmployeeModule { }
