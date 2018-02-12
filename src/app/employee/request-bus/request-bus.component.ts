@@ -43,7 +43,6 @@ export class RequestBusComponent implements OnInit {
     model.origin = this.origin;
     model.destination = this.destination;
     model.departure_time = this.departure_time;
-    model.status = 1;
     console.log(model);
     this.requestBusService.saveBusRegistration(model.gid, model).subscribe((newrequestbusWithId) => {
       console.log(newrequestbusWithId)
@@ -67,8 +66,8 @@ export class RequestBusComponent implements OnInit {
   private buildForm(): void {
     this.registerForm = this._formBuilder.group({
       'gid': ['326608', [Validators.required]],
-      'emp_name': [{ value: 'Partha Saradhi Gajula', disabled: true }, [Validators.required]],
-      'gender': [{ value: 'Male', disabled: true }, [Validators.required]],
+      'emp_name': ['Partha Saradhi Gajula', [Validators.required]],
+      'gender': ['Male', [Validators.required]],
       'journeycity': ['', [Validators.required]],
       'journeylocation': ['', [Validators.required]],
       'ContactNumber': ['', [Validators.required]],

@@ -11,23 +11,23 @@
           <div class="col-md-4 col-sm-4">
             <div class="form-group">
               <label class="control-label" for="gid">Associate ID </label>
-              <input type="text" formControlName="gid" class="form-control">
+              <input type="text" formControlName="gid" class="form-control" disabled>
             </div>
           </div>
           <div class="form-group col-md-4 col-sm-4">
             <label class="control-label" for="emp_name">Name</label>
-            <input type="text" formControlName="emp_name" class="form-control">
+            <input type="text" formControlName="emp_name" class="form-control" disabled>
           </div>
           <div class="form-group col-md-4 col-sm-4">
             <label for="gender">Gender</label>
-            <input type="text" formControlName="gender" class="form-control">
+            <input type="text" formControlName="gender" class="form-control" disabled>
           </div>
         </div>
         <div class="col-md-12 col-sm-12">
           <div class="form-group col-md-4 col-sm-4">
             <label class="control-label" for="journeycity">Journey City </label>
             <select formControlName="journeycity" class="form-control input-sm">
-              <option>-- Select City --</option>
+              <option value="" disabled hidden selected>-- Select a City --</option>
               <option>Bangalore</option>
               <option>Hyderabad</option>
             </select>
@@ -35,7 +35,7 @@
           <div class="form-group col-md-4 col-sm-4">
             <label class="control-label" for="journeylocation">Journey Location</label>
             <select formControlName="journeylocation" class="form-control input-sm">
-              <option>-- Select Journey Location --</option>
+              <option value="" disabled hidden selected>-- Select Journey Location --</option>
               <option>TechM</option>
               <option>SEZ</option>
             </select>
@@ -54,10 +54,10 @@
             <b class="textcolor">NOTE:</b>
           </font>
           Revised Single Journey charges for PUNE location: Rs.100/- per day
-          <div class="centeralign">
-            <button type="button" (click)="showpanel()" class="btn btn-primary">Proceed</button>
-            <button type="reset" (click)="reset()" class="btn btn-default">Reset</button>
-          </div>
+      </div>
+      <div class="centeralign">
+        <button type="button" (click)="showpanel()" class="btn btn-primary">Proceed</button>
+        <button type="reset" (click)="reset()" class="btn btn-default">Reset</button>
       </div>
     </div>
     <!-- Start of second panel -->
@@ -135,7 +135,7 @@
                         </td>
                         <td align="center" valign="middle">
                           <select class="form-control input-sm" (change)="togglepickpoint($event.target.value)">
-                          <option></option>
+                          <option value="" disabled hidden selected>select pickup/drop point</option>
                           <option *ngFor="let options of routes.PickupPoint; let j = index" [value]="routes.PickupPoint[j]">{{routes.PickupPoint[j]}}</option>
                         </select>
                         </td>
