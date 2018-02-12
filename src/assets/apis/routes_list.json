@@ -3,7 +3,7 @@
       "RouteNo": "1",
       "Origin": "TMEC",
       "Destination": "Nagalanda Circle",
-      "DepartuteTime": "8:50 AM",
+      "DepartuteTime": "08:50:00",
       "PickupPoint": [
             "Nagalanda Junction",
             "Madiwala",
@@ -14,7 +14,7 @@
       "RouteNo": "2",
       "Origin": "TMEC",
       "Destination": "Konappana Agrahara",
-      "DepartuteTime": "9:30 AM",
+      "DepartuteTime": "09:30:00",
       "PickupPoint": [
             "Ecity",
             "BTM",

@@ -7,8 +7,6 @@
         <h3 class="panel-title">Raise Request</h3>
       </div>
       <div class="panel-body">
-        <!-- <form [formGroup]="registerForm" role="form" name="form" (ngSubmit)="register(registerForm.value)" #f="ngForm" novalidate
-        class="form"> -->
         <div class="col-md-12 col-sm-12">
           <div class="col-md-4 col-sm-4">
             <div class="form-group">
@@ -60,7 +58,6 @@
             <button type="button" (click)="showpanel()" class="btn btn-primary">Proceed</button>
             <button type="reset" (click)="reset()" class="btn btn-default">Reset</button>
           </div>
-          <!-- </form> -->
       </div>
     </div>
     <!-- Start of second panel -->
@@ -89,86 +86,88 @@
           </div>
           <!-- </form> -->
           <div>
-            <button type="button" class="btn btn-primary center-block">Select</button>
+            <button type="button" class="btn btn-primary center-block" (click)="showthegrid()">Select</button>
           </div>
           <!-- grid start -->
-          <div class="box">
-            <div class="table-responsive">
-              <div class="box-header with-border">
-                <tr>
-                  <td>
-                    <h4 class="box-title">Route Details(s)
-                    </h4>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <div class="width">
-                      <button type="button" class="btn btn-block btn-info btn-xs">Click here to download Route details</button>
-                    </div>
-                  </td>
-                </tr>
-              </div>
-              <!-- end of box-header -->
-              <div class="box-body">
-                <table class="table table-bordered table-striped">
-                  <tbody>
-                    <tr>
-                      <th>Select Route</th>
-                      <th>Route No.</th>
-                      <th>Origin</th>
-                      <th>Destination</th>
-                      <th>Departure Time</th>
-                      <th>View Pickup/Drop points</th>
-                      <th>Pickup/Drop point</th>
-                    </tr>
-                    <tr *ngFor="let routes of routes_list; let i = index">
-                      <td align="center" valign="middle">
-                        <input type="radio" name="route" (click)="onSelect(routes)">
-                      </td>
-                      <td align="center" valign="middle">{{routes.RouteNo}}</td>
-                      <td align="center" valign="middle">{{routes.Origin}}</td>
-                      <td align="center" valign="middle">{{routes.Destination}}</td>
-                      <td align="center" valign="middle">{{routes.DepartuteTime}}</td>
-                      <td align="center" valign="middle">
-                        <a href="#" class="btn btn-info btn-sm">
+          <div *ngIf="showgrid">
+            <div class="box">
+              <div class="table-responsive">
+                <div class="box-header with-border">
+                  <tr>
+                    <td>
+                      <h4 class="box-title">Route Details(s)
+                      </h4>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="width">
+                        <button type="button" class="btn btn-block btn-info btn-xs">Click here to download Route details</button>
+                      </div>
+                    </td>
+                  </tr>
+                </div>
+                <!-- end of box-header -->
+                <div class="box-body">
+                  <table class="table table-bordered table-striped">
+                    <tbody>
+                      <tr>
+                        <th>Select Route</th>
+                        <th>Route No.</th>
+                        <th>Origin</th>
+                        <th>Destination</th>
+                        <th>Departure Time</th>
+                        <th>View Pickup/Drop points</th>
+                        <th>Pickup/Drop point</th>
+                      </tr>
+                      <tr *ngFor="let routes of routes_list; let i = index">
+                        <td align="center" valign="middle">
+                          <input type="radio" name="route" (click)="onSelect(routes)">
+                        </td>
+                        <td align="center" valign="middle">{{routes.RouteNo}}</td>
+                        <td align="center" valign="middle">{{routes.Origin}}</td>
+                        <td align="center" valign="middle">{{routes.Destination}}</td>
+                        <td align="center" valign="middle">{{routes.DepartuteTime}}</td>
+                        <td align="center" valign="middle">
+                          <a href="#" class="btn btn-info btn-sm">
                           <span class="glyphicon glyphicon-list-alt"></span> View
                         </a>
-                      </td>
-                      <td align="center" valign="middle">
-                        <select class="form-control input-sm" (change)="togglepickpoint($event.target.value)">
+                        </td>
+                        <td align="center" valign="middle">
+                          <select class="form-control input-sm" (change)="togglepickpoint($event.target.value)">
                           <option></option>
                           <option *ngFor="let options of routes.PickupPoint; let j = index" [value]="routes.PickupPoint[j]">{{routes.PickupPoint[j]}}</option>
                         </select>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-              <!-- end of box-body -->
-              <div class="box-footer clearfix">
-                <ul class="pagination pagination-sm no-margin pull-right">
-                  <li>
-                    <a href="http://localhost:4200/employee/requestbus">«</a>
-                  </li>
-                  <li>
-                    <a href="http://localhost:4200/employee/requestbus">1</a>
-                  </li>
-                  <li>
-                    <a href="http://localhost:4200/employee/requestbus">2</a>
-                  </li>
-                  <li>
-                    <a href="http://localhost:4200/employee/requestbus">3</a>
-                  </li>
-                  <li>
-                    <a href="http://localhost:4200/employee/requestbus">»</a>
-                  </li>
-                </ul>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <!-- end of box-body -->
+                <div class="box-footer clearfix">
+                  <ul class="pagination pagination-sm no-margin pull-right">
+                    <li>
+                      <a href="http://localhost:4200/employee/requestbus">«</a>
+                    </li>
+                    <li>
+                      <a href="http://localhost:4200/employee/requestbus">1</a>
+                    </li>
+                    <li>
+                      <a href="http://localhost:4200/employee/requestbus">2</a>
+                    </li>
+                    <li>
+                      <a href="http://localhost:4200/employee/requestbus">3</a>
+                    </li>
+                    <li>
+                      <a href="http://localhost:4200/employee/requestbus">»</a>
+                    </li>
+                  </ul>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="centeralign">
-            <button type="submit" class="btn btn-primary">Register</button>
+            <div class="centeralign">
+              <button type="submit" class="btn btn-primary">Register</button>
+            </div>
           </div>
           <!-- grid ends -->
         </div>
