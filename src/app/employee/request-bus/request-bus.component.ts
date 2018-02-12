@@ -43,16 +43,38 @@ export class RequestBusComponent implements OnInit {
     model.origin = this.origin;
     model.destination = this.destination;
     model.departure_time = this.departure_time;
-    console.log(model);
-    this.requestBusService.saveBusRegistration(model.gid, model).subscribe((newrequestbusWithId) => {
-      console.log(newrequestbusWithId)
-      //this.myNgForm.resetForm();
+    //this.regID = this.getRegisterCheck(model.gid);
+    this.requestBusService.getRegisterCheck(model.gid).subscribe((register) => {
+      if (register[0].id) {
+
+        this.requestBusService.updateBusRegistration(model.gid, register[0].id, model).subscribe((newrequestbusWithId) => {
+          console.log(newrequestbusWithId)
+        }, (response: Response) => {
+          if (response.status === 500) {
+            this.error = 'errorHasOcurred';
+            console.log(response);
+          }
+        });
+      }
+      else {
+        this.requestBusService.saveBusRegistration(model.gid, model).subscribe((newrequestbusWithId) => {
+          console.log(newrequestbusWithId)
+        }, (response: Response) => {
+          if (response.status === 500) {
+            this.error = 'errorHasOcurred';
+            console.log(response);
+          }
+        });
+      }
     }, (response: Response) => {
       if (response.status === 500) {
         this.error = 'errorHasOcurred';
         console.log(response);
       }
+
     });
+
+
   }
   showpanel() {
     this.showme = true;
@@ -63,9 +85,10 @@ export class RequestBusComponent implements OnInit {
   showthegrid() {
     this.showgrid = true;
   }
+  
   private buildForm(): void {
     this.registerForm = this._formBuilder.group({
-      'gid': ['326608', [Validators.required]],
+      'gid': ['345548', [Validators.required]],
       'emp_name': ['Partha Saradhi Gajula', [Validators.required]],
       'gender': ['Male', [Validators.required]],
       'journeycity': ['', [Validators.required]],

@@ -24,14 +24,19 @@ export class RequestBusService {
     // Create a request option
     const options = new RequestOptions({ headers: headers });
 
-    return this.http.post(this.requestBusUrl + 'users/' + id +'/register/bus', bodyString, options)
+    return this.http.post(this.requestBusUrl + 'users/' + id +'/register/bus/', bodyString, options)
       .map(response => response.json())
       .catch(this.handleError);
   }
 
-  updateBusRegistration(id,resource) {
+  updateBusRegistration(gid,id,resource) {
+    // Stringify payload
     const bodyString = JSON.stringify(resource);
-    return this.http.put(this.requestBusUrl + 'users/' + id +'/register/bus', bodyString)
+    // ... Set content type to JSON
+    const headers = new Headers({ 'Content-Type': 'application/json' });
+    // Create a request option
+    const options = new RequestOptions({ headers: headers });
+    return this.http.put(this.requestBusUrl + 'users/' + gid +'/register/bus/' + id, bodyString, options)
       .map(response => response.json())
       .catch(this.handleError);
   }
@@ -43,6 +48,11 @@ export class RequestBusService {
       .catch(this.handleError);
   }
 
+  getRegisterCheck(id) {
+    return this.http.get(this.requestBusUrl + 'users/' + id +'/registercheck')
+      .map(response => response.json())
+      .catch(this.handleError);
+  }
 
   private handleError(error: Response | any) {
     const errMsg = (error.message) ? error.message :
