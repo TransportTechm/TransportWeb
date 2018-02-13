@@ -20,8 +20,8 @@ export class NavComponent implements OnInit {
       this.router.navigate(['/login']);
     }
     if (userData) {
-      this.userName = userData[0]['first_name'] + " " + userData[0]['last_name'];
-      userData.forEach(element => {
+      this.userName = userData['data'][0]['first_name'] + " " + userData['data'][0]['last_name'];
+      userData['data'].forEach(element => {
         if (element.role_name === 'Employee') {
           this.disableEmployeeBus = false;
           this.disableEmployeeCab = false;
