@@ -1,6 +1,6 @@
 <app-nav></app-nav>
 <div class="container">
-  <form [formGroup]="registerForm" role="form" name="form" (ngSubmit)="register(registerForm.value)" #f="ngForm" novalidate
+  <form [formGroup]="registerForm" role="form" name="form" (ngSubmit)="register(registerForm.value)"  novalidate
     class="form">
     <div class="panel panel-primary">
       <div class="panel-heading">
@@ -26,26 +26,31 @@
         <div class="col-md-12 col-sm-12">
           <div class="form-group col-md-4 col-sm-4">
             <label class="control-label" for="journeycity">Journey City </label>
-            <select name="journeycity" class="form-control input-sm" required>
-              <option value="" disabled hidden selected>-- Select a City --</option>
+            <select formControlName="journeycity" class="form-control input-sm" required>
+              <option value="" selected>Select a City</option>
               <option *ngFor="let options of cities_list" [value]="options.name">{{options.name}}</option>
             </select>
+            <small class="textcolor" *ngIf="formErrors.journeycity">
+              {{ formErrors.journeycity }}
+            </small>
           </div>
           <div class="form-group col-md-4 col-sm-4">
             <label class="control-label" for="journeylocation">Journey Location</label>
-            <select name="journeylocation" class="form-control input-sm">
-              <option value="" disabled hidden selected>-- Select Journey Location --</option>
+            <select formControlName="journeylocation" class="form-control input-sm">
+              <option value="" selected>Select Journey Location</option>
               <option *ngFor="let locs of locations_list" [value]="locs.name">{{locs.name}}</option>
             </select>
+            <small class="textcolor" *ngIf="formErrors.journeylocation">
+              {{ formErrors.journeylocation }}
+            </small>
           </div>
           <div class="form-group col-md-4 col-sm-4" [ngClass]="{ 'has-error':  formErrors.ContactNumber}">
             <label class="control-label" for="ContactNumber">Contact Number </label>
-            <input formControlName="ContactNumber" type="text" class="form-control" [value]="user_contact" required placeholder="Enter Contact Number"
-              required>
-              <small class="textcolor" *ngIf="formErrors.ContactNumber">
-                  {{ formErrors.ContactNumber }}
-               </small>
+            <input formControlName="ContactNumber" type="text" class="form-control">
 
+            <small class="textcolor" *ngIf="formErrors.ContactNumber">
+              {{ formErrors.ContactNumber }}
+            </small>
           </div>
         </div>
         <font>
@@ -82,6 +87,9 @@
               <label *ngFor="let options of journeyType" class="radio-inline">
                 <input formControlName="journey_type" type="radio" name="journey_type" value="{{options.id}}">{{options.name}}
               </label>
+              <small class="textcolor" *ngIf="formErrors.journey_type">
+                {{ formErrors.journey_type }}
+              </small>
             </div>
           </div>
           <!-- </form> -->
@@ -130,43 +138,24 @@
                         <td align="center" valign="middle">{{routes.DepartuteTime}}</td>
                         <td align="center" valign="middle">
                           <a href="#" class="btn btn-info btn-sm">
-                          <span class="glyphicon glyphicon-list-alt"></span> View
-                        </a>
+                            <span class="glyphicon glyphicon-list-alt"></span> View
+                          </a>
                         </td>
                         <td align="center" valign="middle">
                           <select class="form-control input-sm" (change)="togglepickpoint($event.target.value)">
-                          <option value="" disabled hidden selected>select pickup/drop point</option>
-                          <option *ngFor="let options of routes.PickupPoint; let j = index" [value]="routes.PickupPoint[j]">{{routes.PickupPoint[j]}}</option>
-                        </select>
+                            <option value="" disabled hidden selected>select pickup/drop point</option>
+                            <option *ngFor="let options of routes.PickupPoint; let j = index" [value]="routes.PickupPoint[j]">{{routes.PickupPoint[j]}}</option>
+                          </select>
                         </td>
                       </tr>
                     </tbody>
                   </table>
                 </div>
                 <!-- end of box-body -->
-                <div class="box-footer clearfix">
-                  <ul class="pagination pagination-sm no-margin pull-right">
-                    <li>
-                      <a href="http://localhost:4200/employee/requestbus">«</a>
-                    </li>
-                    <li>
-                      <a href="http://localhost:4200/employee/requestbus">1</a>
-                    </li>
-                    <li>
-                      <a href="http://localhost:4200/employee/requestbus">2</a>
-                    </li>
-                    <li>
-                      <a href="http://localhost:4200/employee/requestbus">3</a>
-                    </li>
-                    <li>
-                      <a href="http://localhost:4200/employee/requestbus">»</a>
-                    </li>
-                  </ul>
-                </div>
               </div>
             </div>
             <div class="centeralign">
-              <button type="submit" class="btn btn-primary" [disabled]="!registerForm.valid">Register</button>
+              <button type="submit" [disabled]="!registerForm.valid" class="btn btn-primary">Register</button>
             </div>
           </div>
           <!-- grid ends -->
@@ -214,4 +203,5 @@
     </div>
     <!-- udpate Modal ends -->
   </form>
+
 </div>

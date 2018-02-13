@@ -26,6 +26,7 @@ export class RequestBusComponent implements OnInit {
   public user_empId: number;
   public user_name: string;
   public user_contact: number;
+  public formSubmitAttempt: boolean;
   @ViewChild('form') myNgForm;
   constructor(private _formBuilder: FormBuilder, private http: Http, private requestBusService: RequestBusService) { }
 
@@ -55,37 +56,39 @@ export class RequestBusComponent implements OnInit {
     this.departure_time = selectedItem.DepartuteTime;
   }
   public register(model) {
-    model.route_no = this.route_no;
-    model.pick_up_point = this.pick_up_point;
-    model.origin = this.origin;
-    model.destination = this.destination;
-    model.departure_time = this.departure_time;
-    this.requestBusService.getRegisterCheck(model.gid).subscribe((register) => {
-      if (register.status === 'success') {
-        this.requestBusService.updateBusRegistration(model.gid, register.data[0].id, model).subscribe((newrequestbusWithId) => {
-          alert('Configurations Route Updated successfully!');
-        }, err => {
-          console.error('*** LoginComponent: Error while logging', err);
-          console.error(err);
-          alert(err);
-        });
-      } else {
-        this.requestBusService.saveBusRegistration(model.gid, model).subscribe((newrequestbusWithId) => {
-          alert('Configurations saved successfully!');
-        }, err => {
-          console.error('*** LoginComponent: Error while logging', err);
-          console.error(err);
-          alert(err);
-        });
+    // this.registerForm.markAsTouched({ onlySelf: true });
+    if (this.registerForm.valid) {
+      // save data
+      model.route_no = this.route_no;
+      model.pick_up_point = this.pick_up_point;
+      model.origin = this.origin;
+      model.destination = this.destination;
+      model.departure_time = this.departure_time;
+      this.requestBusService.getRegisterCheck(model.gid).subscribe((register) => {
+        if (register.status === 'success') {
+          this.requestBusService.updateBusRegistration(model.gid, register.data[0].id, model).subscribe((newrequestbusWithId) => {
+            alert('Configurations Route Updated successfully!');
+          }, err => {
+            console.error('*** LoginComponent: Error while logging', err);
+            console.error(err);
+            alert(err);
+          });
+        } else {
+          this.requestBusService.saveBusRegistration(model.gid, model).subscribe((newrequestbusWithId) => {
+            alert('Configurations saved successfully!');
+          }, err => {
+            console.error('*** LoginComponent: Error while logging', err);
+            console.error(err);
+            alert(err);
+          });
+        }
+      }, err => {
+        console.error('*** LoginComponent: Error while logging', err);
+        console.error(err);
+        alert(err);
       }
-    }, err => {
-      console.error('*** LoginComponent: Error while logging', err);
-      console.error(err);
-      alert(err);
+      );
     }
-    );
-
-
   }
   showpanel() {
     this.showme = true;
@@ -99,12 +102,12 @@ export class RequestBusComponent implements OnInit {
 
   private buildForm(): void {
     this.registerForm = this._formBuilder.group({
-      'gid': [this.user_empId, [Validators.required]],
-      'emp_name': [this.user_name, [Validators.required]],
-      'gender': [this.user_gender, [Validators.required]],
+      'gid': [this.user_empId],
+      'emp_name': [this.user_name],
+      'gender': [this.user_gender],
       'journeycity': ['', [Validators.required]],
       'journeylocation': ['', [Validators.required]],
-      'ContactNumber': ['', [Validators.required]],
+      'ContactNumber': [this.user_contact, [Validators.required]],
       'journey_type': ['', [Validators.required]],
       // 'Route_No': [this.RouteNo, [Validators.required]],
       // 'Pickup Point': ['', [Validators.required]]
@@ -132,20 +135,32 @@ export class RequestBusComponent implements OnInit {
       }
     }
   }
-
   // tslint:disable-next-line:member-ordering
   formErrors = {
-    'ContactNumber': ''
+    'ContactNumber': '',
+    'journeycity': '',
+    'journeylocation': '',
+    'journey_type': ''
+
   };
 
   // tslint:disable-next-line:member-ordering
   validationMessages = {
     'ContactNumber': {
       'required': 'Contact Number is required.',
+    },
+    'journeycity': {
+      'required': 'Select Journey City.',
+    },
+    'journeylocation': {
+      'required': 'Select Journey Location.',
+    },
+    'journey_type': {
+      'required': 'Select Journey Type.',
     }
   };
-
 }
+
 
 
 
