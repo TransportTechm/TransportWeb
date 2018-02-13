@@ -33,6 +33,6 @@ import { LoginService } from './services/login/login.service';
     NavComponent,
     StartComponent
   ],
-  providers:[AuthGuard,LoginService]
+  providers: [AuthGuard, LoginService]
 })
 export class SharedModule { }

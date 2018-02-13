@@ -23,14 +23,14 @@ export class LoginComponent implements OnInit {
   login() {
     this.loading = true;
     this.loginService.authenticate(this.model).subscribe(user => {
-      localStorage.setItem('userData', JSON.stringify(user))
+      localStorage.setItem('userData', JSON.stringify(user));
       this.loading = false;
       this.router.navigate(['/']);
     }, err => {
-      var errJson = JSON.parse(err);
+      const errJson = JSON.parse(err);
       console.log(errJson);
       this.error = errJson.message;
       this.loading = false;
-    })
+    });
   }
 }

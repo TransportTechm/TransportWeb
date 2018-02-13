@@ -9,18 +9,18 @@ import { Router } from '@angular/router';
 export class NavComponent implements OnInit {
   userName: string;
   userData: any;
-  disableEmployeeBus: boolean = true;
-  disableEmployeeCab: boolean = true;
-  disableTransport: boolean = true;
-  disableVendor: boolean = true;
+  disableEmployeeBus = true;
+  disableEmployeeCab = true;
+  disableTransport = true;
+  disableVendor = true;
   constructor(private router: Router) { }
   ngOnInit() {
-    let userData = JSON.parse(localStorage.getItem('userData'));
+    const userData = JSON.parse(localStorage.getItem('userData'));
     if (userData === undefined) {
       this.router.navigate(['/login']);
     }
     if (userData) {
-      this.userName = userData['data'][0]['first_name'] + " " + userData['data'][0]['last_name'];
+      this.userName = userData['data'][0]['first_name'] + ' ' + userData['data'][0]['last_name'];
       userData['data'].forEach(element => {
         if (element.role_name === 'Employee') {
           this.disableEmployeeBus = false;

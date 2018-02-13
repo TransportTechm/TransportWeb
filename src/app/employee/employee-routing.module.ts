@@ -10,10 +10,10 @@ const employeeroutes: Routes = [
   {
     path: '',
     children: [
-      {path: 'requestbus',component: RequestBusComponent},
-      {path: 'availability',component: ViewAvailabilityComponent},
-      {path: 'viewhistory',component: ViewHistoryComponent},
-      {path: 'cancelrequest',component: CancelRequestComponent},
+      {path: 'requestbus', component: RequestBusComponent},
+      {path: 'availability', component: ViewAvailabilityComponent},
+      {path: 'viewhistory', component: ViewHistoryComponent},
+      {path: 'cancelrequest', component: CancelRequestComponent},
     ]
   }
 ];

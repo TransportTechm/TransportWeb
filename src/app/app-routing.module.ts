@@ -5,8 +5,8 @@ import { AuthGuard } from './shared/guard/auth.guard';
 
 const routes: Routes = [
     { path: '', redirectTo: '/', pathMatch: 'full'},
-    { path: '', loadChildren: './shared/shared.module#SharedModule',canActivate: [AuthGuard] },
-    { path: 'employee', loadChildren: './employee/employee.module#EmployeeModule',data: { preload: true },canActivate: [AuthGuard]},
+    { path: '', loadChildren: './shared/shared.module#SharedModule', canActivate: [AuthGuard] },
+    { path: 'employee', loadChildren: './employee/employee.module#EmployeeModule', data: { preload: true }, canActivate: [AuthGuard]},
     { path: 'login', loadChildren: './login/login.module#LoginModule' },
     { path: 'error', component:  Error404Component},
     { path: '**', redirectTo: 'error', pathMatch: 'full'}

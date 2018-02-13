@@ -8,11 +8,11 @@ import 'rxjs/add/observable/throw';
 
 @Injectable()
 export class LoginService {
-  url:any;
+  url: any;
   constructor(private http: Http) {
   }
   authenticate(login) {
-    this.url="http://localhost:3000/transportationapi/employee/1.0/users/login?username="+login.username+"&password="+login.password+""
+    this.url = 'http://localhost:3000/transportationapi/employee/1.0/users/login?username=' + login.username + '&password=' + login.password + '';
     return this.http.get(this.url)
     .map(response => response.json())
     .catch(this.handleError);
