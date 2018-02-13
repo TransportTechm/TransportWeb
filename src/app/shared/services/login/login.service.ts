@@ -5,15 +5,16 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/throw';
+import { environment } from '../../../../environments/environment';
 
 @Injectable()
 export class LoginService {
-  url: any;
+  private requestBusUrl: string;
   constructor(private http: Http) {
+    this.requestBusUrl = environment.employeeServiceUrl;
   }
   authenticate(login) {
-    this.url = 'http://localhost:3000/transportationapi/employee/1.0/users/login?username=' + login.username + '&password=' + login.password + '';
-    return this.http.get(this.url)
+    return this.http.get(this.requestBusUrl + 'users/login?username=' + login.username + '&password=' + login.password + '')
     .map(response => response.json())
     .catch(this.handleError);
   }
