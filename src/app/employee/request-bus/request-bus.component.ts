@@ -10,8 +10,8 @@ import { RequestBusService } from '../services/request-bus.service';
 export class RequestBusComponent implements OnInit {
 
   public registerForm: FormGroup;
-  public showme: boolean = false;
-  public showgrid: boolean = false;
+  public showme = false;
+  public showgrid = false;
   public pick_up_point: any;
   public routes_list;
   public cities_list;
@@ -19,7 +19,7 @@ export class RequestBusComponent implements OnInit {
   public journeyType;
   public route_no;
   public origin;
-  public destination
+  public destination;
   public departure_time;
   public error: string;
   public user_gender: string;
@@ -31,12 +31,12 @@ export class RequestBusComponent implements OnInit {
 
   ngOnInit() {
 
-    let userData = JSON.parse(localStorage.getItem('userData'));
+    const userData = JSON.parse(localStorage.getItem('userData'));
     if (userData) {
-      this.user_gender = userData['data'][0]['gender']
-      this.user_empId = userData['data'][0]['emp_gid']
-      this.user_name = userData['data'][0]['first_name'] + " " + userData['data'][0]['last_name'];
-      this.user_contact = userData['data'][0]['mobile_id']
+      this.user_gender = userData['data'][0]['gender'];
+      this.user_empId = userData['data'][0]['emp_gid'];
+      this.user_name = userData['data'][0]['first_name'] + '' + userData['data'][0]['last_name'];
+      this.user_contact = userData['data'][0]['mobile_id'];
     }
     this.http.get('assets/apis/routes_list.json').subscribe(res => this.routes_list = res.json());
     this.http.get('assets/apis/cities.json').subscribe(res => this.cities_list = res.json());
@@ -50,7 +50,7 @@ export class RequestBusComponent implements OnInit {
   }
   onSelect(selectedItem: any) {
     this.route_no = selectedItem.RouteNo;
-    this.origin = selectedItem.Origin
+    this.origin = selectedItem.Origin;
     this.destination = selectedItem.Destination;
     this.departure_time = selectedItem.DepartuteTime;
   }
@@ -61,7 +61,7 @@ export class RequestBusComponent implements OnInit {
     model.destination = this.destination;
     model.departure_time = this.departure_time;
     this.requestBusService.getRegisterCheck(model.gid).subscribe((register) => {
-      if (register.status == 'success') {
+      if (register.status === 'success') {
         this.requestBusService.updateBusRegistration(model.gid, register.data[0].id, model).subscribe((newrequestbusWithId) => {
           alert('Configurations Route Updated successfully!');
         }, err => {
@@ -69,8 +69,7 @@ export class RequestBusComponent implements OnInit {
           console.error(err);
           alert(err);
         });
-      }
-      else {
+      } else {
         this.requestBusService.saveBusRegistration(model.gid, model).subscribe((newrequestbusWithId) => {
           alert('Configurations saved successfully!');
         }, err => {
@@ -107,7 +106,7 @@ export class RequestBusComponent implements OnInit {
       'journeylocation': ['', [Validators.required]],
       'ContactNumber': ['', [Validators.required]],
       'journey_type': ['', [Validators.required]],
-      //'Route_No': [this.RouteNo, [Validators.required]],
+      // 'Route_No': [this.RouteNo, [Validators.required]],
       // 'Pickup Point': ['', [Validators.required]]
     });
     this.registerForm.valueChanges
@@ -119,12 +118,14 @@ export class RequestBusComponent implements OnInit {
   private onValueChanged(data?: any) {
     if (!this.registerForm) { return; }
     const form = this.registerForm;
+    // tslint:disable-next-line:forin
     for (const field in this.formErrors) {
       // clear previous error message (if any)
       this.formErrors[field] = '';
       const control = form.get(field);
       if (control && control.dirty && !control.valid) {
         const messages = this.validationMessages[field];
+        // tslint:disable-next-line:forin
         for (const key in control.errors) {
           this.formErrors[field] += messages[key] + ' ';
         }
@@ -132,15 +133,17 @@ export class RequestBusComponent implements OnInit {
     }
   }
 
+  // tslint:disable-next-line:member-ordering
   formErrors = {
     'ContactNumber': ''
   };
 
+  // tslint:disable-next-line:member-ordering
   validationMessages = {
     'ContactNumber': {
       'required': 'Contact Number is required.',
     }
-  }
+  };
 
 }
 
