@@ -26,22 +26,26 @@
         <div class="col-md-12 col-sm-12">
           <div class="form-group col-md-4 col-sm-4">
             <label class="control-label" for="journeycity">Journey City </label>
-            <select formControlName="journeycity" class="form-control input-sm">
+            <select name="journeycity" class="form-control input-sm" required>
               <option value="" disabled hidden selected>-- Select a City --</option>
               <option *ngFor="let options of cities_list" [value]="options.name">{{options.name}}</option>
             </select>
           </div>
           <div class="form-group col-md-4 col-sm-4">
             <label class="control-label" for="journeylocation">Journey Location</label>
-            <select formControlName="journeylocation" class="form-control input-sm">
+            <select name="journeylocation" class="form-control input-sm">
               <option value="" disabled hidden selected>-- Select Journey Location --</option>
               <option *ngFor="let locs of locations_list" [value]="locs.name">{{locs.name}}</option>
             </select>
           </div>
-          <div class="form-group col-md-4 col-sm-4">
+          <div class="form-group col-md-4 col-sm-4" [ngClass]="{ 'has-error':  formErrors.ContactNumber}">
             <label class="control-label" for="ContactNumber">Contact Number </label>
-            <input formControlName="ContactNumber" type="text" class="form-control" value="{{user_contact}}" placeholder="Enter Contact Number"
+            <input formControlName="ContactNumber" type="text" class="form-control" [value]="user_contact" required placeholder="Enter Contact Number"
               required>
+              <small class="textcolor" *ngIf="formErrors.ContactNumber">
+                  {{ formErrors.ContactNumber }}
+               </small>
+
           </div>
         </div>
         <font>
@@ -162,7 +166,7 @@
               </div>
             </div>
             <div class="centeralign">
-              <button type="submit" class="btn btn-primary">Register</button>
+              <button type="submit" class="btn btn-primary" [disabled]="!registerForm.valid">Register</button>
             </div>
           </div>
           <!-- grid ends -->

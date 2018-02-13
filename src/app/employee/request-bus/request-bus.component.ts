@@ -1,8 +1,7 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, NgModule } from '@angular/core';
 import { Http } from '@angular/http';
-import { ReactiveFormsModule, FormGroup, FormControl, Validators, FormBuilder, FormArray } from '@angular/forms';
+import { ReactiveFormsModule, FormGroup, FormControl, Validators, FormBuilder, FormArray, FormsModule } from '@angular/forms';
 import { RequestBusService } from '../services/request-bus.service';
-
 @Component({
   selector: 'app-request-bus',
   templateUrl: './request-bus.component.html',
@@ -31,7 +30,7 @@ export class RequestBusComponent implements OnInit {
   constructor(private _formBuilder: FormBuilder, private http: Http, private requestBusService: RequestBusService) { }
 
   ngOnInit() {
-   
+
     let userData = JSON.parse(localStorage.getItem('userData'));
     if (userData) {
       this.user_gender = userData['data'][0]['gender']
@@ -62,7 +61,7 @@ export class RequestBusComponent implements OnInit {
     model.destination = this.destination;
     model.departure_time = this.departure_time;
     this.requestBusService.getRegisterCheck(model.gid).subscribe((register) => {
-      if (register.status=='success') {
+      if (register.status == 'success') {
         this.requestBusService.updateBusRegistration(model.gid, register.data[0].id, model).subscribe((newrequestbusWithId) => {
           alert('Configurations Route Updated successfully!');
         }, err => {
@@ -80,12 +79,12 @@ export class RequestBusComponent implements OnInit {
           alert(err);
         });
       }
-    },err => {
+    }, err => {
       console.error('*** LoginComponent: Error while logging', err);
       console.error(err);
       alert(err);
     }
-);
+    );
 
 
   }
@@ -111,7 +110,39 @@ export class RequestBusComponent implements OnInit {
       //'Route_No': [this.RouteNo, [Validators.required]],
       // 'Pickup Point': ['', [Validators.required]]
     });
+    this.registerForm.valueChanges
+      .subscribe(data => this.onValueChanged(data));
+    this.onValueChanged(); // (re)set validation messages now
   }
+
+
+  private onValueChanged(data?: any) {
+    if (!this.registerForm) { return; }
+    const form = this.registerForm;
+    for (const field in this.formErrors) {
+      // clear previous error message (if any)
+      this.formErrors[field] = '';
+      const control = form.get(field);
+      if (control && control.dirty && !control.valid) {
+        const messages = this.validationMessages[field];
+        for (const key in control.errors) {
+          this.formErrors[field] += messages[key] + ' ';
+        }
+      }
+    }
+  }
+
+  formErrors = {
+    'ContactNumber': ''
+  };
+
+  validationMessages = {
+    'ContactNumber': {
+      'required': 'Contact Number is required.',
+    }
+  }
+
 }
+
 
 
