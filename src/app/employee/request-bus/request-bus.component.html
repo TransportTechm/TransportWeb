@@ -28,21 +28,20 @@
             <label class="control-label" for="journeycity">Journey City </label>
             <select formControlName="journeycity" class="form-control input-sm">
               <option value="" disabled hidden selected>-- Select a City --</option>
-              <option>Bangalore</option>
-              <option>Hyderabad</option>
+              <option *ngFor="let options of cities_list; let i = index" [value]="cities_list[i].name">{{cities_list[i].name}}</option>
             </select>
           </div>
           <div class="form-group col-md-4 col-sm-4">
             <label class="control-label" for="journeylocation">Journey Location</label>
             <select formControlName="journeylocation" class="form-control input-sm">
               <option value="" disabled hidden selected>-- Select Journey Location --</option>
-              <option>TechM</option>
-              <option>SEZ</option>
+              <option *ngFor="let locs of locations_list; let j = index" [value]="locations_list[j].name">{{locations_list[j].name}}</option>
             </select>
           </div>
           <div class="form-group col-md-4 col-sm-4">
             <label class="control-label" for="ContactNumber">Contact Number </label>
-            <input formControlName="ContactNumber" type="text" class="form-control" placeholder="Enter Contact Number" required>
+            <input formControlName="ContactNumber" type="text" class="form-control" value="{{user_contact}}" placeholder="Enter Contact Number"
+              required>
           </div>
         </div>
         <font>
@@ -175,26 +174,43 @@
     </div>
     <!-- End of second panel -->
     <!-- popup start -->
-    <div class="modal fade" id="infomodal" tabindex="-1" role="dialog">
-      <div class="modal-dialog bigmodal" role="document">
+    <div class="modal fade" id="infomodal">
+      <div class="modal-dialog">
         <div class="modal-content">
-          <div class="modal-header bg-primary">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-            <h4 class="modal-title">Info</h4>
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <h4 class="modal-title">Information</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
           </div>
+          <!-- Modal body -->
           <div class="modal-body">
-            <div class="row clearfix">
-              <p>Hello please read this</p>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              </div>
-            </div>
+            Types of Tickets: SJT, TJT
+          </div>
+          <!-- Modal footer -->
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
           </div>
         </div>
       </div>
     </div>
     <!-- popup ends -->
+    <!-- update Modal start -->
+    <div id="updateModal" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Confirm</h4>
+          </div>
+          <div class="modal-body">
+            <p>Do you want to udpate the existing request</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- udpate Modal ends -->
   </form>
 </div>

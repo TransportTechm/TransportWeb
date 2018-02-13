@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Http } from '@angular/http';
 import { ReactiveFormsModule, FormGroup, FormControl, Validators, FormBuilder, FormArray } from '@angular/forms';
 import { RequestBusService } from '../services/request-bus.service';
-
 @Component({
   selector: 'app-request-bus',
   templateUrl: './request-bus.component.html',
@@ -15,16 +14,31 @@ export class RequestBusComponent implements OnInit {
   public showgrid: boolean = false;
   public pick_up_point: any;
   public routes_list;
+  public cities_list;
+  public locations_list;
   public route_no;
   public origin;
   public destination
   public departure_time;
   public error: string;
+  public user_gender: string;
+  public user_empId: number;
+  public user_name: string;
+  public user_contact: number;
   @ViewChild('form') myNgForm;
   constructor(private _formBuilder: FormBuilder, private http: Http, private requestBusService: RequestBusService) { }
 
   ngOnInit() {
+    let userData = JSON.parse(localStorage.getItem('userData'));
+    if (userData) {
+      this.user_gender = userData['data'][0]['gender']
+      this.user_empId = userData['data'][0]['emp_gid']
+      this.user_name = userData['data'][0]['first_name'] + " " + userData['data'][0]['last_name'];
+      this.user_contact = userData['data'][0]['mobile_id']
+    }
     this.http.get('assets/apis/routes_list.json').subscribe(res => this.routes_list = res.json());
+    this.http.get('assets/apis/cities.json').subscribe(res => this.cities_list = res.json());
+    this.http.get('assets/apis/locations.json').subscribe(res => this.locations_list = res.json());
     this.buildForm();
 
   }
@@ -46,7 +60,6 @@ export class RequestBusComponent implements OnInit {
     //this.regID = this.getRegisterCheck(model.gid);
     this.requestBusService.getRegisterCheck(model.gid).subscribe((register) => {
       if (register[0].id) {
-
         this.requestBusService.updateBusRegistration(model.gid, register[0].id, model).subscribe((newrequestbusWithId) => {
           console.log(newrequestbusWithId)
         }, (response: Response) => {
@@ -85,12 +98,12 @@ export class RequestBusComponent implements OnInit {
   showthegrid() {
     this.showgrid = true;
   }
-  
+
   private buildForm(): void {
     this.registerForm = this._formBuilder.group({
-      'gid': ['345548', [Validators.required]],
-      'emp_name': ['Partha Saradhi Gajula', [Validators.required]],
-      'gender': ['Male', [Validators.required]],
+      'gid': [this.user_empId, [Validators.required]],
+      'emp_name': [this.user_name, [Validators.required]],
+      'gender': [this.user_gender, [Validators.required]],
       'journeycity': ['', [Validators.required]],
       'journeylocation': ['', [Validators.required]],
       'ContactNumber': ['', [Validators.required]],
