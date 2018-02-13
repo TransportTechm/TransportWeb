@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Http } from '@angular/http';
 import { ReactiveFormsModule, FormGroup, FormControl, Validators, FormBuilder, FormArray } from '@angular/forms';
 import { RequestBusService } from '../services/request-bus.service';
+
 @Component({
   selector: 'app-request-bus',
   templateUrl: './request-bus.component.html',
@@ -16,6 +17,7 @@ export class RequestBusComponent implements OnInit {
   public routes_list;
   public cities_list;
   public locations_list;
+  public journeyType;
   public route_no;
   public origin;
   public destination
@@ -29,6 +31,7 @@ export class RequestBusComponent implements OnInit {
   constructor(private _formBuilder: FormBuilder, private http: Http, private requestBusService: RequestBusService) { }
 
   ngOnInit() {
+   
     let userData = JSON.parse(localStorage.getItem('userData'));
     if (userData) {
       this.user_gender = userData['data'][0]['gender']
@@ -39,6 +42,7 @@ export class RequestBusComponent implements OnInit {
     this.http.get('assets/apis/routes_list.json').subscribe(res => this.routes_list = res.json());
     this.http.get('assets/apis/cities.json').subscribe(res => this.cities_list = res.json());
     this.http.get('assets/apis/locations.json').subscribe(res => this.locations_list = res.json());
+    this.http.get('assets/apis/JourneyType.json').subscribe(res => this.journeyType = res.json());
     this.buildForm();
 
   }
@@ -57,35 +61,31 @@ export class RequestBusComponent implements OnInit {
     model.origin = this.origin;
     model.destination = this.destination;
     model.departure_time = this.departure_time;
-    //this.regID = this.getRegisterCheck(model.gid);
     this.requestBusService.getRegisterCheck(model.gid).subscribe((register) => {
-      if (register[0].id) {
-        this.requestBusService.updateBusRegistration(model.gid, register[0].id, model).subscribe((newrequestbusWithId) => {
-          console.log(newrequestbusWithId)
-        }, (response: Response) => {
-          if (response.status === 500) {
-            this.error = 'errorHasOcurred';
-            console.log(response);
-          }
+      if (register.status=='success') {
+        this.requestBusService.updateBusRegistration(model.gid, register.data[0].id, model).subscribe((newrequestbusWithId) => {
+          alert('Configurations Route Updated successfully!');
+        }, err => {
+          console.error('*** LoginComponent: Error while logging', err);
+          console.error(err);
+          alert(err);
         });
       }
       else {
         this.requestBusService.saveBusRegistration(model.gid, model).subscribe((newrequestbusWithId) => {
-          console.log(newrequestbusWithId)
-        }, (response: Response) => {
-          if (response.status === 500) {
-            this.error = 'errorHasOcurred';
-            console.log(response);
-          }
+          alert('Configurations saved successfully!');
+        }, err => {
+          console.error('*** LoginComponent: Error while logging', err);
+          console.error(err);
+          alert(err);
         });
       }
-    }, (response: Response) => {
-      if (response.status === 500) {
-        this.error = 'errorHasOcurred';
-        console.log(response);
-      }
-
-    });
+    },err => {
+      console.error('*** LoginComponent: Error while logging', err);
+      console.error(err);
+      alert(err);
+    }
+);
 
 
   }

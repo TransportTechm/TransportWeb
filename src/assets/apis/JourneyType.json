@@ -1,0 +1,12 @@
+[
+    {
+        "id": 1,
+        "value": "Yearly",
+        "name": "Yearly Journey Ticket"
+    },
+    {
+        "id": 2,
+        "value": "Single",
+        "name": "Single Journey Ticket"
+    }
+]

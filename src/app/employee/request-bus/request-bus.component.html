@@ -28,14 +28,14 @@
             <label class="control-label" for="journeycity">Journey City </label>
             <select formControlName="journeycity" class="form-control input-sm">
               <option value="" disabled hidden selected>-- Select a City --</option>
-              <option *ngFor="let options of cities_list; let i = index" [value]="cities_list[i].name">{{cities_list[i].name}}</option>
+              <option *ngFor="let options of cities_list" [value]="options.name">{{options.name}}</option>
             </select>
           </div>
           <div class="form-group col-md-4 col-sm-4">
             <label class="control-label" for="journeylocation">Journey Location</label>
             <select formControlName="journeylocation" class="form-control input-sm">
               <option value="" disabled hidden selected>-- Select Journey Location --</option>
-              <option *ngFor="let locs of locations_list; let j = index" [value]="locations_list[j].name">{{locations_list[j].name}}</option>
+              <option *ngFor="let locs of locations_list" [value]="locs.name">{{locs.name}}</option>
             </select>
           </div>
           <div class="form-group col-md-4 col-sm-4">
@@ -75,11 +75,8 @@
               <label class="control-label" for="ticket_type">Please select the Journey Type: </label>
             </div>
             <div class="form-group col-md-8 col-sm-8">
-              <label class="radio-inline">
-                <input formControlName="journey_type" type="radio" name="journey_type" value="Year">Yearly Journey Ticket
-              </label>
-              <label class="radio-inline">
-                <input formControlName="journey_type" type="radio" name="journey_type" value="Single">Single Journey Ticket
+              <label *ngFor="let options of journeyType" class="radio-inline">
+                <input formControlName="journey_type" type="radio" name="journey_type" value="{{options.id}}">{{options.name}}
               </label>
             </div>
           </div>

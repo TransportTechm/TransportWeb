@@ -1,14 +1,14 @@
 [
     {
-        "id": 1001,
+        "id": 1,
         "name": "Bangalore"
     },
     {
-        "id": 1002,
+        "id": 2,
         "name": "Hyderabad"
     },
     {
-        "id": 1003,
+        "id": 3,
         "name": "Chennai"
     }
 ]
