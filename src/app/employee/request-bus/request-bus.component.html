@@ -65,7 +65,7 @@
       </div>
       <div class="centeralign">
         <button type="button" (click)="showpanel()" class="btn btn-primary">Proceed</button>
-        <button type="reset" (click)="reset()" class="btn btn-default">Reset</button>
+        <button type="button" (click)="reset()" class="btn btn-default">Reset</button>
       </div>
     </div>
     <!-- Start of second panel -->
@@ -76,9 +76,9 @@
         </div>
         <div class="panel-body">
           <!-- <form class="form"> -->
-          <div class="width">
+          <!-- <div class="width">
             <button type="button" class="btn btn-block btn-info btn-xs" data-toggle="modal" data-target="#infomodal">Click to view the procedure before registering</button>
-          </div>
+          </div> -->
           <div class="col-md-12 col-sm-12">
             <div class="form-group col-md-4 col-sm-4">
               <label class="control-label" for="ticket_type">Please select the Journey Type: </label>
@@ -133,7 +133,7 @@
                       </tr>
                       <tr *ngFor="let routes of routes_list; let i = index">
                         <td align="center" valign="middle">
-                          <input type="radio" name="route" (click)="onSelect(routes)">
+                          <input type="radio" name="route_no"  (click)="onSelect(routes)">
                         </td>
                         <td align="center" valign="middle">{{routes.RouteNo}}</td>
                         <td align="center" valign="middle">{{routes.Origin}}</td>
@@ -145,8 +145,8 @@
                           </a>
                         </td>
                         <td align="center" valign="middle">
-                          <select class="form-control input-sm" (change)="togglepickpoint($event.target.value)">
-                            <option value="" disabled hidden selected>select pickup/drop point</option>
+                          <select class="form-control input-sm" formControlName="pick_up_point" (change)="togglepickpoint($event.target.value)">
+                            <option value=""selected>select pickup/drop point</option>
                             <option *ngFor="let options of routes.PickupPoint; let j = index" [value]="routes.PickupPoint[j]">{{routes.PickupPoint[j]}}</option>
                           </select>
                         </td>
