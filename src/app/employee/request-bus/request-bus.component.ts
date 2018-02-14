@@ -156,16 +156,18 @@ export class RequestBusComponent implements OnInit {
         model.journey_type = 'Year';
         model.journey_date = null;
         this.requestBusService.getRegisterCheckYear(model.gid, model.journey_type).subscribe((register) => {
-          console.log(register);
           if (register.status === 'success' && register.data.length > 0) {
-            this.requestBusService.updateBusRegistration(model.gid, register.data[0].id, model).subscribe((newrequestbusWithId) => {
-              alert('Route Updated successfully!');
-              this.router.navigate(['/employee/viewhistory']);
-            }, err => {
-              console.error('Route Updation Failed', err);
-              console.error(err);
-              alert(err);
-            });
+            if (window.confirm('You are requesting to update route. Once processed, your data will be permanently updated.')) {
+              // put your delete method logic here
+              this.requestBusService.updateBusRegistration(model.gid, register.data[0].id, model).subscribe((newrequestbusWithId) => {
+                alert('Route Updated successfully!');
+                this.router.navigate(['/employee/viewhistory']);
+              }, err => {
+                console.error('Route Updation Failed', err);
+                console.error(err);
+                alert(err);
+              });
+            }
           } else {
             this.requestBusService.saveBusRegistration(model.gid, model).subscribe((newrequestbusWithId) => {
               this.router.navigate(['/employee/viewhistory']);
@@ -185,17 +187,21 @@ export class RequestBusComponent implements OnInit {
       } else {
         model.journey_type = 'Single';
         this.requestBusService.getRegisterCheckSingle(model.gid, model.journey_type, model.journey_date).subscribe((register) => {
-          console.log(register);
           if (register.status === 'success' && register.data.length > 0) {
-            this.requestBusService.updateBusRegistration(model.gid, register.data[0].id, model).subscribe((newrequestbusWithId) => {
-              this.router.navigate(['/employee/viewhistory']);
-            }, err => {
-              console.error('Route Updation Failed', err);
-              console.error(err);
-              alert(err);
-            });
+            if (window.confirm('You are requesting to update route. Once processed, your data will be permanently updated.')) {
+              // put your delete method logic here
+              this.requestBusService.updateBusRegistration(model.gid, register.data[0].id, model).subscribe((newrequestbusWithId) => {
+                alert('Route Updated successfully!');
+                this.router.navigate(['/employee/viewhistory']);
+              }, err => {
+                console.error('Route Updation Failed', err);
+                console.error(err);
+                alert(err);
+              });
+            }
           } else {
             this.requestBusService.saveBusRegistration(model.gid, model).subscribe((newrequestbusWithId) => {
+              alert('Route Saved successfully!');
               this.router.navigate(['/employee/viewhistory']);
             }, err => {
               console.error('Registration Failed', err);
