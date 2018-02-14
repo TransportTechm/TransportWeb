@@ -15,15 +15,14 @@
             <th>Journey Type</th>
             <th>Status</th>
           </tr>
-          <tr>
-            <td>
-              <input type="radio" name="" value="" checked>
-              <br>
-            </td>
-            <td>326608</td>
-            <td>Partha Saradhi Gajula</td>
-            <td>12-02-2018</td>
-            <td>Yearly</td>
+          <tr *ngFor=" let activeList of journeyActiveList.data;">
+              <td align="center" valign="middle">
+                  <input type="radio" name="route" (click)="onSelect(routes)">
+                </td>
+            <td align="center" valign="middle">{{activeList.gid}}</td>
+            <td align="center" valign="middle">{{activeList.name}}</td>
+            <td align="center" valign="middle">{{activeList.created_date}}</td>
+            <td align="center" valign="middle">{{activeList.journey_type}}</td>
             <td>
               <span class="label label-success">Active</span>
             </td>
