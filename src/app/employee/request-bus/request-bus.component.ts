@@ -12,6 +12,7 @@ export class RequestBusComponent implements OnInit {
   public registerForm: FormGroup;
   public showme = false;
   public showgrid = false;
+  public showdatepicker = false;
   public pick_up_point: any;
   public routes_list;
   public cities_list;
@@ -36,7 +37,7 @@ export class RequestBusComponent implements OnInit {
     if (userData) {
       this.user_gender = userData['data'][0]['gender'];
       this.user_empId = userData['data'][0]['emp_gid'];
-      this.user_name = userData['data'][0]['first_name'] + '' + userData['data'][0]['last_name'];
+      this.user_name = userData['data'][0]['first_name'] + ' ' + userData['data'][0]['last_name'];
       this.user_contact = userData['data'][0]['mobile_id'];
     }
     this.http.get('assets/apis/routes_list.json').subscribe(res => this.routes_list = res.json());
@@ -55,6 +56,14 @@ export class RequestBusComponent implements OnInit {
     this.destination = selectedItem.Destination;
     this.departure_time = selectedItem.DepartuteTime;
   }
+  onSelectJourneyType(selectedItem: any){
+    if(selectedItem.id==2){
+      this.showdatepicker=true;
+    }
+    else{
+      this.showdatepicker=false;
+    }
+  }
   public register(model) {
     // this.registerForm.markAsTouched({ onlySelf: true });
     if (this.registerForm.valid) {
@@ -67,23 +76,23 @@ export class RequestBusComponent implements OnInit {
       this.requestBusService.getRegisterCheck(model.gid).subscribe((register) => {
         if (register.status === 'success') {
           this.requestBusService.updateBusRegistration(model.gid, register.data[0].id, model).subscribe((newrequestbusWithId) => {
-            alert('Configurations Route Updated successfully!');
+            alert('Route Updated successfully!');
           }, err => {
-            console.error('*** LoginComponent: Error while logging', err);
+            console.error('Route Updation Failed', err);
             console.error(err);
             alert(err);
           });
         } else {
           this.requestBusService.saveBusRegistration(model.gid, model).subscribe((newrequestbusWithId) => {
-            alert('Configurations saved successfully!');
+            alert('Registered successfully!');
           }, err => {
-            console.error('*** LoginComponent: Error while logging', err);
+            console.error('Registration Failed', err);
             console.error(err);
             alert(err);
           });
         }
       }, err => {
-        console.error('*** LoginComponent: Error while logging', err);
+        console.error('Error while Registering', err);
         console.error(err);
         alert(err);
       }
@@ -99,7 +108,6 @@ export class RequestBusComponent implements OnInit {
   showthegrid() {
     this.showgrid = true;
   }
-
   private buildForm(): void {
     this.registerForm = this._formBuilder.group({
       'gid': [this.user_empId],
