@@ -1,6 +1,6 @@
 <app-nav></app-nav>
 <div class="container">
-  <form [formGroup]="registerForm" role="form" name="form" (ngSubmit)="register(registerForm.value)"  #f="ngForm" novalidate
+  <form [formGroup]="registerForm" role="form" name="form" (ngSubmit)="register(registerForm.value)" #f="ngForm" novalidate
     class="form">
     <div class="panel panel-primary">
       <div class="panel-heading">
@@ -83,19 +83,16 @@
             <div class="form-group col-md-4 col-sm-4">
               <label class="control-label" for="ticket_type">Please select the Journey Type: </label>
             </div>
-            <div class="form-group col-md-8 col-sm-8">
+            <div class="form-group col-md-4 col-sm-4">
               <label *ngFor="let options of journeyType" class="radio-inline">
-                <input formControlName="journey_type" type="radio" name="journey_type" value="{{options.id}}" (click)="onSelectJourneyType(options)">{{options.name}}
+                <input formControlName="journey_type" type="radio" name="journey_type" value="{{options.name}}" (click)="onSelectJourneyType(options)">{{options.name}}
               </label>
               <small class="textcolor" *ngIf="formErrors.journey_type">
                 {{ formErrors.journey_type }}
               </small>
-              <div *ngIf="showdatepicker">
-                  <div class="form-group">
-                      <label>Date:</label>
-                        <input type="text" class="form-control pull-right" id="datepicker">
-                    </div>
-              </div>
+            </div>
+            <div class="form-group col-md-4 col-sm-4" *ngIf="showdatepicker">
+               <input type="date" formControlName="journey_date" class="form-control" id="datepicker">
             </div>
           </div>
           <!-- </form> -->

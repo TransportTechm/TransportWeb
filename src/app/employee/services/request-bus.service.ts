@@ -48,12 +48,16 @@ export class RequestBusService {
       .catch(this.handleError);
   }
 
-  getRegisterCheck(id) {
-    return this.http.get(this.requestBusUrl + 'users/' + id + '/registercheck')
+  getRegisterCheckYear(id, jID) {
+    return this.http.get(this.requestBusUrl + 'users/' + id + '/registercheckyear/' + jID )
       .map(response => response.json())
       .catch(this.handleError);
   }
-
+  getRegisterCheckSingle(id, jID, JDATE) {
+    return this.http.get(this.requestBusUrl + 'users/' + id + '/registerchecksingle/' + jID + '/' + JDATE)
+      .map(response => response.json())
+      .catch(this.handleError);
+  }
   private handleError(error: Response | any) {
     const errMsg = (error.message) ? error.message :
       error.status ? `${error.status} - ${error.statusText}` : 'Server error';
