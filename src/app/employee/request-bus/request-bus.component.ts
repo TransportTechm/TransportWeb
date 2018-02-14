@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, NgModule } from '@angular/core';
 import { Http } from '@angular/http';
 import { ReactiveFormsModule, FormGroup, FormControl, Validators, FormBuilder, FormArray, FormsModule } from '@angular/forms';
 import { RequestBusService } from '../services/request-bus.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-request-bus',
   templateUrl: './request-bus.component.html',
@@ -28,12 +29,16 @@ export class RequestBusComponent implements OnInit {
   public user_name: string;
   public user_contact: number;
   public formSubmitAttempt: boolean;
-  @ViewChild('form') myNgForm;
-  constructor(private _formBuilder: FormBuilder, private http: Http, private requestBusService: RequestBusService) { }
+
+  constructor(private _formBuilder: FormBuilder,
+    private http: Http,
+    private requestBusService: RequestBusService,
+    private router: Router) { }
 
   ngOnInit() {
 
     const userData = JSON.parse(localStorage.getItem('userData'));
+
     if (userData) {
       this.user_gender = userData['data'][0]['gender'];
       this.user_empId = userData['data'][0]['emp_gid'];
@@ -47,101 +52,7 @@ export class RequestBusComponent implements OnInit {
     this.buildForm();
 
   }
-  togglepickpoint(pickpoint1) {
-    this.pick_up_point = pickpoint1;
-  }
-  onSelect(selectedItem: any) {
-    this.route_no = selectedItem.RouteNo;
-    this.origin = selectedItem.Origin;
-    this.destination = selectedItem.Destination;
-    this.departure_time = selectedItem.DepartuteTime;
-  }
-  onSelectJourneyType(selectedItem: any) {
-    if (selectedItem.id === 2) {
-      this.showdatepicker = true;
-    } else {
-      this.showdatepicker = false;
-    }
-  }
-  public register(model) {
-    // this.registerForm.markAsTouched({ onlySelf: true });
-    if (this.registerForm.valid) {
-      // save data
-      model.route_no = this.route_no;
-      model.pick_up_point = this.pick_up_point;
-      model.origin = this.origin;
-      model.destination = this.destination;
-      model.departure_time = this.departure_time;
 
-      if (model.journey_type === 'Yearly Journey Ticket') {
-        console.log('Yearly');
-        model.journey_type = 'Yearly';
-        model.journey_date = null;
-        this.requestBusService.getRegisterCheckYear(model.gid, model.journey_type).subscribe((register) => {
-          console.log(register);
-          if (register.status === 'success' && register.data.length > 0) {
-            this.requestBusService.updateBusRegistration(model.gid, register.data[0].id, model).subscribe((newrequestbusWithId) => {
-              alert('Route Updated successfully!');
-            }, err => {
-              console.error('Route Updation Failed', err);
-              console.error(err);
-              alert(err);
-            });
-          } else {
-            this.requestBusService.saveBusRegistration(model.gid, model).subscribe((newrequestbusWithId) => {
-              alert('Registered successfully!');
-            }, err => {
-              console.error('Registration Failed', err);
-              console.error(err);
-              alert(err);
-            });
-          }
-        }, err => {
-          console.error('Error while Registering', err);
-          console.error(err);
-          alert(err);
-        }
-        );
-
-      } else {
-        model.journey_type = 'Single';
-        this.requestBusService.getRegisterCheckSingle(model.gid, model.journey_type, model.journey_date).subscribe((register) => {
-          console.log(register);
-          if (register.status === 'success' && register.data.length > 0) {
-            this.requestBusService.updateBusRegistration(model.gid, register.data[0].id, model).subscribe((newrequestbusWithId) => {
-              alert('Route Updated successfully!');
-            }, err => {
-              console.error('Route Updation Failed', err);
-              console.error(err);
-              alert(err);
-            });
-          } else {
-            this.requestBusService.saveBusRegistration(model.gid, model).subscribe((newrequestbusWithId) => {
-              alert('Registered successfully!');
-            }, err => {
-              console.error('Registration Failed', err);
-              console.error(err);
-              alert(err);
-            });
-          }
-        }, err => {
-          console.error('Error while Registering', err);
-          console.error(err);
-          alert(err);
-        }
-        );
-      }
-    }
-  }
-  showpanel() {
-    this.showme = true;
-  }
-  reset() {
-    this.showme = false;
-  }
-  showthegrid() {
-    this.showgrid = true;
-  }
   private buildForm(): void {
     this.registerForm = this._formBuilder.group({
       'gid': [this.user_empId],
@@ -152,14 +63,13 @@ export class RequestBusComponent implements OnInit {
       'ContactNumber': [this.user_contact, [Validators.required]],
       'journey_type': ['', [Validators.required]],
       'journey_date': [''],
-      // 'Route_No': [this.RouteNo, [Validators.required]],
-      // 'Pickup Point': ['', [Validators.required]]
+      'route_no': [''],
+      'pick_up_point': ['']
     });
     this.registerForm.valueChanges
       .subscribe(data => this.onValueChanged(data));
     this.onValueChanged(); // (re)set validation messages now
   }
-
 
   private onValueChanged(data?: any) {
     if (!this.registerForm) { return; }
@@ -202,6 +112,105 @@ export class RequestBusComponent implements OnInit {
       'required': 'Select Journey Type.',
     }
   };
+
+
+  togglepickpoint(pickpoint1) {
+    this.pick_up_point = pickpoint1;
+  }
+  onSelect(selectedItem: any) {
+    this.route_no = selectedItem.RouteNo;
+    this.origin = selectedItem.Origin;
+    this.destination = selectedItem.Destination;
+    this.departure_time = selectedItem.DepartuteTime;
+  }
+  onSelectJourneyType(selectedItem: any) {
+    if (selectedItem.id === 2) {
+      this.showdatepicker = true;
+    } else {
+      this.showdatepicker = false;
+    }
+  }
+
+  showpanel() {
+    this.showme = true;
+  }
+  reset() {
+    this.showme = false;
+  }
+  showthegrid() {
+    this.showgrid = true;
+  }
+
+  public register(model) {
+    // this.registerForm.markAsTouched({ onlySelf: true });
+    if (this.registerForm.valid) {
+      // save data
+      model.route_no = this.route_no;
+      model.pick_up_point = this.pick_up_point;
+      model.origin = this.origin;
+      model.destination = this.destination;
+      model.departure_time = this.departure_time;
+      console.log(model.journey_type);
+      if (model.journey_type === 'Yearly Journey Ticket') {
+        model.journey_type = 'Yearly';
+        model.journey_date = null;
+        this.requestBusService.getRegisterCheckYear(model.gid, model.journey_type).subscribe((register) => {
+          console.log(register);
+          if (register.status === 'success' && register.data.length > 0) {
+            this.requestBusService.updateBusRegistration(model.gid, register.data[0].id, model).subscribe((newrequestbusWithId) => {
+              alert('Route Updated successfully!');
+              this.router.navigate(['/employee/viewhistory']);
+            }, err => {
+              console.error('Route Updation Failed', err);
+              console.error(err);
+              alert(err);
+            });
+          } else {
+            this.requestBusService.saveBusRegistration(model.gid, model).subscribe((newrequestbusWithId) => {
+              this.router.navigate(['/employee/viewhistory']);
+            }, err => {
+              console.error('Registration Failed', err);
+              console.error(err);
+              alert(err);
+            });
+          }
+        }, err => {
+          console.error('Error while Registering', err);
+          console.error(err);
+          alert(err);
+        }
+        );
+
+      } else {
+        model.journey_type = 'Single';
+        this.requestBusService.getRegisterCheckSingle(model.gid, model.journey_type, model.journey_date).subscribe((register) => {
+          console.log(register);
+          if (register.status === 'success' && register.data.length > 0) {
+            this.requestBusService.updateBusRegistration(model.gid, register.data[0].id, model).subscribe((newrequestbusWithId) => {
+              this.router.navigate(['/employee/viewhistory']);
+            }, err => {
+              console.error('Route Updation Failed', err);
+              console.error(err);
+              alert(err);
+            });
+          } else {
+            this.requestBusService.saveBusRegistration(model.gid, model).subscribe((newrequestbusWithId) => {
+              this.router.navigate(['/employee/viewhistory']);
+            }, err => {
+              console.error('Registration Failed', err);
+              console.error(err);
+              alert(err);
+            });
+          }
+        }, err => {
+          console.error('Error while Registering', err);
+          console.error(err);
+          alert(err);
+        }
+        );
+      }
+    }
+  }
 }
 
 
