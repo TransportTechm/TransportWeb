@@ -8,9 +8,10 @@
       <div class="box-body table-responsive no-padding">
         <table class="table table-hover">
           <tr>
-            <th>Route Number</th>
+            <th>Route #</th>
             <th>Origin</th>
-            <th>Destination</th>
+            <th>Destination</th> 
+            <th>Pick Up Point</th>           
             <th>Registration Date</th>
             <th>Cancellation Date</th>
             <th>Journey Type</th>
@@ -21,16 +22,18 @@
             <td>{{list.route_no}}</td>
             <td>{{list.origin}}</td>
             <td>{{list.destination}}</td>
+            <td>{{list.pick_up_point}}</td>
             <td>{{list.created_date | date}}</td>
             <td>{{list.updated_date | date}}</td>
             <td>{{list.journey_type}}</td>
-            <span>{{list.status}}</span>
-            <!-- <td *ngIf="{{list.status}} == '1'">
-              <span class="label label-danger">Approved</span>
+            <td *ngIf="list.status == 1">
+              <span class="label label-success">Active</span>
             </td>
-            <td *ngIf="{{list.status}} == '0'">
+            <td *ngIf="list.status == 0">
               <span class="label label-danger">Cancelled</span>
-            </td> -->
+            </td>
+            
+            
           </tr>
         </table>
       </div>
@@ -44,9 +47,10 @@
       <div class="box-body table-responsive no-padding">
         <table class="table table-hover">
           <tr>
-            <th>Route Number</th>
+            <th>Route #</th>
             <th>Origin</th>
             <th>Destination</th>
+            <th>Pick Up Point</th>
             <th>Registration Date</th>
             <th>Journey Date</th>
             <th>Journey Type</th>
@@ -56,13 +60,16 @@
             <td>{{list.route_no}}</td>
             <td>{{list.origin}}</td>
             <td>{{list.destination}}</td>
+            <td>{{list.pick_up_point}}</td>
             <td>{{list.created_date | date}}</td>
             <td>{{list.journey_date | date}}</td>
             <td>{{list.journey_type}}</td>
-            <td>
+            <td *ngIf="list.status == 1">
               <span class="label label-primary">Approved</span>
             </td>
-
+            <td *ngIf="list.status == 0">
+              <span class="label label-danger">Cancelled</span>
+            </td>
           </tr>
         </table>
       </div>

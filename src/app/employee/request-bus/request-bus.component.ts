@@ -152,7 +152,7 @@ export class RequestBusComponent implements OnInit {
       model.departure_time = this.departure_time;
       console.log(model.journey_type);
       if (model.journey_type === 'Yearly Journey Ticket') {
-        model.journey_type = 'Yearly';
+        model.journey_type = 'Year';
         model.journey_date = null;
         this.requestBusService.getRegisterCheckYear(model.gid, model.journey_type).subscribe((register) => {
           console.log(register);

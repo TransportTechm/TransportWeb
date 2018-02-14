@@ -92,7 +92,7 @@
               </small>
             </div>
             <div class="form-group col-md-4 col-sm-4" *ngIf="showdatepicker">
-               <input type="date" formControlName="journey_date" class="form-control" id="datepicker">
+              <input type="date" formControlName="journey_date" class="form-control" id="datepicker">
             </div>
           </div>
           <!-- </form> -->
@@ -133,7 +133,7 @@
                       </tr>
                       <tr *ngFor="let routes of routes_list; let i = index">
                         <td align="center" valign="middle">
-                          <input type="radio" name="route_no"  (click)="onSelect(routes)">
+                          <input type="radio" name="route_no" (click)="onSelect(routes)">
                         </td>
                         <td align="center" valign="middle">{{routes.RouteNo}}</td>
                         <td align="center" valign="middle">{{routes.Origin}}</td>
@@ -146,7 +146,7 @@
                         </td>
                         <td align="center" valign="middle">
                           <select class="form-control input-sm" formControlName="pick_up_point" (change)="togglepickpoint($event.target.value)">
-                            <option value=""selected>select pickup/drop point</option>
+                            <option value="" selected>select pickup/drop point</option>
                             <option *ngFor="let options of routes.PickupPoint; let j = index" [value]="routes.PickupPoint[j]">{{routes.PickupPoint[j]}}</option>
                           </select>
                         </td>
