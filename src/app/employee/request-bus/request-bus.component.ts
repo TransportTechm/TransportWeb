@@ -11,8 +11,6 @@ import { Router } from '@angular/router';
 export class RequestBusComponent implements OnInit {
 
   public registerForm: FormGroup;
-  public showme = false;
-  public showgrid = false;
   public showdatepicker = false;
   public pick_up_point: any;
   public routes_list;
@@ -28,7 +26,7 @@ export class RequestBusComponent implements OnInit {
   public user_empId: number;
   public user_name: string;
   public user_contact: number;
-  public formSubmitAttempt: boolean;
+
 
   constructor(private _formBuilder: FormBuilder,
     private http: Http,
@@ -36,21 +34,15 @@ export class RequestBusComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
-
     const userData = JSON.parse(localStorage.getItem('userData'));
-
     if (userData) {
       this.user_gender = userData['data'][0]['gender'];
       this.user_empId = userData['data'][0]['emp_gid'];
       this.user_name = userData['data'][0]['first_name'] + ' ' + userData['data'][0]['last_name'];
       this.user_contact = userData['data'][0]['mobile_id'];
     }
-    this.http.get('assets/apis/routes_list.json').subscribe(res => this.routes_list = res.json());
-    this.http.get('assets/apis/cities.json').subscribe(res => this.cities_list = res.json());
-    this.http.get('assets/apis/locations.json').subscribe(res => this.locations_list = res.json());
-    this.http.get('assets/apis/JourneyType.json').subscribe(res => this.journeyType = res.json());
     this.buildForm();
-
+    this.getJourneyCity();
   }
 
   private buildForm(): void {
@@ -71,7 +63,7 @@ export class RequestBusComponent implements OnInit {
     this.onValueChanged(); // (re)set validation messages now
   }
 
-  private onValueChanged(data?: any) {
+  public onValueChanged(data?: any) {
     if (!this.registerForm) { return; }
     const form = this.registerForm;
     // tslint:disable-next-line:forin
@@ -89,7 +81,7 @@ export class RequestBusComponent implements OnInit {
     }
   }
   // tslint:disable-next-line:member-ordering
-  formErrors = {
+  public formErrors = {
     'ContactNumber': '',
     'journeycity': '',
     'journeylocation': '',
@@ -98,7 +90,7 @@ export class RequestBusComponent implements OnInit {
   };
 
   // tslint:disable-next-line:member-ordering
-  validationMessages = {
+  private validationMessages = {
     'ContactNumber': {
       'required': 'Contact Number is required.',
     },
@@ -112,8 +104,35 @@ export class RequestBusComponent implements OnInit {
       'required': 'Select Journey Type.',
     }
   };
-
-
+  private getJourneyCity() {
+    this.http.get('assets/apis/cities.json').subscribe(res => this.cities_list = res.json());
+  }
+  onSelectCity(value) {
+    console.log(value);
+    this.getJourneyLocation();
+  }
+  private getJourneyLocation() {
+    this.http.get('assets/apis/locations.json').subscribe(res => this.locations_list = res.json());
+  }
+  onSelectLocation(value) {
+    console.log(value);
+    this.getJourneyType();
+  }
+  private getJourneyType() {
+    this.http.get('assets/apis/JourneyType.json').subscribe(res => this.journeyType = res.json());
+  }
+  onSelectJourneyType(selectedItem: any) {
+    if (selectedItem.id === 2) {
+      this.showdatepicker = true;
+      this.getRouteList();
+    } else {
+      this.showdatepicker = false;
+      this.getRouteList();
+    }
+  }
+  private getRouteList() {
+    this.http.get('assets/apis/routes_list.json').subscribe(res => this.routes_list = res.json());
+  }
   togglepickpoint(pickpoint1) {
     this.pick_up_point = pickpoint1;
   }
@@ -123,24 +142,6 @@ export class RequestBusComponent implements OnInit {
     this.destination = selectedItem.Destination;
     this.departure_time = selectedItem.DepartuteTime;
   }
-  onSelectJourneyType(selectedItem: any) {
-    if (selectedItem.id === 2) {
-      this.showdatepicker = true;
-    } else {
-      this.showdatepicker = false;
-    }
-  }
-
-  showpanel() {
-    this.showme = true;
-  }
-  reset() {
-    this.showme = false;
-  }
-  showthegrid() {
-    this.showgrid = true;
-  }
-
   public register(model) {
     // this.registerForm.markAsTouched({ onlySelf: true });
     if (this.registerForm.valid) {
