@@ -54,6 +54,24 @@ export class RequestBusService {
       .catch(this.handleError);
   }
 
+  getYearJourneyList(id){
+    return this.http.get(this.requestBusUrl + 'users/' + id + '/journeys/year')
+    .map(response => response.json())
+    .catch(this.handleError);
+  }
+
+  getSingleJourneyList(id){
+    return this.http.get(this.requestBusUrl + 'users/' + id + '/journeys/single')
+    .map(response => response.json())
+    .catch(this.handleError);
+  }
+  
+  getActiveList(id) {
+    return this.http.get(this.requestBusUrl + 'users/' + id + '/journeys/active')
+    .map(response => response.json())
+    .catch(this.handleError);
+   }
+
   private handleError(error: Response | any) {
     const errMsg = (error.message) ? error.message :
       error.status ? `${error.status} - ${error.statusText}` : 'Server error';

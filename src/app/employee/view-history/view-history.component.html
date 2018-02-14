@@ -8,45 +8,33 @@
       <div class="box-body table-responsive no-padding">
         <table class="table table-hover">
           <tr>
-            <th>Associate ID</th>
-            <th>Associate Name</th>
+            <th>Route Number</th>
+            <th>Origin</th>
+            <th>Destination</th>
             <th>Registration Date</th>
-            <th>Cancelation Date</th>
+            <th>Cancellation Date</th>
             <th>Journey Type</th>
             <th>Status</th>
           </tr>
-          <tr>
-            <td>326608</td>
-            <td>Partha Saradhi Gajula</td>
-            <td>12-02-2018</td>
-            <td>15-02-2018</td>
-            <td>Yearly</td>
-            <td>
-              <span class="label label-danger">Canceled</span>
-            </td>
-
-          </tr>
-          <tr>
-            <td>326608</td>
-            <td>Partha Saradhi Gajula</td>
-            <td>12-02-2018</td>
-            <td>15-02-2018</td>
-            <td>Yearly</td>
-            <td>
-              <span class="label label-danger">Canceled</span>
-            </td>
-
-          </tr>
-          <tr>
-            <td>326608</td>
-            <td>Partha Saradhi Gajula</td>
-            <td>12-02-2018</td>
-            <td></td>
-            <td>Yearly</td>
-            <td>
-              <span class="label label-success">Active</span>
-            </td>
-
+          <!-- <tr> -->
+          <tr *ngFor="let list of yearJourneyList.data">
+            <td>{{list.route_no}}</td>
+            <td>{{list.origin}}</td>
+            <td>{{list.destination}}</td>
+            <td>{{list.created_date}}</td>
+            <td>{{list.updated_date}}</td>
+            <td>{{list.journey_type}}</td>
+            <!-- <div *ngIf="showActive"> -->
+                <td *ngIf="showActive">
+                    <span class="label label-danger">Approved</span>
+                  </td>
+                <!-- </div> -->
+            <!-- <div *ngIf= "showCancelled" > -->
+              <td *ngIf= "showCancelled">
+                <span class="label label-danger">Cancelled</span>
+              </td>
+            <!-- </div> -->
+            
           </tr>
         </table>
       </div>
@@ -60,40 +48,21 @@
       <div class="box-body table-responsive no-padding">
         <table class="table table-hover">
           <tr>
-            <th>Associate ID</th>
-            <th>Associate Name</th>
-            <th>Registration Date</th>
-            <th>Journey Date</th>
-            <th>Journey Type</th>
-            <th>Status</th>
+              <th>Route Number</th>
+              <th>Origin</th>
+              <th>Destination</th>
+              <th>Registration Date</th>
+              <th>Journey Date</th>
+              <th>Journey Type</th>
+              <th>Status</th>
           </tr>
-          <tr>
-            <td>326608</td>
-            <td>Partha Saradhi Gajula</td>
-            <td>12-02-2018</td>
-            <td>15-02-2018</td>
-            <td>Yearly</td>
-            <td>
-              <span class="label label-primary">Approved</span>
-            </td>
-          </tr>
-          <tr>
-            <td>326608</td>
-            <td>Partha Saradhi Gajula</td>
-            <td>12-02-2018</td>
-            <td>15-02-2018</td>
-            <td>Yearly</td>
-            <td>
-              <span class="label label-primary">Approved</span>
-            </td>
-
-          </tr>
-          <tr>
-            <td>326608</td>
-            <td>Partha Saradhi Gajula</td>
-            <td>12-02-2018</td>
-            <td>15-02-2018</td>
-            <td>Yearly</td>
+          <tr *ngFor="let list of singleJourneyList.data">
+              <td>{{list.route_no}}</td>
+              <td>{{list.origin}}</td>
+              <td>{{list.destination}}</td>
+              <td>{{list.created_date}}</td>
+              <td>{{list.journey_date}}</td>
+              <td>{{list.journey_type}}</td>
             <td>
               <span class="label label-primary">Approved</span>
             </td>
