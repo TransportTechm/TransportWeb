@@ -56,12 +56,11 @@ export class RequestBusComponent implements OnInit {
     this.destination = selectedItem.Destination;
     this.departure_time = selectedItem.DepartuteTime;
   }
-  onSelectJourneyType(selectedItem: any){
-    if(selectedItem.id==2){
-      this.showdatepicker=true;
-    }
-    else{
-      this.showdatepicker=false;
+  onSelectJourneyType(selectedItem: any) {
+    if (selectedItem.id === 2) {
+      this.showdatepicker = true;
+    } else {
+      this.showdatepicker = false;
     }
   }
   public register(model) {
