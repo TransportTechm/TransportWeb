@@ -9,7 +9,7 @@ export class RequestBusService {
 
   constructor(private http: Http) {
     this.requestBusUrl = environment.employeeServiceUrl;
-   }
+  }
   getBusRegistrationDetails(id) {
     return this.http.get(this.requestBusUrl + 'users/' + id + '/register/bus')
       .map(response => response.json())
@@ -49,7 +49,7 @@ export class RequestBusService {
   }
 
   getRegisterCheckYear(id, jID) {
-    return this.http.get(this.requestBusUrl + 'users/' + id + '/registercheckyear/' + jID )
+    return this.http.get(this.requestBusUrl + 'users/' + id + '/registercheckyear/' + jID)
       .map(response => response.json())
       .catch(this.handleError);
   }
@@ -59,24 +59,33 @@ export class RequestBusService {
       .catch(this.handleError);
   }
 
-  getYearJourneyList(id){
+  getYearJourneyList(id) {
     return this.http.get(this.requestBusUrl + 'users/' + id + '/journeys/year')
-    .map(response => response.json())
-    .catch(this.handleError);
+      .map(response => response.json())
+      .catch(this.handleError);
   }
 
-  getSingleJourneyList(id){
+  getSingleJourneyList(id) {
     return this.http.get(this.requestBusUrl + 'users/' + id + '/journeys/single')
-    .map(response => response.json())
-    .catch(this.handleError);
+      .map(response => response.json())
+      .catch(this.handleError);
   }
-  
+
   getActiveList(id) {
     return this.http.get(this.requestBusUrl + 'users/' + id + '/journeys/active')
+      .map(response => response.json())
+      .catch(this.handleError);
+  }
+
+  cancelRegistration(gid, id) {
+    const bodyString = '';
+    const headers = new Headers({ 'Content-Type': 'application/json' });
+    // Create a request option
+    const options = new RequestOptions({ headers: headers });
+    return this.http.put(this.requestBusUrl + 'users/' + gid + '/journeys/cancel/' + id, bodyString, options)
     .map(response => response.json())
     .catch(this.handleError);
-   }
-
+  }
   private handleError(error: Response | any) {
     const errMsg = (error.message) ? error.message :
       error.status ? `${error.status} - ${error.statusText}` : 'Server error';

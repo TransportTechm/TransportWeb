@@ -9,8 +9,8 @@ import { RequestBusService } from '../services/request-bus.service';
 })
 export class ViewHistoryComponent implements OnInit {
   public user_empId: number;
-  public yearJourneyList: any;
-  public singleJourneyList: any;
+  public yearJourneyList: any[];
+  public singleJourneyList: any[];
   public showActive: boolean;
   public showCancelled: boolean;
 
@@ -23,20 +23,11 @@ export class ViewHistoryComponent implements OnInit {
     }
 
     this.requestBusService.getYearJourneyList(this.user_empId).subscribe(result => {
-      this.yearJourneyList = result;
-      console.log(this.yearJourneyList.data)
+      this.yearJourneyList = result.data;
     });
 
     this.requestBusService.getSingleJourneyList(this.user_empId).subscribe(result => {
-      this.singleJourneyList = result;
-      console.log(this.singleJourneyList.data[0].status)
+      this.singleJourneyList = result.data;
     });
-
-    if(this.yearJourneyList.data[0].status == 1) {
-      this.showActive = true;
-    }
-      else{
-        this.showCancelled = true;
-    }
   }
 }

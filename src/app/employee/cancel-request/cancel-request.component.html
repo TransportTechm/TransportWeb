@@ -9,19 +9,21 @@
         <table class="table table-hover">
           <tr>
             <th></th>
-            <th>Associate ID</th>
-            <th>Associate Name</th>
+            <th>Route Number</th>
+            <th>Origin</th>
+            <th>Destination</th>
             <th>Registration Date</th>
             <th>Journey Type</th>
             <th>Status</th>
           </tr>
-          <tr *ngFor=" let activeList of journeyActiveList.data;">
+          <tr *ngFor=" let activeList of journeyActiveList;">
               <td align="center" valign="middle">
-                  <input type="radio" name="route" (click)="onSelect(routes)">
+                  <input type="radio" name="route" (click)="onSelect(activeList.id)">
                 </td>
-            <td align="center" valign="middle">{{activeList.gid}}</td>
-            <td align="center" valign="middle">{{activeList.name}}</td>
-            <td align="center" valign="middle">{{activeList.created_date}}</td>
+            <td align="center" valign="middle">{{activeList.route_no}}</td>
+            <td align="center" valign="middle">{{activeList.origin}}</td>
+            <td align="center" valign="middle">{{activeList.destination}}</td>
+            <td align="center" valign="middle">{{activeList.created_date | date}}</td>
             <td align="center" valign="middle">{{activeList.journey_type}}</td>
             <td>
               <span class="label label-success">Active</span>
@@ -29,7 +31,7 @@
           </tr>
         </table>
       </div>
-      <button type="button" class="btn btn-block btn-danger">Cancel Request</button>
+      <button type="button" class="btn btn-block btn-danger" (click)="cancelRequest()">Cancel Request</button>
     </div>
   </div>
 </div>

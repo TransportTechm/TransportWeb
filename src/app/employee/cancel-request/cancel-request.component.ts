@@ -11,18 +11,29 @@ export class CancelRequestComponent implements OnInit {
 
   constructor(private http: Http, private requestBusService: RequestBusService) { }
   public user_empId: number;
-  public journeyActiveList: any;
+  public journeyActiveList: any[];
+  public selectedId: number;
 
   ngOnInit() {
     const userData = JSON.parse(localStorage.getItem('userData'));
     if (userData) {
       this.user_empId = userData['data'][0]['emp_gid'];
     }
-
     this.requestBusService.getActiveList(this.user_empId).subscribe(result => {
-      this.journeyActiveList=result;
-      console.log(this.journeyActiveList)
+      this.journeyActiveList=result.data;
     });
   }
-
+  onSelect(selectedItemId: any) {
+    this.selectedId = selectedItemId;
+  }
+  cancelRequest(){
+    this.requestBusService.cancelRegistration(this.user_empId, this.selectedId).subscribe(result =>{
+      alert('Registration Successfully Cancelled');
+      window.location.reload();
+    }, err => {
+      console.error('CAncellation failed', err);
+      console.error(err);
+      alert(err);
+    });
+  }
 }
