@@ -8,7 +8,7 @@ import { Http } from '@angular/http';
 })
 export class RouteListComponent implements OnInit {
   routes_list;
-  constructor(private http: Http,) { }
+  constructor(private http: Http, ) { }
 
   ngOnInit() {
     this.getRouteList();

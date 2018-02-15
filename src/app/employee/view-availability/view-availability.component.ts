@@ -73,23 +73,22 @@ export class ViewAvailabilityComponent implements OnInit {
     this.showPlaces = true;
     this.http.get('assets/apis/seatCapacity.json').subscribe(res =>
       this.routes_list2 = res.json()
-    );  
+    );
   }
   proceed() {
     this.requestBusService.getSeatAvailabilty(this.routes_list2[0].RouteNo).subscribe(result => {
       this.availabilty = (this.routes_list2[0].SeatCapacity) - (result.data[0].occupiedSeats);
-      console.log(this.availabilty)
+      console.log(this.availabilty);
       if (this.availabilty > 0) {
         this.showgrid = true;
-      }
-      else {
+      } else {
         this.showgrid2 = true;
       }
     }, err => {
       console.error('error retrieving data', err);
       console.error(err);
       alert(err);
-    })
+    });
   }
   cancel() {
     this.showgrid = false;
