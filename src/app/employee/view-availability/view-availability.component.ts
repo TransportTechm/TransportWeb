@@ -18,8 +18,10 @@ export class ViewAvailabilityComponent implements OnInit {
   public showdatepicker = false;
   public routes_list;
   public routes_list2;
+  public selectedRouteNum;
+  public availabilty: any[];
 
-  constructor(private http: Http, private _formBuilder: FormBuilder) { }
+  constructor(private http: Http, private _formBuilder: FormBuilder, private requestBusService: RequestBusService) { }
 
   ngOnInit() {
     this.buildForm();
@@ -61,5 +63,20 @@ export class ViewAvailabilityComponent implements OnInit {
   }
   private getRouteList() {
     this.http.get('assets/apis/routes_list.json').subscribe(res => this.routes_list = res.json());
+  }
+  onSelectRouteNum(routeNum) {
+    this.selectedRouteNum = routeNum;
+    console.log(this.selectedRouteNum)
+  }
+  proceed() {
+    console.log(this.selectedRouteNum)
+    this.requestBusService.getSeatAvailabilty(this.selectedRouteNum).subscribe(result => {
+      this.availabilty = result.data
+      console.log(this.availabilty)
+    }, err => {
+      console.error('error retrieving data', err);
+      console.error(err);
+      alert(err);
+    })
   }
 }
