@@ -4,14 +4,6 @@
       "Origin": "TMEC",
       "Destination": "Nagalanda Circle",
       "DepartuteTime": "08:50:00",
-      "SeatCapacity": "40"
-    },
-    {
-      "RouteNo": "2",
-      "Origin": "TMEC",
-      "Destination": "Konappana Agrahara",
-      "DepartuteTime": "09:30:00",
-      "SeatCapacity": "30"
-        
+      "SeatCapacity": "2"
     }
 ]
