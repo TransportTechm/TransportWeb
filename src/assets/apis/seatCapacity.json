@@ -1,0 +1,9 @@
+[
+    {
+      "RouteNo": "1",
+      "Origin": "TMEC",
+      "Destination": "Nagalanda Circle",
+      "DepartuteTime": "08:50:00",
+      "SeatCapacity": "40"
+    }
+]

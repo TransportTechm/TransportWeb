@@ -103,6 +103,14 @@ export class RequestBusService {
       .map(response => response.json())
       .catch(this.handleError);
   }
+
+  getSeatAvailabilty(routeNo){
+    console.log(routeNo)
+    return this.http.get(this.requestBusUrl + 'users/availableseats/' + routeNo)
+    .map(response => response.json())
+    .catch(this.handleError);
+  }
+
   private handleError(error: Response | any) {
     const errMsg = (error.message) ? error.message :
       error.status ? `${error.status} - ${error.statusText}` : 'Server error';

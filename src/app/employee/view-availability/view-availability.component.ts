@@ -18,8 +18,13 @@ export class ViewAvailabilityComponent implements OnInit {
   public showdatepicker = false;
   public routes_list;
   public routes_list2;
+  public selectedRouteNum;
+  public availabilty: any;
+  public showgrid = false;
+  public showgrid2 = false;
+  public showPlaces = false;
 
-  constructor(private http: Http, private _formBuilder: FormBuilder) { }
+  constructor(private http: Http, private _formBuilder: FormBuilder, private requestBusService: RequestBusService) { }
 
   ngOnInit() {
     this.buildForm();
@@ -60,6 +65,33 @@ export class ViewAvailabilityComponent implements OnInit {
     }
   }
   private getRouteList() {
-    this.http.get('assets/apis/routes_list.json').subscribe(res => this.routes_list = res.json());
+    this.http.get('assets/apis/routes_list.json').subscribe(res =>
+      this.routes_list = res.json()
+    );
+  }
+  onSelectRouteNum(routeNum) {
+    this.showPlaces = true;
+    this.http.get('assets/apis/seatCapacity.json').subscribe(res =>
+      this.routes_list2 = res.json()
+    );  
+  }
+  proceed() {
+    this.requestBusService.getSeatAvailabilty(this.routes_list2[0].RouteNo).subscribe(result => {
+      this.availabilty = (this.routes_list2[0].SeatCapacity) - (result.data[0].occupiedSeats);
+      console.log(this.availabilty)
+      if (this.availabilty > 0) {
+        this.showgrid = true;
+      }
+      else {
+        this.showgrid2 = true;
+      }
+    }, err => {
+      console.error('error retrieving data', err);
+      console.error(err);
+      alert(err);
+    })
+  }
+  cancel() {
+    this.showgrid = false;
   }
 }
