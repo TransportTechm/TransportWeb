@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { TransportRoutingModule } from './transport-routing.module';
 import { RouteListComponent } from './transport/route-list/route-list.component';
 import { SharedModule } from '../shared/shared.module';
+import { ApproveVehicleComponent } from './transport/approve-vehicle/approve-vehicle.component';
 
 @NgModule({
   imports: [
@@ -11,6 +12,6 @@ import { SharedModule } from '../shared/shared.module';
     SharedModule,
     TransportRoutingModule
   ],
-  declarations: [RouteListComponent]
+  declarations: [RouteListComponent, ApproveVehicleComponent]
 })
 export class TransportModule { }
