@@ -1,4 +1,7 @@
 <app-nav></app-nav>
+<div class="alert alert-success">
+  <strong>Success!</strong> Indicates a successful or positive action.
+</div>
 <div class="container">
   <form [formGroup]="registerForm" role="form" name="form" (ngSubmit)="register(registerForm.value)" #f="ngForm" novalidate
     class="form">

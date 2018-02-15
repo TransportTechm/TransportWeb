@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, NgModule } from '@angular/core';
+import { Component, OnInit, ViewChild, NgModule} from '@angular/core';
 import { Http } from '@angular/http';
 import { ReactiveFormsModule, FormGroup, FormControl, Validators, FormBuilder, FormArray, FormsModule } from '@angular/forms';
 import { RequestBusService } from '../services/request-bus.service';
@@ -14,7 +14,7 @@ export class RequestBusComponent implements OnInit {
   public showdatepicker = false;
   public pick_up_point: any;
   public routes_list;
-  public cities_list;
+  public cities_list: any[];
   public locations_list;
   public journeyType;
   public route_no;
@@ -106,6 +106,15 @@ export class RequestBusComponent implements OnInit {
   };
   private getJourneyCity() {
     this.http.get('assets/apis/cities.json').subscribe(res => this.cities_list = res.json());
+    /* this.requestBusService.getJourneyCity(1).subscribe(c => {
+      console.log(c);
+      this.cities_list = c.json();
+    },
+      err => {
+        console.error('*** RequestBusComponent: Error while getJourneyCity', err);
+        console.error(err);
+      }
+    ); */
   }
   onSelectCity(value) {
     console.log(value);
@@ -163,7 +172,7 @@ export class RequestBusComponent implements OnInit {
                 alert('Route Updated successfully!');
                 this.router.navigate(['/employee/viewhistory']);
               }, err => {
-                console.error('Route Updation Failed', err);
+                console.error('*** RequestBusComponent:Error while Registering');
                 console.error(err);
                 alert(err);
               });
@@ -172,13 +181,13 @@ export class RequestBusComponent implements OnInit {
             this.requestBusService.saveBusRegistration(model.gid, model).subscribe((newrequestbusWithId) => {
               this.router.navigate(['/employee/viewhistory']);
             }, err => {
-              console.error('Registration Failed', err);
-              console.error(err);
+              console.error('*** RequestBusComponent:Error while Registering');
+                console.error(err);
               alert(err);
             });
           }
         }, err => {
-          console.error('Error while Registering', err);
+          console.error('*** RequestBusComponent:Error while Registering');
           console.error(err);
           alert(err);
         }
@@ -194,7 +203,7 @@ export class RequestBusComponent implements OnInit {
                 alert('Route Updated successfully!');
                 this.router.navigate(['/employee/viewhistory']);
               }, err => {
-                console.error('Route Updation Failed', err);
+                console.error('*** RequestBusComponent:Error while Registering');
                 console.error(err);
                 alert(err);
               });
@@ -204,13 +213,13 @@ export class RequestBusComponent implements OnInit {
               alert('Route Saved successfully!');
               this.router.navigate(['/employee/viewhistory']);
             }, err => {
-              console.error('Registration Failed', err);
+              console.error('*** RequestBusComponent:Error while Registering');
               console.error(err);
               alert(err);
             });
           }
         }, err => {
-          console.error('Error while Registering', err);
+          console.error('*** RequestBusComponent:Error while Registering', err);
           console.error(err);
           alert(err);
         }

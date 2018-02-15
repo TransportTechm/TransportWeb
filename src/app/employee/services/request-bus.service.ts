@@ -5,13 +5,15 @@ import { environment } from '../../../environments/environment';
 
 @Injectable()
 export class RequestBusService {
-  private requestBusUrl: string;
+  private employeeServiceUrl: string;
+  private transportServiceUrl: string;
 
   constructor(private http: Http) {
-    this.requestBusUrl = environment.employeeServiceUrl;
+    this.employeeServiceUrl = environment.employeeServiceUrl;
+    this.transportServiceUrl = environment.transportServiceUrl;
   }
   getBusRegistrationDetails(id) {
-    return this.http.get(this.requestBusUrl + 'users/' + id + '/register/bus')
+    return this.http.get(this.employeeServiceUrl + 'users/' + id + '/register/bus')
       .map(response => response.json())
       .catch(this.handleError);
   }
@@ -24,7 +26,7 @@ export class RequestBusService {
     // Create a request option
     const options = new RequestOptions({ headers: headers });
 
-    return this.http.post(this.requestBusUrl + 'users/' + id + '/register/bus/', bodyString, options)
+    return this.http.post(this.employeeServiceUrl + 'users/' + id + '/register/bus/', bodyString, options)
       .map(response => response.json())
       .catch(this.handleError);
   }
@@ -36,43 +38,43 @@ export class RequestBusService {
     const headers = new Headers({ 'Content-Type': 'application/json' });
     // Create a request option
     const options = new RequestOptions({ headers: headers });
-    return this.http.put(this.requestBusUrl + 'users/' + gid + '/register/bus/' + id, bodyString, options)
+    return this.http.put(this.employeeServiceUrl + 'users/' + gid + '/register/bus/' + id, bodyString, options)
       .map(response => response.json())
       .catch(this.handleError);
   }
 
   deleteBusRegistration(id) {
-    return this.http.delete(this.requestBusUrl + 'users/' + id + '/register/bus')
+    return this.http.delete(this.employeeServiceUrl + 'users/' + id + '/register/bus')
       .map(response => response.json())
       .toPromise()
       .catch(this.handleError);
   }
 
   getRegisterCheckYear(id, jID) {
-    return this.http.get(this.requestBusUrl + 'users/' + id + '/registercheckyear/' + jID)
+    return this.http.get(this.employeeServiceUrl + 'users/' + id + '/registercheckyear/' + jID)
       .map(response => response.json())
       .catch(this.handleError);
   }
   getRegisterCheckSingle(id, jID, JDATE) {
-    return this.http.get(this.requestBusUrl + 'users/' + id + '/registerchecksingle/' + jID + '/' + JDATE)
+    return this.http.get(this.employeeServiceUrl + 'users/' + id + '/registerchecksingle/' + jID + '/' + JDATE)
       .map(response => response.json())
       .catch(this.handleError);
   }
 
   getYearJourneyList(id) {
-    return this.http.get(this.requestBusUrl + 'users/' + id + '/journeys/year')
+    return this.http.get(this.employeeServiceUrl + 'users/' + id + '/journeys/year')
       .map(response => response.json())
       .catch(this.handleError);
   }
 
   getSingleJourneyList(id) {
-    return this.http.get(this.requestBusUrl + 'users/' + id + '/journeys/single')
+    return this.http.get(this.employeeServiceUrl + 'users/' + id + '/journeys/single')
       .map(response => response.json())
       .catch(this.handleError);
   }
 
   getActiveList(id) {
-    return this.http.get(this.requestBusUrl + 'users/' + id + '/journeys/active')
+    return this.http.get(this.employeeServiceUrl + 'users/' + id + '/journeys/active')
       .map(response => response.json())
       .catch(this.handleError);
   }
@@ -82,9 +84,24 @@ export class RequestBusService {
     const headers = new Headers({ 'Content-Type': 'application/json' });
     // Create a request option
     const options = new RequestOptions({ headers: headers });
-    return this.http.put(this.requestBusUrl + 'users/' + gid + '/journeys/cancel/' + id, bodyString, options)
+    return this.http.put(this.employeeServiceUrl + 'users/' + gid + '/journeys/cancel/' + id, bodyString, options)
     .map(response => response.json())
     .catch(this.handleError);
+  }
+  getJourneyCity(id) {
+    return this.http.get(this.transportServiceUrl + 'orgs/' + id + '/cities')
+      .map(response => response.json())
+      .catch(this.handleError);
+  }
+  getJourneyLocation(id) {
+    return this.http.get(this.transportServiceUrl + 'users/' + id + '/journeys/active')
+      .map(response => response.json())
+      .catch(this.handleError);
+  }
+  getJourneyType(id) {
+    return this.http.get(this.transportServiceUrl + 'users/' + id + '/journeys/active')
+      .map(response => response.json())
+      .catch(this.handleError);
   }
   private handleError(error: Response | any) {
     const errMsg = (error.message) ? error.message :
