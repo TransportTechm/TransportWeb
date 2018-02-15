@@ -1,6 +1,6 @@
 <app-nav></app-nav>
 <div class="container">
-  <form class="form">
+  <form [formGroup]="availabilityForm" role="form" name="form" class="form">
     <div class="panel panel-primary">
       <div class="panel-heading">
         <h3 class="panel-title">View Availability</h3>
@@ -8,37 +8,36 @@
       <div class="panel-body">
         <div class="col-md-12 col-sm-12">
           <div class="form-group col-md-4 col-sm-4">
-            <label class="control-label" for="city">City Name</label>
-            <select class="form-control input-sm">
-                        <option>-- Select City --</option>
-                        <option>Bangalore</option>
-                        <option>Hyderabad</option>
-                      </select>
+            <label class="control-label" for="journeycity">Journey City </label>
+            <select Name="journeycity" formControlName="journeycity" class="form-control input-sm" (change)="onSelectCity($event.target.value)">
+                <option value="" hidden selected>Select a City</option>
+                <option *ngFor="let options of cities_list" value={{options.id}}>{{options.name}}</option>
+              </select>
           </div>
           <div class="form-group col-md-4 col-sm-4">
-            <label class="control-label" for="location">Journey Location</label>
-            <select class="form-control input-sm">
-                        <option>-- Select Journey Location --</option>
-                        <option>TechM</option>
-                        <option>SEZ</option>
-                      </select>
+            <label class="control-label" for="journeylocation">Journey Location</label>
+            <select formControlName="journeylocation" class="form-control input-sm" (change)="onSelectLocation($event.target.value)">
+                <option value="" hidden selected>Select Journey Location</option>
+                <option *ngFor="let locs of locations_list" value={{locs.id}}>{{locs.name}}</option>
+              </select>
           </div>
           <div class="form-group col-md-4 col-sm-4">
-            <label for="gender">Ticket Type</label>
+            <label for="journeyType">Journey Type</label>
             <tr>
-              <input type="radio" name="journey_type">Yearly Journey Ticket
-              <input type="radio" name="journey_type">Single Journey Ticket
+              <label *ngFor="let options of journeyType" class="radio-inline">
+                    <input formControlName="journey_type" type="radio" name="journey_type" value="{{options.name}}" (click)="onSelectJourneyType(options)">{{options.name}}
+                  </label>
             </tr>
           </div>
         </div>
-        <div class="col-md-12 col-sm-12">
+        <div *ngIf="showdatepicker" class="col-md-12 col-sm-12">
           <div class="form-group col-md-4 col-sm-4">
-              <label class="control-label" for="date">Select Date</label>
-              <input type="date" formControlName="journey_date" class="form-control" id="datepicker">
+            <label class="control-label" for="date">Select Date</label>
+            <input type="date" class="form-control" id="datepicker" disabled>
           </div>
           <div class="form-group col-md-4 col-sm-4">
-              <label class="control-label" for="route_type">Route Type</label>
-              <select class="form-control input-sm">
+            <label class="control-label" for="route_type">Route Type</label>
+            <select class="form-control input-sm" disabled>
                   <option>-- Select Route Type --</option>
                   <option>Working Day</option>
                   <option>Non Working Day</option>
@@ -47,20 +46,23 @@
         </div>
         <div class="col-md-12 col-sm-12">
           <div class="form-group col-md-4 col-sm-4">
-            <label class="control-label" for="city">Route No.</label>
-            <input type="text" class="form-control" placeholder="Enter Route Number">
+            <label class="control-label" for="route_no">Route No.</label>
+            <select formControlName="route_no" class="form-control input-sm">
+                <option value="" hidden selected>Select Route Number</option>
+                <option *ngFor="let routes of routes_list" value={{routes.RouteNo}}>{{routes.RouteNo}}</option>
+              </select>
           </div>
           <div class="form-group col-md-4 col-sm-4">
-            <label class="control-label" for="location">Origin</label>
+            <label class="control-label" for="origin"></label>
             <input type="text" class="form-control" placeholder="Origin" disabled>
           </div>
           <div class="form-group col-md-4 col-sm-4">
-            <label class="control-label" for="contact">Destination</label>
+            <label class="control-label" for="destination">Destination</label>
             <input type="text" class="form-control" placeholder="Destination" disabled>
           </div>
         </div>
         <div style="text-align:center">
-          <button type="submit" class="btn btn-primary">Submit</button>
+          <button type="submit" class="btn btn-primary">Proceed</button>
           <button type="button" class="btn btn-default">Cancel</button>
         </div>
       </div>
