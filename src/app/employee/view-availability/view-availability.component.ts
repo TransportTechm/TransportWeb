@@ -22,6 +22,7 @@ export class ViewAvailabilityComponent implements OnInit {
   public availabilty: any;
   public showgrid = false;
   public showgrid2 = false;
+  public showPlaces = false;
 
   constructor(private http: Http, private _formBuilder: FormBuilder, private requestBusService: RequestBusService) { }
 
@@ -69,9 +70,10 @@ export class ViewAvailabilityComponent implements OnInit {
     );
   }
   onSelectRouteNum(routeNum) {
+    this.showPlaces = true;
     this.http.get('assets/apis/seatCapacity.json').subscribe(res =>
       this.routes_list2 = res.json()
-    );
+    );  
   }
   proceed() {
     this.requestBusService.getSeatAvailabilty(this.routes_list2[0].RouteNo).subscribe(result => {
