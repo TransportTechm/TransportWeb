@@ -104,9 +104,9 @@ export class RequestBusService {
       .catch(this.handleError);
   }
 
-  getSeatAvailabilty(routeNo){
-    console.log(routeNo)
-    return this.http.get(this.requestBusUrl + 'users/availableseats/' + routeNo)
+  getSeatAvailabilty(routeNo) {
+    console.log(routeNo);
+    return this.http.get(this.employeeServiceUrl + 'users/availableseats/' + routeNo)
     .map(response => response.json())
     .catch(this.handleError);
   }

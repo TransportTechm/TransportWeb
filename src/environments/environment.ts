@@ -6,5 +6,5 @@
 export const environment = {
   production: false,
   employeeServiceUrl: 'http://localhost:3000/transportationapi/employee/1.0/',
-  transportServiceUrl: 'http://10.53.69.131:8080/transport/1.0/'
+  transportServiceUrl: 'http://transporttechm.cfapps.io/transport/1.0/'
 };
