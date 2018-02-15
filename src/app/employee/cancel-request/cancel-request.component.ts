@@ -32,7 +32,7 @@ export class CancelRequestComponent implements OnInit {
       alert('Registration Successfully Cancelled');
       this.router.navigate(['/employee/viewhistory']);
     }, err => {
-      console.error('CAncellation failed', err);
+      console.error('Cancellation failed', err);
       console.error(err);
       alert(err);
     });
