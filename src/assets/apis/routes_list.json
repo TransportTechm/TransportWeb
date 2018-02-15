@@ -3,12 +3,15 @@
       "RouteNo": "1",
       "Origin": "TMEC",
       "Destination": "Nagalanda Circle",
-      "DepartuteTime": "08:50:00",
+      "DepartuteTime": "06:00:00",
       "PickupPoint": [
             "Nagalanda Junction",
             "Madiwala",
             "Silk Board"
-        ]
+        ],
+        "VehicleRegistrationNumber":"KT002165",
+        "DriverName":"Raju",
+        "AvailableSeats":"18"
     },
     {
       "RouteNo": "2",
@@ -19,6 +22,9 @@
             "Ecity",
             "BTM",
             "sarjapur"
-        ]
+        ],
+        "VehicleRegistrationNumber":"KT002165",
+        "DriverName":"Narendra",
+        "AvailableSeats":"20"
     }
 ]
