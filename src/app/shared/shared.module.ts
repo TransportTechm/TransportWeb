@@ -9,6 +9,7 @@ import { NavComponent } from './nav/nav.component';
 import { StartComponent } from './start/start.component';
 import { AuthGuard } from './guard/auth.guard';
 import { LoginService } from './services/login/login.service';
+import {ToastModule} from 'ng2-toastr/ng2-toastr';
 
 @NgModule({
   imports: [
@@ -16,7 +17,8 @@ import { LoginService } from './services/login/login.service';
     FormsModule,
     ReactiveFormsModule,
     SharedRoutingModule,
-    HttpModule
+    HttpModule,
+    ToastModule.forRoot()
   ],
   declarations: [
     Error404Component,
@@ -29,6 +31,7 @@ import { LoginService } from './services/login/login.service';
     ReactiveFormsModule,
     SharedRoutingModule,
     HttpModule,
+    ToastModule,
     Error404Component,
     NavComponent,
     StartComponent

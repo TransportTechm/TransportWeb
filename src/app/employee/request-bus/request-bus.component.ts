@@ -1,8 +1,9 @@
-import { Component, OnInit, ViewChild, NgModule} from '@angular/core';
+import { Component, OnInit, ViewChild, NgModule, ViewContainerRef} from '@angular/core';
 import { Http } from '@angular/http';
 import { ReactiveFormsModule, FormGroup, FormControl, Validators, FormBuilder, FormArray, FormsModule } from '@angular/forms';
 import { RequestBusService } from '../services/request-bus.service';
 import { Router } from '@angular/router';
+import { ToastsManager } from 'ng2-toastr';
 @Component({
   selector: 'app-request-bus',
   templateUrl: './request-bus.component.html',
@@ -31,7 +32,10 @@ export class RequestBusComponent implements OnInit {
   constructor(private _formBuilder: FormBuilder,
     private http: Http,
     private requestBusService: RequestBusService,
-    private router: Router) { }
+    private router: Router,
+    public toastr: ToastsManager, vcr: ViewContainerRef) {
+      this.toastr.setRootViewContainerRef(vcr);
+    }
 
   ngOnInit() {
     const userData = JSON.parse(localStorage.getItem('userData'));
@@ -43,6 +47,7 @@ export class RequestBusComponent implements OnInit {
     }
     this.buildForm();
     this.getJourneyCity();
+    // this.toastr.success('You are awesome!', 'Success!');
   }
 
   private buildForm(): void {
@@ -106,9 +111,9 @@ export class RequestBusComponent implements OnInit {
   };
   private getJourneyCity() {
     this.http.get('assets/apis/cities.json').subscribe(res => this.cities_list = res.json());
-    /* this.requestBusService.getJourneyCity(1).subscribe(c => {
-      console.log(c);
-      this.cities_list = c.json();
+    /* this.requestBusService.getJourneyCity(1).subscribe(cities => {
+      console.log(cities);
+      this.cities_list = cities.json();
     },
       err => {
         console.error('*** RequestBusComponent: Error while getJourneyCity', err);
@@ -169,7 +174,8 @@ export class RequestBusComponent implements OnInit {
             if (window.confirm('You are requesting to update route. Once processed, your data will be permanently updated.')) {
               // put your delete method logic here
               this.requestBusService.updateBusRegistration(model.gid, register.data[0].id, model).subscribe((newrequestbusWithId) => {
-                alert('Route Updated successfully!');
+                // alert('Route Updated successfully!');
+                this.toastr.success('Route Updated successfully!', 'Success!');
                 this.router.navigate(['/employee/viewhistory']);
               }, err => {
                 console.error('*** RequestBusComponent:Error while Registering');
@@ -179,6 +185,7 @@ export class RequestBusComponent implements OnInit {
             }
           } else {
             this.requestBusService.saveBusRegistration(model.gid, model).subscribe((newrequestbusWithId) => {
+              this.toastr.success('Route Saved successfully!', 'Success!');
               this.router.navigate(['/employee/viewhistory']);
             }, err => {
               console.error('*** RequestBusComponent:Error while Registering');
@@ -200,7 +207,8 @@ export class RequestBusComponent implements OnInit {
             if (window.confirm('You are requesting to update route. Once processed, your data will be permanently updated.')) {
               // put your delete method logic here
               this.requestBusService.updateBusRegistration(model.gid, register.data[0].id, model).subscribe((newrequestbusWithId) => {
-                alert('Route Updated successfully!');
+                // alert('Route Updated successfully!');
+                this.toastr.success('Route Updated successfully!', 'Success!');
                 this.router.navigate(['/employee/viewhistory']);
               }, err => {
                 console.error('*** RequestBusComponent:Error while Registering');
@@ -210,7 +218,8 @@ export class RequestBusComponent implements OnInit {
             }
           } else {
             this.requestBusService.saveBusRegistration(model.gid, model).subscribe((newrequestbusWithId) => {
-              alert('Route Saved successfully!');
+              // alert('Route Saved successfully!');
+              this.toastr.success('Route Saved successfully!', 'Success!');
               this.router.navigate(['/employee/viewhistory']);
             }, err => {
               console.error('*** RequestBusComponent:Error while Registering');
