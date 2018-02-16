@@ -27,6 +27,7 @@ export class RequestBusComponent implements OnInit {
   public user_empId: number;
   public user_name: string;
   public user_contact: number;
+  public departures;
 
 
   constructor(private _formBuilder: FormBuilder,
@@ -182,6 +183,16 @@ export class RequestBusComponent implements OnInit {
     this.origin = selectedItem.Origin;
     this.destination = selectedItem.Destination;
     this.departure_time = selectedItem.DepartuteTime;
+  }
+  showTimings(routeNo, destination) {
+    console.log(routeNo)
+    this.destination = destination;
+    this.routes_list.forEach(element => {
+      if (element.RouteNo === routeNo) {
+        this.departures = element.PickupPoint;
+        console.log(this.departures)
+      }
+    });
   }
   public register(model) {
     // this.registerForm.markAsTouched({ onlySelf: true });

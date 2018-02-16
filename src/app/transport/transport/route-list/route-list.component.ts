@@ -28,10 +28,6 @@ export class RouteListComponent implements OnInit {
         console.log(this.departures)
       }
     });
-    this.getdepartureTimeList();
-  }
-  private getdepartureTimeList() {
-    this.http.get('assets/apis/departureTime.json').subscribe(res => this.departureTime_list = res.json());
   }
 
 }
