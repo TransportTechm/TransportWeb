@@ -9,6 +9,7 @@ import { Http } from '@angular/http';
 export class RouteListComponent implements OnInit {
   public routes_list;
   public departureTime_list;
+  public departures;
   constructor(private http: Http) { }
 
   ngOnInit() {
@@ -17,7 +18,14 @@ export class RouteListComponent implements OnInit {
   private getRouteList() {
     this.http.get('assets/apis/routes_list.json').subscribe(res => this.routes_list = res.json());
   }
-  showTimings(){
+  showTimings(routeNo){
+    console.log(routeNo)
+    this.routes_list.forEach(element => {
+      if(element.RouteNo===routeNo){
+        this.departures=element.PickupPoint;
+        console.log(this.departures)
+      }
+    });
     this.getdepartureTimeList();
   }
   private getdepartureTimeList() {

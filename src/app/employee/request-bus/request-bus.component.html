@@ -134,7 +134,7 @@
                     <td align="center" valign="middle">
                       <select class="form-control input-sm" formControlName="pick_up_point" (change)="togglepickpoint($event.target.value)">
                         <option value="" selected>select pickup/drop point</option>
-                        <option *ngFor="let options of routes.PickupPoint; let j = index" [value]="routes.PickupPoint[j]">{{routes.PickupPoint[j]}}</option>
+                        <option *ngFor="let options of routes.PickupPoint; let j = index" [value]="routes.PickupPoint[j].name">{{routes.PickupPoint[j].name}}</option>
                       </select>
                     </td>
                   </tr>

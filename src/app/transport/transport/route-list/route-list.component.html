@@ -40,7 +40,7 @@
               <td align="center" valign="middle">{{routes.DepartuteTime}} a.m</td>
               <td align="center" valign="middle">
                 <a href="#" class="btn btn-info btn-sm"
-                    data-toggle="modal" data-target="#exampleModal" (click)="showTimings()">
+                    data-toggle="modal" data-target="#exampleModal" (click)="showTimings(routes.RouteNo)">
                   <span class="glyphicon glyphicon-list-alt"></span> View
                 </a>
               </td>
@@ -49,40 +49,42 @@
                   <span class="mdi mdi-airline-seat-recline-normal"></span>{{routes.AvailableSeats}}
                 </a>
               </td>
+              <!-- modal pop-up starts -->
+      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Pickup/Drop points</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                    <table class="table table-bordered table-striped">
+                        <tbody>
+                          <tr>
+                            <th>Pick Up Point</th>
+                            <th>Drop Point</th>
+                            <th>Departure Time</th>
+                          </tr>
+                          <tr *ngFor= "let timings of departures">
+                          <td>{{timings.name}}</td>
+                          <td>{{timings.Destination}}</td>
+                          <td>{{timings.depttime}}</td>
+                        </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- modal pop-up ends -->
             </tr>
           </tbody>
           </table>
       </div>
 
-      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Pickup/Drop points</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-                  <table class="table table-bordered table-striped">
-                      <tbody>
-                        <tr>
-                          <th>Pick Up Point</th>
-                          <th>Dropping Point</th>
-                          <th>Departure Time</th>
-                        </tr>
-                        <tr *ngFor= "let timings of departureTime_list">
-                        <td>{{timings.PickupPoint}}</td>
-                        <td>{{timings.DropPoint}}</td>
-                        <td>{{timings.DepartuteTime}}</td>
-                      </tr>
-                </tbody>
-              </table>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            </div>
-          </div>
-        </div>
-      </div>
       
