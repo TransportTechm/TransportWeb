@@ -71,26 +71,11 @@
                           <th>Dropping Point</th>
                           <th>Departure Time</th>
                         </tr>
-                        <tr>
-                        <td>Marthalli</td>
-                        <td>TMEC</td>
-                        <td>6:50 a.m</td>
+                        <tr *ngFor= "let timings of departureTime_list">
+                        <td>{{timings.PickupPoint}}</td>
+                        <td>{{timings.DropPoint}}</td>
+                        <td>{{timings.DepartuteTime}}</td>
                       </tr>
-                    <tr>
-                    <td>K.R PURAM</td>
-                    <td>TMEC</td>
-                    <td>6:20 a.m</td>
-                  </tr>
-                  <tr>
-                  <td>SILKBOARD</td>
-                    <td>TMEC</td>
-                    <td>7:00 a.m</td>
-                  </tr>
-                  <tr>
-                  <td>SINGASANDRA</td>
-                    <td>TMEC</td>
-                    <td>7:30 a.m</td>
-                  </tr>
                 </tbody>
               </table>
             </div>

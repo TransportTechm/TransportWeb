@@ -7,13 +7,19 @@ import { Http } from '@angular/http';
   styleUrls: ['./route-list.component.css']
 })
 export class RouteListComponent implements OnInit {
-  routes_list;
-  constructor(private http: Http, ) { }
+  public routes_list;
+  public departureTime_list;
+  constructor(private http: Http) { }
 
   ngOnInit() {
     this.getRouteList();
+    this.getdepartureTimeList();
   }
   private getRouteList() {
     this.http.get('assets/apis/routes_list.json').subscribe(res => this.routes_list = res.json());
   }
+  private getdepartureTimeList() {
+    this.http.get('assets/apis/departureTime.json').subscribe(res => this.departureTime_list = res.json());
+  }
+
 }
