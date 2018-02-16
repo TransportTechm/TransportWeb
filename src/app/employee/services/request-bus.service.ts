@@ -94,12 +94,12 @@ export class RequestBusService {
       .catch(this.handleError);
   }
   getJourneyLocation(id) {
-    return this.http.get(this.transportServiceUrl + 'users/' + id + '/journeys/active')
+    return this.http.get(this.transportServiceUrl + 'cities/' + id + '/locations')
       .map(response => response.json())
       .catch(this.handleError);
   }
   getJourneyType(id) {
-    return this.http.get(this.transportServiceUrl + 'users/' + id + '/journeys/active')
+    return this.http.get(this.transportServiceUrl + 'locs/' + id + '/journeyTypes')
       .map(response => response.json())
       .catch(this.handleError);
   }

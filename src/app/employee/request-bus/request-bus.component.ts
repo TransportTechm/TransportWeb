@@ -15,9 +15,9 @@ export class RequestBusComponent implements OnInit {
   public showdatepicker = false;
   public pick_up_point: any;
   public routes_list;
-  public cities_list: any[];
-  public locations_list;
-  public journeyType;
+  public cities_list = [];
+  public locations_list = [];
+  public journeyType = [];
   public route_no;
   public origin;
   public destination;
@@ -110,42 +110,69 @@ export class RequestBusComponent implements OnInit {
     }
   };
   private getJourneyCity() {
-    this.http.get('assets/apis/cities.json').subscribe(res => this.cities_list = res.json());
-    /* this.requestBusService.getJourneyCity(1).subscribe(cities => {
-      console.log(cities);
-      this.cities_list = cities.json();
+    // this.http.get('assets/apis/cities.json').subscribe(res => this.cities_list = res.json());
+    this.requestBusService.getJourneyCity(1).subscribe(cities => {
+      this.cities_list = cities.cities;
     },
       err => {
         console.error('*** RequestBusComponent: Error while getJourneyCity', err);
         console.error(err);
       }
-    ); */
+    );
   }
   onSelectCity(value) {
     console.log(value);
-    this.getJourneyLocation();
+    this.getJourneyLocation(value);
   }
-  private getJourneyLocation() {
-    this.http.get('assets/apis/locations.json').subscribe(res => this.locations_list = res.json());
+  private getJourneyLocation(value) {
+    // this.http.get('assets/apis/locations.json').subscribe(res => this.locations_list = res.json());
+    this.requestBusService.getJourneyLocation(value).subscribe(locations => {
+      console.log(locations.locations);
+      this.locations_list = locations.locations;
+    },
+      err => {
+        console.error('*** RequestBusComponent: Error while getJourneyLocation', err);
+        console.error(err);
+      }
+    );
   }
   onSelectLocation(value) {
     console.log(value);
-    this.getJourneyType();
+    this.getJourneyType(value);
   }
-  private getJourneyType() {
-    this.http.get('assets/apis/JourneyType.json').subscribe(res => this.journeyType = res.json());
+  private getJourneyType(value) {
+    // this.http.get('assets/apis/JourneyType.json').subscribe(res => this.journeyType = res.json());
+    this.requestBusService.getJourneyType(value).subscribe(JourneyTypes => {
+      console.log(JourneyTypes.journeyTypes);
+      this.journeyType = JourneyTypes.journeyTypes;
+    },
+      err => {
+        console.error('*** RequestBusComponent: Error while getJourneyType', err);
+        console.error(err);
+      }
+    );
   }
   onSelectJourneyType(selectedItem: any) {
-    if (selectedItem.id === 2) {
-      this.showdatepicker = true;
-      this.getRouteList();
-    } else {
+    console.log(selectedItem);
+    if (selectedItem.name === 'Yearly Journey Ticket') {
       this.showdatepicker = false;
-      this.getRouteList();
+      this.getRouteList(selectedItem.id);
+    } else {
+      this.showdatepicker = true;
+      this.getRouteList(selectedItem.id);
     }
   }
-  private getRouteList() {
+  private getRouteList(value) {
     this.http.get('assets/apis/routes_list.json').subscribe(res => this.routes_list = res.json());
+    this.requestBusService.getJourneyType(value).subscribe(JourneyTypes => {
+      console.log(JourneyTypes.journeyTypes);
+      this.journeyType = JourneyTypes.journeyTypes;
+    },
+      err => {
+        console.error('*** RequestBusComponent: Error while getJourneyType', err);
+        console.error(err);
+      }
+    );
   }
   togglepickpoint(pickpoint1) {
     this.pick_up_point = pickpoint1;
