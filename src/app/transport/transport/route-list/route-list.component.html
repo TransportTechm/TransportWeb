@@ -40,7 +40,7 @@
               <td align="center" valign="middle">{{routes.DepartuteTime}} a.m</td>
               <td align="center" valign="middle">
                 <a href="#" class="btn btn-info btn-sm"
-                    data-toggle="modal" data-target="#exampleModal" (click)="showTimings(routes.RouteNo)">
+                    data-toggle="modal" data-target="#exampleModal" (click)="showTimings(routes.RouteNo, routes.Destination)">
                   <span class="glyphicon glyphicon-list-alt"></span> View
                 </a>
               </td>
@@ -69,7 +69,7 @@
                           </tr>
                           <tr *ngFor= "let timings of departures">
                           <td>{{timings.name}}</td>
-                          <td>{{timings.Destination}}</td>
+                          <td>{{destination}}</td>
                           <td>{{timings.depttime}}</td>
                         </tr>
                   </tbody>
