@@ -6,5 +6,5 @@
 export const environment = {
   production: false,
   employeeServiceUrl: 'http://localhost:3000/employee/1.0/',
-  transportServiceUrl: 'http://transportservice-sissyish-articulacy.cfapps.io/transport/1.0/'
+  transportServiceUrl: 'https://transportjavaapplication.cfapps.io/transport/1.0/'
 };

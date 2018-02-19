@@ -49,24 +49,24 @@
             <label class="control-label" for="route_no">Route No.</label>
             <select formControlName="route_no" class="form-control input-sm" (change)="onSelectRouteNum($event.target.value)">
                 <option value="" hidden selected>Select Route Number</option>
-                <option *ngFor="let routes of routes_list" value={{routes.RouteNo}}>{{routes.RouteNo}}</option>
+                <option *ngFor="let routes of routes_list" value={{routes.routeNo}}>{{routes.routeNo}}</option>
               </select>
           </div>
           <div *ngIf = "showPlaces">
           <div class="form-group col-md-4 col-sm-4">
             <label class="control-label" for="origin">Origin</label>
-            <input type="text" class="form-control" placeholder="Origin" value="{{routes_list2[0].Origin}}" disabled>
+            <input type="text" class="form-control" placeholder="Origin" value="{{routes_list2[0].origin}}" disabled>
           </div>
           <div class="form-group col-md-4 col-sm-4">
             <label class="control-label" for="destination">Destination</label>
-            <input type="text" class="form-control" placeholder="Destination" value="{{routes_list2[0].Destination}}" disabled>
+            <input type="text" class="form-control" placeholder="Destination" value="{{routes_list2[0].destination}}" disabled>
           </div>
         </div>
         </div>
         <div style="text-align:center">
           <button type="submit" class="btn btn-primary" (click)="proceed()">Proceed</button>
           <button type="reset" class="btn btn-default" (click)="cancel()">Cancel</button>
-        </div>
+        </div><br/>
         <!-- grid start -->
         <div  class="row">
           <div class="col-md-12">
