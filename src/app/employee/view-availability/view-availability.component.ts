@@ -95,9 +95,9 @@ export class ViewAvailabilityComponent implements OnInit {
     }
   }
   private getRouteList(value) {
-    //this.http.get('assets/apis/routes_list.json').subscribe(res => this.routes_list = res.json());
+    // this.http.get('assets/apis/routes_list.json').subscribe(res => this.routes_list = res.json());
     this.requestBusService.getRoutesList(value).subscribe(routes_list => {
-      //console.log(routes_list);
+      // console.log(routes_list);
       this.routes_list = routes_list;
     },
       err => {
@@ -116,8 +116,8 @@ export class ViewAvailabilityComponent implements OnInit {
         console.log(this.origin);
       }
     });
-    //this.http.get('assets/apis/seatCapacity.json').subscribe(res =>
-      //this.routes_list2 = res.json()
+    // this.http.get('assets/apis/seatCapacity.json').subscribe(res =>
+      // this.routes_list2 = res.json()
    // );
   }
   proceed() {
