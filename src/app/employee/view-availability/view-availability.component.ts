@@ -16,15 +16,19 @@ export class ViewAvailabilityComponent implements OnInit {
   public locations_list;
   public journeyType;
   public showdatepicker = false;
-  public routes_list;
+  public route_list;
   public routes_list2;
   public selectedRouteNum;
   public availabilty: any;
   public showgrid = false;
   public showgrid2 = false;
   public showPlaces = false;
+  public route_no;
   public origin;
   public destination;
+  public seatCapacity;
+  public RouteNo;
+  public deptTime;
 
   constructor(private http: Http, private _formBuilder: FormBuilder, private requestBusService: RequestBusService) { }
 
@@ -98,7 +102,7 @@ export class ViewAvailabilityComponent implements OnInit {
     //this.http.get('assets/apis/routes_list.json').subscribe(res => this.routes_list = res.json());
     this.requestBusService.getRoutesList(value).subscribe(routes_list => {
       //console.log(routes_list);
-      this.routes_list=routes_list;
+      this.route_list = routes_list;
     },
       err => {
         console.error('*** RequestBusComponent: Error while getJourneyType', err);
@@ -108,21 +112,23 @@ export class ViewAvailabilityComponent implements OnInit {
   }
   onSelectRouteNum(routeNum) {
     console.log(routeNum)
-    this.showPlaces = false;
-    this.routes_list.forEach(element => {
-      if (element.routeNo === routeNum) {
+    // this.showPlaces = true;
+    this.route_list.forEach(element => {
+      if (element.routeNo == routeNum) {
+        this.RouteNo= element.routeNo;
         this.origin = element.origin;
         this.destination = element.destination;
-        console.log(this.origin)
+        this.seatCapacity = element.seatCapacity;
+        this.deptTime= element.departureTime;
       }
     });
     //this.http.get('assets/apis/seatCapacity.json').subscribe(res =>
-      //this.routes_list2 = res.json()
-   // );
+    //this.routes_list2 = res.json()
+    // );
   }
   proceed() {
-    this.requestBusService.getSeatAvailabilty(this.routes_list2[0].RouteNo).subscribe(result => {
-      this.availabilty = (this.routes_list2[0].SeatCapacity) - (result.data[0].occupiedSeats);
+    this.requestBusService.getSeatAvailabilty(this.RouteNo).subscribe(result => {
+      this.availabilty = (this.seatCapacity) - (result.data[0].occupiedSeats);
       console.log(this.availabilty);
       if (this.availabilty > 0) {
         this.showgrid = true;

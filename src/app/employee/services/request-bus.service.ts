@@ -111,7 +111,6 @@ export class RequestBusService {
 }
 
   getSeatAvailabilty(routeNo) {
-    console.log(routeNo);
     return this.http.get(this.employeeServiceUrl + 'users/availableseats/' + routeNo)
     .map(response => response.json())
     .catch(this.handleError);
