@@ -20,12 +20,12 @@ export class RouteListComponent implements OnInit {
     this.http.get('assets/apis/routes_list.json').subscribe(res => this.routes_list = res.json());
   }
   showTimings(routeNo, destination) {
-    console.log(routeNo)
+    console.log(routeNo);
     this.destination = destination;
     this.routes_list.forEach(element => {
       if (element.RouteNo === routeNo) {
         this.departures = element.PickupPoint;
-        console.log(this.departures)
+        console.log(this.departures);
       }
     });
   }

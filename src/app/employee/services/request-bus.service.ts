@@ -104,7 +104,7 @@ export class RequestBusService {
       .catch(this.handleError);
   }
 
-  getRoutesList(id){
+  getRoutesList(id) {
     return this.http.get(this.transportServiceUrl + 'routes/all/' + id)
     .map(response => response.json())
     .catch(this.handleError);

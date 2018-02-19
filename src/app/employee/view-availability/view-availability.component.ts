@@ -99,10 +99,15 @@ export class ViewAvailabilityComponent implements OnInit {
     }
   }
   private getRouteList(value) {
-    //this.http.get('assets/apis/routes_list.json').subscribe(res => this.routes_list = res.json());
+    // this.http.get('assets/apis/routes_list.json').subscribe(res => this.routes_list = res.json());
     this.requestBusService.getRoutesList(value).subscribe(routes_list => {
+<<<<<<< HEAD
       //console.log(routes_list);
       this.route_list = routes_list;
+=======
+      // console.log(routes_list);
+      this.routes_list = routes_list;
+>>>>>>> ef51c8081871524d2738820bc745361345045ba6
     },
       err => {
         console.error('*** RequestBusComponent: Error while getJourneyType', err);

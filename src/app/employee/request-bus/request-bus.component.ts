@@ -164,10 +164,10 @@ export class RequestBusComponent implements OnInit {
     }
   }
   private getRouteList(value) {
-    //this.http.get('assets/apis/routes_list.json').subscribe(res => this.routes_list = res.json());
+    // this.http.get('assets/apis/routes_list.json').subscribe(res => this.routes_list = res.json());
     this.requestBusService.getRoutesList(value).subscribe(routes_list => {
       console.log(routes_list);
-      this.routes_list=routes_list;
+      this.routes_list = routes_list;
     },
       err => {
         console.error('*** RequestBusComponent: Error while getJourneyType', err);
@@ -179,18 +179,18 @@ export class RequestBusComponent implements OnInit {
     this.pick_up_point = pickpoint1;
   }
   onSelect(selectedItem: any) {
-    console.log(selectedItem)
+    console.log(selectedItem);
     this.route_no = selectedItem.routeNo;
     this.origin = selectedItem.origin;
     this.destination = selectedItem.destination;
     this.departure_time = selectedItem.departureTime;
   }
   showTimings(routeNo) {
-    console.log(routeNo)
+    console.log(routeNo);
     this.routes_list.forEach(element => {
       if (element.routeNo === routeNo) {
         this.departures = element.bpoints;
-        console.log(this.departures)
+        console.log(this.departures);
       }
     });
   }
