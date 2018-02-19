@@ -185,12 +185,11 @@ export class RequestBusComponent implements OnInit {
     this.destination = selectedItem.destination;
     this.departure_time = selectedItem.departureTime;
   }
-  showTimings(routeNo, destination) {
+  showTimings(routeNo) {
     console.log(routeNo)
-    this.destination = destination;
     this.routes_list.forEach(element => {
-      if (element.RouteNo === routeNo) {
-        this.departures = element.PickupPoint;
+      if (element.routeNo === routeNo) {
+        this.departures = element.bpoints;
         console.log(this.departures)
       }
     });
