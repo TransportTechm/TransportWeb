@@ -104,6 +104,12 @@ export class RequestBusService {
       .catch(this.handleError);
   }
 
+  getRoutesList(id){
+    return this.http.get(this.transportServiceUrl + 'routes/all/' + id)
+    .map(response => response.json())
+    .catch(this.handleError);
+}
+
   getSeatAvailabilty(routeNo) {
     console.log(routeNo);
     return this.http.get(this.employeeServiceUrl + 'users/availableseats/' + routeNo)

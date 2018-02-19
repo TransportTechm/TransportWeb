@@ -164,10 +164,10 @@ export class RequestBusComponent implements OnInit {
     }
   }
   private getRouteList(value) {
-    this.http.get('assets/apis/routes_list.json').subscribe(res => this.routes_list = res.json());
-    this.requestBusService.getJourneyType(value).subscribe(JourneyTypes => {
-      console.log(JourneyTypes.journeyTypes);
-      this.journeyType = JourneyTypes.journeyTypes;
+    //this.http.get('assets/apis/routes_list.json').subscribe(res => this.routes_list = res.json());
+    this.requestBusService.getRoutesList(value).subscribe(routes_list => {
+      console.log(routes_list);
+      this.routes_list=routes_list;
     },
       err => {
         console.error('*** RequestBusComponent: Error while getJourneyType', err);
@@ -179,10 +179,11 @@ export class RequestBusComponent implements OnInit {
     this.pick_up_point = pickpoint1;
   }
   onSelect(selectedItem: any) {
-    this.route_no = selectedItem.RouteNo;
-    this.origin = selectedItem.Origin;
-    this.destination = selectedItem.Destination;
-    this.departure_time = selectedItem.DepartuteTime;
+    console.log(selectedItem)
+    this.route_no = selectedItem.routeNo;
+    this.origin = selectedItem.origin;
+    this.destination = selectedItem.destination;
+    this.departure_time = selectedItem.departureTime;
   }
   showTimings(routeNo, destination) {
     console.log(routeNo)
