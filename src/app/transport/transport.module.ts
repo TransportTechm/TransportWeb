@@ -5,6 +5,7 @@ import { TransportRoutingModule } from './transport-routing.module';
 import { RouteListComponent } from './transport/route-list/route-list.component';
 import { SharedModule } from '../shared/shared.module';
 import { ApproveVehicleComponent } from './transport/approve-vehicle/approve-vehicle.component';
+import { TransportService } from './services/transport.service';
 
 @NgModule({
   imports: [
@@ -12,6 +13,9 @@ import { ApproveVehicleComponent } from './transport/approve-vehicle/approve-veh
     SharedModule,
     TransportRoutingModule
   ],
-  declarations: [RouteListComponent, ApproveVehicleComponent]
+  declarations: [RouteListComponent, ApproveVehicleComponent],
+  providers: [
+    TransportService
+  ]
 })
 export class TransportModule { }

@@ -85,8 +85,8 @@ export class RequestBusService {
     // Create a request option
     const options = new RequestOptions({ headers: headers });
     return this.http.put(this.employeeServiceUrl + 'users/' + gid + '/journeys/cancel/' + id, bodyString, options)
-    .map(response => response.json())
-    .catch(this.handleError);
+      .map(response => response.json())
+      .catch(this.handleError);
   }
   getJourneyCity(id) {
     return this.http.get(this.transportServiceUrl + 'orgs/' + id + '/cities')
@@ -106,14 +106,14 @@ export class RequestBusService {
 
   getRoutesList(id) {
     return this.http.get(this.transportServiceUrl + 'routes/all/' + id)
-    .map(response => response.json())
-    .catch(this.handleError);
-}
+      .map(response => response.json())
+      .catch(this.handleError);
+  }
 
   getSeatAvailabilty(routeNo) {
     return this.http.get(this.employeeServiceUrl + 'users/availableseats/' + routeNo)
-    .map(response => response.json())
-    .catch(this.handleError);
+      .map(response => response.json())
+      .catch(this.handleError);
   }
 
   private handleError(error: Response | any) {
