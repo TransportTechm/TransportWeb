@@ -11,7 +11,7 @@ export class VendorService {
     this.vendorServiceUrl = environment.vendorServiceUrl;
   }
 
-  saveBusRegistration(resource) {
+  saveDriverRegistration(resource) {
     // Stringify payload
     const bodyString = JSON.stringify(resource);
     // ... Set content type to JSON

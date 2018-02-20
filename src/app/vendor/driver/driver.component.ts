@@ -31,7 +31,7 @@ export class DriverComponent implements OnInit {
 
   public register(model) {
     console.log(model)
-    this.vendorService.saveBusRegistration(model).subscribe((driverRegister) => {
+    this.vendorService.saveDriverRegistration(model).subscribe((driverRegister) => {
       console.log("Driver Registered");
       console.log(driverRegister);
       window.location.reload();
