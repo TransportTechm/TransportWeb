@@ -44,7 +44,6 @@ export class DriverComponent implements OnInit {
   }
 
   private getDriverList() {
-    // this.http.get('assets/apis/cities.json').subscribe(res => this.cities_list = res.json());
     this.vendorService.getDriverList().subscribe(driverList => {
       this.driverList = driverList;
       console.log(this.driverList);
