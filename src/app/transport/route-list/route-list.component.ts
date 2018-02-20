@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, NgModule } from '@angular/core';
 import { Http } from '@angular/http';
-import { TransportService } from '../../services/transport.service';
+import { TransportService } from '../services/transport.service';
 
 @Component({
   selector: 'app-route-list',
