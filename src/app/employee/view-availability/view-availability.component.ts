@@ -101,7 +101,7 @@ export class ViewAvailabilityComponent implements OnInit {
   private getRouteList(value) {
     // this.http.get('assets/apis/routes_list.json').subscribe(res => this.routes_list = res.json());
     this.requestBusService.getRoutesList(value).subscribe(routes_list => {
-      //console.log(routes_list);
+      // console.log(routes_list);
       this.route_list = routes_list;
     },
       err => {
@@ -111,19 +111,19 @@ export class ViewAvailabilityComponent implements OnInit {
     );
   }
   onSelectRouteNum(routeNum) {
-    console.log(routeNum)
+    console.log(routeNum);
     // this.showPlaces = true;
     this.route_list.forEach(element => {
-      if (element.routeNo == routeNum) {
-        this.RouteNo= element.routeNo;
+      if (element.routeNo === routeNum) {
+        this.RouteNo = element.routeNo;
         this.origin = element.origin;
         this.destination = element.destination;
         this.seatCapacity = element.seatCapacity;
-        this.deptTime= element.departureTime;
+        this.deptTime = element.departureTime;
       }
     });
-    //this.http.get('assets/apis/seatCapacity.json').subscribe(res =>
-    //this.routes_list2 = res.json()
+    // this.http.get('assets/apis/seatCapacity.json').subscribe(res =>
+    // this.routes_list2 = res.json()
     // );
   }
   proceed() {
