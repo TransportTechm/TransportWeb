@@ -9,7 +9,7 @@
         <div class="col-md-12 col-sm-12">
           <div class="form-group col-md-6 col-sm-6">
             <label class="control-label" for="driverName">Driver Name:</label>
-            <input type="text" formControlName="driverName" class="form-control" placeholder="Enter Driver Name">
+            <input type="text" formControlName="driname" class="form-control" placeholder="Enter Driver Name">
           </div>
           <div class="form-group col-md-6 col-sm-6">
             <label class="control-label" for="address">Address:</label>
@@ -19,15 +19,15 @@
         <div class="col-md-12 col-sm-12">
           <div class="form-group col-md-6 col-sm-6">
             <label class="control-label" for="mobileNumber">Mobile Number:</label>
-            <input type="text" formControlName="mobileNumber" class="form-control" placeholder="Enter Mobile Number">
+            <input type="text" formControlName="mobile_number" class="form-control" placeholder="Enter Mobile Number">
           </div>
           <div class="form-group col-md-6 col-sm-6">
             <label class="control-label" for="licenseNumber">License Number:</label>
-            <input type="text" formControlName="licenseNumber" class="form-control" placeholder="Enter License Number">
+            <input type="text" formControlName="license_number" class="form-control" placeholder="Enter License Number">
           </div>
         </div>
         <div class="aligncenter">
-          <button type="submit" class="btn btn-primary">Proceed</button>
+          <button type="submit" class="btn btn-primary" (click)="reload()">Register</button>
           <button type="reset" class="btn btn-default">Cancel</button>
         </div><br/>
         <!-- grid start -->
@@ -46,11 +46,11 @@
                         <td align="center" valign="middle">Mobile Number</td>
                         <td align="center" valign="middle">License Number</td>
                       </tr>
-                      <tr>
-                        <td align="center" valign="middle">Satya</td>
-                        <td align="center" valign="middle">H.No. 4-5, Kormangala, Bengaluru</td>
-                        <td align="center" valign="middle">9898989898</td>
-                        <td align="center" valign="middle">LIC0056</td>
+                      <tr *ngFor = "let list of driverList">
+                        <td align="center" valign="middle">{{list.driname}}</td>
+                        <td align="center" valign="middle">{{list.address}}</td>
+                        <td align="center" valign="middle">{{list.mobile_number}}</td>
+                        <td align="center" valign="middle">{{list.license_number}}</td>
                       </tr>
                     </tbody>
                   </table>
