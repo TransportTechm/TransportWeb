@@ -112,9 +112,11 @@ export class ViewAvailabilityComponent implements OnInit {
   }
   onSelectRouteNum(routeNum) {
     console.log(routeNum);
+    this.showgrid = false;
+    this.showgrid2 = false;
     // this.showPlaces = true;
     this.route_list.forEach(element => {
-      if (element.routeNo === routeNum) {
+      if (element.routeNo == routeNum) {
         this.RouteNo = element.routeNo;
         this.origin = element.origin;
         this.destination = element.destination;
@@ -143,5 +145,6 @@ export class ViewAvailabilityComponent implements OnInit {
   }
   cancel() {
     this.showgrid = false;
+    this.showgrid2 = false;
   }
 }
