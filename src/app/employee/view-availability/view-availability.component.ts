@@ -116,6 +116,7 @@ export class ViewAvailabilityComponent implements OnInit {
     this.showgrid2 = false;
     // this.showPlaces = true;
     this.route_list.forEach(element => {
+      // tslint:disable-next-line:triple-equals
       if (element.routeNo == routeNum) {
         this.RouteNo = element.routeNo;
         this.origin = element.origin;

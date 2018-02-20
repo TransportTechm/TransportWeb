@@ -7,7 +7,7 @@ import { environment } from '../../../environments/environment';
 export class VendorService {
   private vendorServiceUrl: string;
 
-  constructor(private http: Http) { 
+  constructor(private http: Http) {
     this.vendorServiceUrl = environment.vendorServiceUrl;
   }
 
@@ -29,7 +29,11 @@ export class VendorService {
       .map(response => response.json())
       .catch(this.handleError);
   }
-
+  getVehicleTypeList() {
+    return this.http.get(this.vendorServiceUrl + '/vecTypes')
+      .map(response => response.json())
+      .catch(this.handleError);
+  }
 
   private handleError(error: Response | any) {
     const errMsg = (error.message) ? error.message :

@@ -1,41 +1,36 @@
 <app-nav></app-nav>
 <div class="container">
-    <form [formGroup]="vehicleForm" role="form" name="form" class="form">
-      <div class="panel panel-primary">
-        <div class="panel-heading">
-          <h3 class="panel-title">Driver Registration</h3>
+  <form [formGroup]="vehicleForm" role="form" name="form" class="form">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3 class="panel-title">Driver Registration</h3>
+      </div>
+      <div class="panel-body">
+        <div class="col-md-12 col-sm-12">
+          <div class="form-group col-md-4 col-sm-4">
+            <label class="control-label" for="regNumber">Vehicle Registration Number:</label>
+            <input type="text" formControlName="regNumber" class="form-control" placeholder="Enter Vehicle Registration Number">
+          </div>
+          <div class="form-group col-md-4 col-sm-4">
+            <label class="control-label" for="vehicleType">Vehicle Type</label>
+            <select formControlName="vehicleType" class="form-control input-sm">
+              <option value="" hidden selected>Select a Vehicle Type</option>
+              <option *ngFor="let options of vehicleTypeList" value={{options.id}}>{{options.vecTypeName}}</option>
+            </select>
+          </div>
+          <div class="form-group col-md-4 col-sm-4">
+            <label class="control-label" for="driver">Driver: </label>
+            <select formControlName="driver" class="form-control input-sm">
+              <option value="" hidden selected>Select a Driver</option>
+              <option *ngFor="let options of driverList" value={{options.id}}>{{options.driname}}</option>
+            </select>
+          </div>
         </div>
-        <div class="panel-body">
-          <div class="col-md-12 col-sm-12">
-            <div class="form-group col-md-6 col-sm-6">
-              <label class="control-label" for="regNumber">Vehicle Registration Number:</label>
-              <input type="text" formControlName="regNumber" class="form-control" placeholder="Enter Vehicle Registration Number">
-            </div>
-            <div class="form-group col-md-6 col-sm-6">
-              <label class="control-label" for="vehicleType">Vehicle Type ID:</label>
-              <input type="text" formControlName="vehicleType" class="form-control" placeholder="Enter Vehicle Type ID">
-            </div>
-          </div>
-          <div class="col-md-12 col-sm-12">
-            <div class="form-group col-md-6 col-sm-6">
-              <label class="control-label" for="driver">Driver: </label>
-              <select formControlName="driver" class="form-control input-sm">
-                  <option value="" selected>Select Driver</option>
-                  <option>Seenu</option>
-                  <option>Bunty</option>
-                  <option>Chanti</option>
-                </select>
-            </div>
-            <div class="form-group col-md-6 col-sm-6">
-              <label class="control-label" for="verificationStatus">Verification Status:</label>
-              <input type="text" formControlName="verificationStatus" class="form-control" placeholder="Verification Status">
-            </div>
-          </div>
-          <div class="aligncenter">
-            <button type="submit" class="btn btn-primary">Register</button>
-            <button type="reset" class="btn btn-default">Cancel</button>
-          </div>
+        <div class="aligncenter">
+          <button type="submit" class="btn btn-primary">Register</button>
+          <button type="reset" class="btn btn-default">Cancel</button>
         </div>
       </div>
-    </form>
-  </div>
+    </div>
+  </form>
+</div>

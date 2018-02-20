@@ -10,6 +10,7 @@ import { StartComponent } from './start/start.component';
 import { AuthGuard } from './guard/auth.guard';
 import { LoginService } from './services/login/login.service';
 import {ToastModule} from 'ng2-toastr/ng2-toastr';
+import { PagerService } from './services/pager.service';
 
 @NgModule({
   imports: [
@@ -36,6 +37,6 @@ import {ToastModule} from 'ng2-toastr/ng2-toastr';
     NavComponent,
     StartComponent
   ],
-  providers: [AuthGuard, LoginService]
+  providers: [AuthGuard, LoginService, PagerService]
 })
 export class SharedModule { }
