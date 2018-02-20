@@ -36,6 +36,7 @@
               <li [routerLinkActive]="['active']">
                 <a routerLink="/employee/cancelrequest">Cancel Request</a>
               </li>
+              <li class="divider"></li>
               <li>
                 <a routerLink="/AddAction">Print Bus Pass</a>
               </li>
@@ -68,6 +69,10 @@
                 <a routerLink="/transport/routelist">Routes</a>
               </li>
               <li>
+                <a routerLink="/transport/approvevehicle">Approve Vehicle</a>
+              </li>
+              <li class="divider"></li>
+              <li>
                 <a routerLink="/Category">Boarding Points</a>
               </li>
               <li>
@@ -76,9 +81,7 @@
               <li>
                 <a routerLink="/Site">Assign Bus To Route</a>
               </li>
-              <li>
-                <a routerLink="/transport/approvevehicle">Approve Vehicle</a>
-              </li>
+             
               <li>
                 <a routerLink="/Category">Acknowwledge Cab Request</a>
               </li>
@@ -111,11 +114,12 @@
             </a>
             <ul class="dropdown-menu">
               <li>
-                <a routerLink="/Category">Register Vehicle</a>
+                <a routerLink="/vendor/vehicle">Register Vehicle</a>
               </li>
               <li>
-                <a routerLink="/Site">Register Driver</a>
+                <a routerLink="/vendor/driver">Register Driver</a>
               </li>
+              <li class="divider"></li>
               <li>
                   <a routerLink="/Category">Driver Allocation</a>
                 </li>
