@@ -1,4 +1,40 @@
 <app-nav></app-nav>
-<p>
-  approve-vehicle works!
-</p>
+<!-- grid start -->
+<div class="row">
+  <div class="col-md-12">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        Vehicle Approval Pending List</div>
+      <div class="form-group1">
+        <table class="table table-bordered table-striped">
+          <tbody>
+            <tr class="bold">
+              <td align="center" valign="middle">Vehicle Registration Number</td>
+              <td align="center" valign="middle">View Details</td>
+              <td align="center" valign="middle">Status</td>
+              <td align="center" valign="middle">Action</td>
+            </tr>
+            <tr class="table-row">
+              <td align="center" valign="middle">AP03AB1239</td>
+              <td align="center" valign="middle">
+                <a href="#" class="btn btn-info btn-sm" data-toggle="modal" data-target="#routeListModal" (click)="showTimings(routes.routeNo)">
+                  <span class="glyphicon glyphicon-list-alt"></span> View
+                </a>
+              </td>
+              <td align="center" valign="middle">Pending</td>
+              <td align="center" valign="middle">
+                <a href="#" class="btn btn-info btn-sm" data-toggle="modal" data-target="#routeListModal" (click)="showTimings(routes.routeNo)">
+                  <span class="glyphicon glyphicon-ok"></span> Approve
+                </a>
+                <a href="#" class="btn btn-info btn-sm" data-toggle="modal" data-target="#routeListModal" (click)="showTimings(routes.routeNo)">
+                  <span class="glyphicon glyphicon-remove"></span> Cancel
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- grid ends -->
