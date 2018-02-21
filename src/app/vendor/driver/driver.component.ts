@@ -7,9 +7,6 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import * as _ from 'underscore';
 import { PagerService } from '../../shared/services/pager.service';
-
-
-
 @Component({
   selector: 'app-driver',
   templateUrl: './driver.component.html',
@@ -44,12 +41,12 @@ pagedItems: any[];
     this.vendorService.saveDriverRegistration(model).subscribe((driverRegister) => {
       console.log('Driver Registered');
       console.log(driverRegister);
-      window.location.reload();
+
     }, err => {
       console.error('*** DriverComponent:Error while Registering');
       console.error(err);
       alert(err);
-      window.location.reload();
+
     });
   }
 
@@ -77,8 +74,4 @@ pagedItems: any[];
     // get current page of items
     this.pagedItems = this.driverList.slice(this.pager.startIndex, this.pager.endIndex + 1);
   }
-  reload() {
-    window.location.reload();
-  }
-
 }
