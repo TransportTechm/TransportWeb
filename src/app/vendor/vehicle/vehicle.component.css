@@ -1,3 +1,9 @@
+.bold{
+    font-weight:bold;
+}
 .aligncenter{
     text-align:center;
+}
+.textcolor{
+    color:red;
 }

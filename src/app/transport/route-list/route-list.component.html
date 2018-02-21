@@ -1,88 +1,83 @@
 <app-nav></app-nav>
-<div class="col-md-12 col-sm-12 box">
-  <div class="table-responsive">
-    <div class="box-header with-border">
-      <tr>
-        <td>
-          <h4 class="box-title">Route Details(s)
-          </h4>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <div class="width">
-            <button type="button" class="btn btn-block btn-info btn-xs">Click here to download Route details</button>
-          </div>
-        </td>
-      </tr>
+<div class="container">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h3 class="panel-title">Route Details(s)</h3>
     </div>
-    <!-- end of box-header -->
-    <div class="box-body">
-      <table class="table table-bordered table-striped">
-        <tbody>
-          <tr>
-            <th>Route No.</th>
-            <th>Vehicle Registration Number</th>
-            <th>Driver Name</th>
-            <th>Origin</th>
-            <th>Destination</th>
-            <th>Departure Time</th>
-            <th>View Pickup/Drop points</th>
-            <th>Seat Capacity</th>
+    <div class="panel-body">
+      <div class="col-md-12 col-sm-12 box">
+        <div class="table-responsive">
+          <div class="box-header with-border">
+                <div class="width">
+                  <button type="button" class="btn btn-block btn-info btn-xs">Click here to download Route details</button>
+                </div>
+          </div>
+          <div class="box-body">
+            <table class="table table-bordered table-striped">
+              <tbody>
+                <tr>
+                  <th>Route No.</th>
+                  <th>Vehicle Registration Number</th>
+                  <th>Driver Name</th>
+                  <th>Origin</th>
+                  <th>Destination</th>
+                  <th>Departure Time</th>
+                  <th>View Pickup/Drop points</th>
+                  <th>Seat Capacity</th>
 
-          </tr>
-          <tr *ngFor="let routes of routes_list; let i = index">
-              <td align="center" valign="middle">{{routes.routeNo}}</td>
-              <td align="center" valign="middle">{{routes.vehicleRegNO}}</td>
-              <td align="center" valign="middle">to be given</td>
-              <td align="center" valign="middle">{{routes.origin}}</td>
-              <td align="center" valign="middle">{{routes.destination}}</td>
-              <td align="center" valign="middle">{{routes.departureTime}} a.m</td>
-              <td align="center" valign="middle">
-                <a href="#" class="btn btn-info btn-sm"
-                    data-toggle="modal" data-target="#routeListModal" (click)="showTimings(routes.routeNo)">
+                </tr>
+                <tr *ngFor="let routes of routes_list; let i = index">
+                  <td align="center" valign="middle">{{routes.routeNo}}</td>
+                  <td align="center" valign="middle">{{routes.vehicleRegNO}}</td>
+                  <td align="center" valign="middle">to be given</td>
+                  <td align="center" valign="middle">{{routes.origin}}</td>
+                  <td align="center" valign="middle">{{routes.destination}}</td>
+                  <td align="center" valign="middle">{{routes.departureTime}} a.m</td>
+                  <td align="center" valign="middle">
+                    <a href="#" class="btn btn-info btn-sm" data-toggle="modal" data-target="#routeListModal" (click)="showTimings(routes.routeNo)">
                   <span class="glyphicon glyphicon-list-alt"></span> View
                 </a>
-              </td>
-              <td align="center" valign="middle">
-                <a href="#" class="btn btn-success">
+                  </td>
+                  <td align="center" valign="middle">
+                    <a href="#" class="btn btn-success">
                   <span class="mdi mdi-airline-seat-recline-normal"></span>{{routes.seatCapacity}}
                 </a>
-              </td>
-             <!-- Route List modal start -->
-<div class="modal fade" id="routeListModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Pickup/Drop points</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  </td>
+                  <!-- Route List modal start -->
+                  <div class="modal fade" id="routeListModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">Pickup/Drop points</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
-        </div>
-        <div class="modal-body">
-              <table class="table table-bordered table-striped">
-                  <tbody>
-                    <tr>
-                      <th>PickUp/Drop Point</th>
-                      <th>Departure Time</th>
-                    </tr>
-                    <tr *ngFor= "let timings of departures">
-                    <td>{{timings.name}}</td>
-                    <td>{{timings.departureTime}}</td>
-                  </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                        <div class="modal-body">
+                          <table class="table table-bordered table-striped">
+                            <tbody>
+                              <tr>
+                                <th>PickUp/Drop Point</th>
+                                <th>Departure Time</th>
+                              </tr>
+                              <tr *ngFor="let timings of departures">
+                                <td>{{timings.name}}</td>
+                                <td>{{timings.departureTime}}</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Route List Model ends -->
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-<!-- Route List Model ends -->
-            </tr>
-          </tbody>
-          </table>
-      </div>
-
-      

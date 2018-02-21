@@ -1,6 +1,6 @@
 <app-nav></app-nav>
 <div class="container">
-  <form [formGroup]="driverForm" role="form" name="form" class="form" (ngSubmit)="register(driverForm.value)">
+  <form [formGroup]="driverForm" role="form" name="form" class="form" (ngSubmit)="register(driverForm.value)" #f="ngForm" novalidate>
     <div class="panel panel-primary">
       <div class="panel-heading">
         <h3 class="panel-title">Driver Registration</h3>
@@ -10,22 +10,34 @@
           <div class="form-group col-md-3 col-sm-3">
             <label class="control-label" for="driverName">Driver Name:</label>
             <input type="text" formControlName="driname" class="form-control" placeholder="Enter Driver Name">
+            <small class="textcolor" *ngIf="formErrors.driname">
+                {{ formErrors.driname }}
+              </small>
           </div>
           <div class="form-group col-md-3 col-sm-3">
             <label class="control-label" for="address">Address:</label>
             <input type="text" formControlName="address" class="form-control" placeholder="Enter Address">
+            <small class="textcolor" *ngIf="formErrors.address">
+                {{ formErrors.address }}
+              </small>
           </div>
           <div class="form-group col-md-3 col-sm-3">
             <label class="control-label" for="mobileNumber">Mobile Number:</label>
             <input type="text" formControlName="mobile_number" class="form-control" placeholder="Enter Mobile Number">
+            <small class="textcolor" *ngIf="formErrors.mobile_number">
+                {{ formErrors.mobile_number }}
+              </small>
           </div>
           <div class="form-group col-md-3 col-sm-3">
             <label class="control-label" for="licenseNumber">License Number:</label>
             <input type="text" formControlName="license_number" class="form-control" placeholder="Enter License Number">
+            <small class="textcolor" *ngIf="formErrors.license_number">
+                {{ formErrors.license_number }}
+              </small>
           </div>
         </div>
         <div class="aligncenter">
-          <button type="submit" class="btn btn-primary" (click)="reload()">Register</button>
+          <button type="submit" class="btn btn-primary" [disabled]="!driverForm.valid" >Register</button>
           <button type="reset" class="btn btn-default">Cancel</button>
         </div>
         <br/>
@@ -35,7 +47,7 @@
             <div class="table-responsive">
               <div class="panel panel-primary">
                 <div class="panel-heading">
-                  Registration</div>
+                  Driver Details</div>
                 <div class="form-group1">
                   <table class="table table-bordered table-striped">
                     <tbody>

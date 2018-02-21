@@ -1,22 +1,28 @@
 <app-nav></app-nav>
 <div class="container">
-  <form [formGroup]="vehicleForm" role="form" name="form" class="form">
+  <form [formGroup]="vehicleForm" role="form" name="form" class="form" (ngSubmit)="register(vehicleForm.value)" #f="ngForm" novalidate>
     <div class="panel panel-primary">
       <div class="panel-heading">
-        <h3 class="panel-title">Driver Registration</h3>
+        <h3 class="panel-title">Vehicle Registration</h3>
       </div>
       <div class="panel-body">
         <div class="col-md-12 col-sm-12">
           <div class="form-group col-md-4 col-sm-4">
             <label class="control-label" for="regNumber">Vehicle Registration Number:</label>
             <input type="text" formControlName="regNumber" class="form-control" placeholder="Enter Vehicle Registration Number">
+            <small class="textcolor" *ngIf="formErrors.regNumber">
+                {{ formErrors.regNumber }}
+              </small>
           </div>
           <div class="form-group col-md-4 col-sm-4">
             <label class="control-label" for="vehicleType">Vehicle Type</label>
             <select formControlName="vehicleType" class="form-control input-sm">
               <option value="" hidden selected>Select a Vehicle Type</option>
-              <option *ngFor="let options of vehicleTypeList" value={{options.id}}>{{options.vecTypeName}}</option>
+              <option *ngFor="let options of vehicleTypeList" value={{options.vId}}>{{options.vecTypeName}}</option>
             </select>
+            <small class="textcolor" *ngIf="formErrors.vehicleType">
+                {{ formErrors.vehicleType }}
+              </small>
           </div>
           <div class="form-group col-md-4 col-sm-4">
             <label class="control-label" for="driver">Driver: </label>
@@ -24,12 +30,67 @@
               <option value="" hidden selected>Select a Driver</option>
               <option *ngFor="let options of driverList" value={{options.id}}>{{options.driname}}</option>
             </select>
+            <small class="textcolor" *ngIf="formErrors.driver">
+                {{ formErrors.driver }}
+              </small>
           </div>
         </div>
         <div class="aligncenter">
-          <button type="submit" class="btn btn-primary">Register</button>
+          <button type="submit" class="btn btn-primary" [disabled]="!vehicleForm.valid">Register</button>
           <button type="reset" class="btn btn-default">Cancel</button>
         </div>
+        <br/>
+        <!-- grid start -->
+        <div class="row">
+          <div class="col-md-12">
+            <div class="table-responsive">
+              <div class="panel panel-primary">
+                <div class="panel-heading">
+                   Vehicle Details</div>
+                <div class="form-group1">
+                  <table class="table table-bordered table-striped">
+                    <tbody>
+                      <tr class="bold">
+                        <td align="center" valign="middle">Vehicle Registration Number</td>
+                        <td align="center" valign="middle">Vehicle Type</td>
+                        <td align="center" valign="middle">Driver</td>
+                        <td align="center" valign="middle">Verification Status</td>
+                      </tr>
+                      <tr *ngFor = "let list of pagedItems">
+                        <td align="center" valign="middle">{{list.vehicleRegNo}}</td>
+                        <td align="center" valign="middle">{{list.vehicleTypeId}}</td>
+                        <td align="center" valign="middle">{{list.driverId}}</td>
+                        <td align="center" valign="middle">{{list.verificationStatus}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <div class="aligncenter">
+                    
+                    <!-- pager -->
+                    <ul *ngIf="pager.pages && pager.pages.length" class="pagination pg-purple">
+                      <li [ngClass]="{disabled:pager.currentPage === 1}">
+                        <a (click)="setPage(1)">First</a>
+                      </li>
+                      <li [ngClass]="{disabled:pager.currentPage === 1}">
+                        <a (click)="setPage(pager.currentPage - 1)">Previous</a>
+                      </li>
+                      <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+                        <a (click)="setPage(page)">{{page}}</a>
+                      </li>
+                      <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                        <a (click)="setPage(pager.currentPage + 1)">Next</a>
+                      </li>
+                      <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                        <a (click)="setPage(pager.totalPages)">Last</a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- grid ends -->
       </div>
     </div>
   </form>

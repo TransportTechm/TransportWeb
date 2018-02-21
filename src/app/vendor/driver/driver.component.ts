@@ -13,13 +13,13 @@ import { PagerService } from '../../shared/services/pager.service';
   styleUrls: ['./driver.component.css']
 })
 export class DriverComponent implements OnInit {
-public driverForm: FormGroup;
-// array of all items to be paged
-driverList: any[];
-// pager object
-pager: any = {};
-// paged items
-pagedItems: any[];
+  public driverForm: FormGroup;
+  // array of all items to be paged
+  driverList: any[];
+  // pager object
+  pager: any = {};
+  // paged items
+  pagedItems: any[];
   // tslint:disable-next-line:max-line-length
   constructor(private http: Http, private _formBuilder: FormBuilder, private vendorService: VendorService, private pagerService: PagerService) { }
 
@@ -34,14 +34,59 @@ pagedItems: any[];
       'mobile_number': ['', [Validators.required]],
       'license_number': ['', [Validators.required]]
     });
+    this.driverForm.valueChanges
+    .subscribe(data => this.onValueChanged(data));
+  this.onValueChanged(); // (re)set validation messages now
   }
+
+  public onValueChanged(data?: any) {
+    if (!this.driverForm) { return; }
+    const form = this.driverForm;
+    // tslint:disable-next-line:forin
+    for (const field in this.formErrors) {
+      // clear previous error message (if any)
+      this.formErrors[field] = '';
+      const control = form.get(field);
+      if (control && control.dirty && !control.valid) {
+        const messages = this.validationMessages[field];
+        // tslint:disable-next-line:forin
+        for (const key in control.errors) {
+          this.formErrors[field] += messages[key] + ' ';
+        }
+      }
+    }
+  }
+
+  public formErrors = {
+    'driname': '',
+    'address': '',
+    'mobile_number': '',
+    'license_number': ''
+
+  };
+
+  // tslint:disable-next-line:member-ordering
+  private validationMessages = {
+    'driname': {
+      'required': 'Driver Name is required.',
+    },
+    'address': {
+      'required': 'Address is required',
+    },
+    'mobile_number': {
+      'required': 'Mobile Number is required',
+    },
+    'license_number': {
+      'required': 'License Number is required',
+    }
+  };
 
   public register(model) {
     console.log(model);
     this.vendorService.saveDriverRegistration(model).subscribe((driverRegister) => {
-      console.log('Driver Registered');
-      console.log(driverRegister);
-
+      if (driverRegister.status == 201) {
+        alert('Driver Registered');
+      }
     }, err => {
       console.error('*** DriverComponent:Error while Registering');
       console.error(err);
