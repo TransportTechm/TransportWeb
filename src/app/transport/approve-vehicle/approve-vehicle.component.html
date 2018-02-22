@@ -25,12 +25,16 @@
                 </td>
                 <td align="center" valign="middle">{{list.verificationStatus}}</td>
                 <td align="center" valign="middle">
-                  <a href="#" class="btn btn-success btn-sm" data-toggle="modal" data-target="#approveModal" (click)="approveButton(list.vehicleRegNo)">
+                  <!-- <div *ngIf="showApproveButton"> -->
+                    <a href="#" class="btn btn-success btn-sm" data-toggle="modal" data-target="#approveModal" (click)="approveButton(list.vehicleRegNo)">
                   <span class="glyphicon glyphicon-ok"></span> Approve
                 </a>
-                  <a href="#" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#cancelModal" (click)="cancelButton(list.vehicleRegNo)">
+                  <!-- </div> -->
+                  <!-- <div *ngIf="showCancelButton"> -->
+                    <a href="#" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#cancelModal" (click)="cancelButton(list.vehicleRegNo)">
                   <span class="glyphicon glyphicon-remove"></span> Cancel
                 </a>
+                  <!-- </div> -->
                 </td>
               </tr>
             </tbody>
@@ -105,7 +109,7 @@
           </table>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary" (click)="approve(list.vehicleRegNo)">Confirm</button>
+          <button type="button" class="btn btn-primary" (click)="approve(viewList.vehicleRegNo)">Confirm</button>
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         </div>
       </div>
@@ -114,37 +118,37 @@
 </div>
 <!-- approveModal ends -->
 <!-- cancelModal start -->
-<div *ngIf = "cancelModal">
-<div class="modal fade" id="cancelModal" tabindex="-1" role="dialog" aria-labelledby="cancelModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Approval Confirmation</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+<div *ngIf="cancelModal">
+  <div class="modal fade" id="cancelModal" tabindex="-1" role="dialog" aria-labelledby="cancelModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Cancel Confirmation</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                       <span aria-hidden="true">&times;</span>
                                     </button>
-      </div>
-      <div class="modal-body">
-        <p>Do you want to Cancel the request?</p>
-        <table class="table table-bordered table-striped">
-          <tbody>
-            <tr>
-              <th>Vehicle Registration Number</th>
-              <th>Status</th>
-            </tr>
-            <tr>
-              <td>{{viewList.vehicleRegNo}}</td>
-              <td>{{viewList.verificationStatus}}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary">Confirm</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+        <div class="modal-body">
+          <p>Do you want to Cancel the request?</p>
+          <table class="table table-bordered table-striped">
+            <tbody>
+              <tr>
+                <th>Vehicle Registration Number</th>
+                <th>Status</th>
+              </tr>
+              <tr>
+                <td>{{viewList.vehicleRegNo}}</td>
+                <td>{{viewList.verificationStatus}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" (click)="cancel(viewList.vehicleRegNo)">Confirm</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
       </div>
     </div>
   </div>
-</div>
 </div>
 <!-- cancelModal ends -->

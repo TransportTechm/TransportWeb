@@ -9,29 +9,29 @@
         <div class="col-md-12 col-sm-12">
           <div class="form-group col-md-4 col-sm-4">
             <label class="control-label" for="regNumber">Vehicle Registration Number:</label>
-            <input type="text" formControlName="regNumber" class="form-control" placeholder="Enter Vehicle Registration Number">
-            <small class="textcolor" *ngIf="formErrors.regNumber">
-                {{ formErrors.regNumber }}
+            <input type="text" formControlName="vehicleRegNo" class="form-control" placeholder="Enter Vehicle Registration Number">
+            <small class="textcolor" *ngIf="formErrors.vehicleRegNo">
+                {{ formErrors.vehicleRegNo }}
               </small>
           </div>
           <div class="form-group col-md-4 col-sm-4">
             <label class="control-label" for="vehicleType">Vehicle Type</label>
-            <select formControlName="vehicleType" class="form-control input-sm">
+            <select formControlName="vehicleTypeId" class="form-control input-sm">
               <option value="" hidden selected>Select a Vehicle Type</option>
               <option *ngFor="let options of vehicleTypeList" value={{options.vId}}>{{options.vecTypeName}}</option>
             </select>
-            <small class="textcolor" *ngIf="formErrors.vehicleType">
-                {{ formErrors.vehicleType }}
+            <small class="textcolor" *ngIf="formErrors.vehicleTypeId">
+                {{ formErrors.vehicleTypeId }}
               </small>
           </div>
           <div class="form-group col-md-4 col-sm-4">
             <label class="control-label" for="driver">Driver: </label>
-            <select formControlName="driver" class="form-control input-sm">
+            <select formControlName="driverId" class="form-control input-sm">
               <option value="" hidden selected>Select a Driver</option>
               <option *ngFor="let options of driverList" value={{options.id}}>{{options.driname}}</option>
             </select>
-            <small class="textcolor" *ngIf="formErrors.driver">
-                {{ formErrors.driver }}
+            <small class="textcolor" *ngIf="formErrors.driverId">
+                {{ formErrors.driverId }}
               </small>
           </div>
         </div>

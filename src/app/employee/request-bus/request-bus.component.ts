@@ -54,8 +54,8 @@ export class RequestBusComponent implements OnInit {
   private buildForm(): void {
     this.registerForm = this._formBuilder.group({
       'gid': [this.user_empId],
-      'emp_name': [this.user_name],
-      'gender': [this.user_gender],
+      'emp_name': [{value: this.user_name, disabled: true}],
+      'gender': [{value: this.user_gender, disabled: true}],
       'journeycity': ['', [Validators.required]],
       'journeylocation': ['', [Validators.required]],
       'ContactNumber': [this.user_contact, [Validators.required]],
@@ -122,13 +122,13 @@ export class RequestBusComponent implements OnInit {
     );
   }
   onSelectCity(value) {
-    console.log(value);
+    //console.log(value);
     this.getJourneyLocation(value);
   }
   private getJourneyLocation(value) {
     // this.http.get('assets/apis/locations.json').subscribe(res => this.locations_list = res.json());
     this.requestBusService.getJourneyLocation(value).subscribe(locations => {
-      console.log(locations.locations);
+      //console.log(locations.locations);
       this.locations_list = locations.locations;
     },
       err => {
@@ -138,13 +138,13 @@ export class RequestBusComponent implements OnInit {
     );
   }
   onSelectLocation(value) {
-    console.log(value);
+    //console.log(value);
     this.getJourneyType(value);
   }
   private getJourneyType(value) {
     // this.http.get('assets/apis/JourneyType.json').subscribe(res => this.journeyType = res.json());
     this.requestBusService.getJourneyType(value).subscribe(JourneyTypes => {
-      console.log(JourneyTypes.journeyTypes);
+      //console.log(JourneyTypes.journeyTypes);
       this.journeyType = JourneyTypes.journeyTypes;
     },
       err => {
@@ -154,7 +154,7 @@ export class RequestBusComponent implements OnInit {
     );
   }
   onSelectJourneyType(selectedItem: any) {
-    console.log(selectedItem);
+    //console.log(selectedItem);
     if (selectedItem.name === 'Yearly Journey Ticket') {
       this.showdatepicker = false;
       this.getRouteList(selectedItem.id);
@@ -166,7 +166,7 @@ export class RequestBusComponent implements OnInit {
   private getRouteList(value) {
     // this.http.get('assets/apis/routes_list.json').subscribe(res => this.routes_list = res.json());
     this.requestBusService.getRoutesList(value).subscribe(routes_list => {
-      console.log(routes_list);
+      //console.log(routes_list);
       this.routes_list = routes_list;
     },
       err => {
@@ -179,18 +179,18 @@ export class RequestBusComponent implements OnInit {
     this.pick_up_point = pickpoint1;
   }
   onSelect(selectedItem: any) {
-    console.log(selectedItem);
+    //console.log(selectedItem);
     this.route_no = selectedItem.routeNo;
     this.origin = selectedItem.origin;
     this.destination = selectedItem.destination;
     this.departure_time = selectedItem.departureTime;
   }
   showTimings(routeNo) {
-    console.log(routeNo);
+   // console.log(routeNo);
     this.routes_list.forEach(element => {
       if (element.routeNo === routeNo) {
         this.departures = element.bpoints;
-        console.log(this.departures);
+        //console.log(this.departures);
       }
     });
   }
@@ -203,7 +203,7 @@ export class RequestBusComponent implements OnInit {
       model.origin = this.origin;
       model.destination = this.destination;
       model.departure_time = this.departure_time;
-      console.log(model.journey_type);
+      //console.log(model.journey_type);
       if (model.journey_type === 'Yearly Journey Ticket') {
         model.journey_type = 'Year';
         model.journey_date = null;

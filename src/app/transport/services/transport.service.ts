@@ -14,7 +14,7 @@ export class TransportService {
   }
 
   getAllRoutesList() {
-    return this.http.get(this.transportServiceUrl + 'routes/all/601' )
+    return this.http.get(this.transportServiceUrl + 'routes' )
       .map(response => response.json())
       .catch(this.handleError);
   }

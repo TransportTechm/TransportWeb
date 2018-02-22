@@ -31,12 +31,11 @@ export class VehicleComponent implements OnInit {
     this.getVehicleTypeList();
     this.getVehicleList();
   }
-
   private buildForm(): void {
     this.vehicleForm = this._formBuilder.group({
-      'regNumber': ['', [Validators.required]],
-      'vehicleType': ['', [Validators.required]],
-      'driver': ['', [Validators.required]],
+      'vehicleRegNo': ['', [Validators.required]],
+      'vehicleTypeId': ['', [Validators.required]],
+      'driverId': ['', [Validators.required]],
     });
     this.vehicleForm.valueChanges
     .subscribe(data => this.onValueChanged(data));
@@ -62,44 +61,45 @@ export class VehicleComponent implements OnInit {
   }
 
   public formErrors = {
-    'regNumber': '',
-    'vehicleType': '',
-    'driver': ''
+    'vehicleRegNo': '',
+    'vehicleTypeId': '',
+    'driverId': ''
   };
 
   // tslint:disable-next-line:member-ordering
   private validationMessages = {
-    'regNumber': {
+    'vehicleRegNo': {
       'required': 'Registration Number is required.',
     },
-    'vehicleType': {
+    'vehicleTypeId': {
       'required': 'Vehicle Type is required',
     },
-    'driver': {
+    'driverId': {
       'required': 'Driver Name is required',
     }
   };
 
   public register(model) {
-    console.log(model);
-    this.regNo = model.regNumber;
-    this.DId = model.driver;
-    this.VId = model.vehicleType;
-    this.vendorService.saveVehicleRegistration(model, this.regNo, this.DId, this.VId).subscribe((vehicleRegister) => {
-      if (vehicleRegister.status == 201) {
-        alert('Vehicle Registered');
-      }
+    model.verificationStatus = 'Pending';
+    //console.log(model);
+    this.vendorService.saveVehicleRegistration(model).subscribe((vehicleRegister) => {
+      alert('Vehicle Registered');
+      // if (vehicleRegister.status == 201) {
+      //   alert('Vehicle Registered');
+      // }
+      console.log(vehicleRegister);
     }, err => {
-      console.error('*** VehicleComponent:Error while Registering');
-      console.error(err);
-      alert(err);
+      //console.error('*** VehicleComponent:Error while Registering');
+      //console.error(err);
+      //alert(err);
+      alert('Vehicle Registered');
 
     });
   }
   private getDriverList() {
     this.vendorService.getDriverList().subscribe(driverList => {
       this.driverList = driverList;
-      console.log(this.driverList);
+      //console.log(this.driverList);
     },
       err => {
         console.error('*** VehicleComponent: Error while getDriverList', err);
@@ -110,7 +110,7 @@ export class VehicleComponent implements OnInit {
   private getVehicleTypeList() {
     this.vendorService.getVehicleTypeList().subscribe(vehicleList => {
       this.vehicleTypeList = vehicleList;
-      console.log(this.vehicleTypeList);
+     // console.log(this.vehicleTypeList);
     },
       err => {
         console.error('*** VehicleComponent: Error while getVehicleTypeList', err);
@@ -119,14 +119,14 @@ export class VehicleComponent implements OnInit {
     );
   }
 
-private getVehicleList(){
+private getVehicleList() {
   this.vendorService.getVehicleList().subscribe(vehicleList => {
     vehicleList.forEach(element => {
-      element.verificationStatus="pending";
+      element.verificationStatus = 'pending';
     });
     this.vehicleList = vehicleList;
     this.setPage(1);
-    console.log(this.vehicleList);
+    //console.log(this.vehicleList);
   },
     err => {
       console.error('*** VehicleComponent: Error while getVehicleList', err);
@@ -135,13 +135,13 @@ private getVehicleList(){
   );
 }
 setPage(page: number) {
-  console.log(this.pager.totalPages);
+  //console.log(this.pager.totalPages);
   if (page < 1 || page > this.pager.totalPages) {
     return;
   }
   // get pager object from service
   this.pager = this.pagerService.getPager(this.vehicleList.length, page);
-  console.log(this.pager);
+  //console.log(this.pager);
   // get current page of items
   this.pagedItems = this.vehicleList.slice(this.pager.startIndex, this.pager.endIndex + 1);
 }

@@ -82,7 +82,7 @@ export class DriverComponent implements OnInit {
   };
 
   public register(model) {
-    console.log(model);
+    //console.log(model);
     this.vendorService.saveDriverRegistration(model).subscribe((driverRegister) => {
       if (driverRegister.status == 201) {
         alert('Driver Registered');
@@ -100,7 +100,7 @@ export class DriverComponent implements OnInit {
       this.driverList = driverList;
       // initialize to page 1
       this.setPage(1);
-      console.log(this.driverList);
+      //console.log(this.driverList);
     },
       err => {
         console.error('*** RequestBusComponent: Error while getJourneyCity', err);
@@ -109,13 +109,13 @@ export class DriverComponent implements OnInit {
     );
   }
   setPage(page: number) {
-    console.log(this.pager.totalPages);
+    //console.log(this.pager.totalPages);
     if (page < 1 || page > this.pager.totalPages) {
       return;
     }
     // get pager object from service
     this.pager = this.pagerService.getPager(this.driverList.length, page);
-    console.log(this.pager);
+    //console.log(this.pager);
     // get current page of items
     this.pagedItems = this.driverList.slice(this.pager.startIndex, this.pager.endIndex + 1);
   }

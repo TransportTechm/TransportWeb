@@ -19,47 +19,49 @@ export class VendorService {
     // Create a request option
     const options = new RequestOptions({ headers: headers });
 
-    return this.http.post(this.vendorServiceUrl + '/dri', bodyString, options)
+    return this.http.post(this.vendorServiceUrl + 'dri', bodyString, options)
       .map(response => response)
       .catch(this.handleError);
   }
 
   getDriverList() {
-    return this.http.get(this.vendorServiceUrl + '/dris')
+    return this.http.get(this.vendorServiceUrl + 'dris')
       .map(response => response.json())
       .catch(this.handleError);
   }
   getVehicleTypeList() {
-    return this.http.get(this.vendorServiceUrl + '/vecTypes')
+    return this.http.get(this.vendorServiceUrl + 'vecTypes')
       .map(response => response.json())
       .catch(this.handleError);
   }
 
-  saveVehicleRegistration(resource, regNo, DId, VId){
+  saveVehicleRegistration(resource) {
+
         // Stringify payload
         const bodyString = JSON.stringify(resource);
+        //console.log('bodystring'+ bodyString)
         // ... Set content type to JSON
         const headers = new Headers({ 'Content-Type': 'application/json' });
         // Create a request option
         const options = new RequestOptions({ headers: headers });
-    
-        return this.http.post(this.vendorServiceUrl + 'vec/' + regNo + '/' + DId + '/'+ VId, bodyString, options )
+
+        return this.http.post(this.vendorServiceUrl + 'vec' , bodyString, options )
           .map(response => response)
           .catch(this.handleError);
   }
- 
-  getVehicleList(){
-    return this.http.get(this.vendorServiceUrl + '/vecs')
+
+  getVehicleList() {
+    return this.http.get(this.vendorServiceUrl + 'vecs')
     .map(response => response.json())
     .catch(this.handleError);
   }
 
-  updateVehicleStatus(regNo, resource){
+  updateVehicleStatus(regNo, status, resource) {
       const bodyString = JSON.stringify(resource);
       const headers = new Headers({ 'Content-Type': 'application/json' });
       const options = new RequestOptions({ headers: headers });
-      return this.http.put(this.vendorServiceUrl + '/vecs/' + regNo, bodyString, options)
-        .map(response => response.json())
+      return this.http.put(this.vendorServiceUrl + 'vec/' + regNo + '/' + status, bodyString, options)
+        .map(response => response)
         .catch(this.handleError);
   }
 

@@ -63,7 +63,7 @@ export class ViewAvailabilityComponent implements OnInit {
   private getJourneyLocation(value) {
     // this.http.get('assets/apis/locations.json').subscribe(res => this.locations_list = res.json());
     this.requestBusService.getJourneyLocation(value).subscribe(locations => {
-      console.log(locations.locations);
+      //console.log(locations.locations);
       this.locations_list = locations.locations;
     },
       err => {
@@ -73,13 +73,13 @@ export class ViewAvailabilityComponent implements OnInit {
     );
   }
   onSelectLocation(value) {
-    console.log(value);
+    //console.log(value);
     this.getJourneyType(value);
   }
   private getJourneyType(value) {
     // this.http.get('assets/apis/JourneyType.json').subscribe(res => this.journeyType = res.json());
     this.requestBusService.getJourneyType(value).subscribe(JourneyTypes => {
-      console.log(JourneyTypes.journeyTypes);
+     // console.log(JourneyTypes.journeyTypes);
       this.journeyType = JourneyTypes.journeyTypes;
     },
       err => {
@@ -89,7 +89,7 @@ export class ViewAvailabilityComponent implements OnInit {
     );
   }
   onSelectJourneyType(selectedItem: any) {
-    console.log(selectedItem);
+    //console.log(selectedItem);
     if (selectedItem.name === 'Yearly Journey Ticket') {
       this.showdatepicker = false;
       this.getRouteList(selectedItem.id);
@@ -111,7 +111,7 @@ export class ViewAvailabilityComponent implements OnInit {
     );
   }
   onSelectRouteNum(routeNum) {
-    console.log(routeNum);
+    //console.log(routeNum);
     this.showgrid = false;
     this.showgrid2 = false;
     // this.showPlaces = true;
@@ -132,7 +132,7 @@ export class ViewAvailabilityComponent implements OnInit {
   proceed() {
     this.requestBusService.getSeatAvailabilty(this.RouteNo).subscribe(result => {
       this.availabilty = (this.seatCapacity) - (result.data[0].occupiedSeats);
-      console.log(this.availabilty);
+      //console.log(this.availabilty);
       if (this.availabilty > 0) {
         this.showgrid = true;
       } else {

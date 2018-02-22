@@ -15,6 +15,9 @@ export class ApproveVehicleComponent implements OnInit {
   public viewModal = false;
   public approveModal = false;
   public cancelModal = false;
+  public status;
+  public showApproveButton;
+  public showCancelButton;
 
   constructor(private http: Http, private vendorService: VendorService) { }
 
@@ -22,13 +25,20 @@ export class ApproveVehicleComponent implements OnInit {
     this.getVehicleList();
   }
 
-  private getVehicleList(){
+  private getVehicleList() {
     this.vendorService.getVehicleList().subscribe(vehicleList => {
-      vehicleList.forEach(element => {
-        element.verificationStatus="pending";
-      });
+      // vehicleList.forEach(element => {
+      //   element.verificationStatus="pending";
+      // });
       this.vehicleList = vehicleList;
-      console.log(this.vehicleList);
+      //console.log(this.vehicleList);
+      // if(this.vehicleList.verificationStatus = 'Approved'){
+      //   this.showApproveButton = false;
+      //   this.showCancelButton = true;
+      // }
+      // if(this.vehicleList.verificationStatus = 'Cancelled'){
+      //   this.showCancelButton = false;
+      // }
     },
       err => {
         console.error('*** VehicleComponent: Error while getVehicleList', err);
@@ -37,46 +47,55 @@ export class ApproveVehicleComponent implements OnInit {
     );
   }
 
-  viewButton(regNo){
+  viewButton(regNo) {
     this.viewModal = true;
     this.vehicleList.forEach(element => {
-      if(element.vehicleRegNo == regNo){
+      if (element.vehicleRegNo == regNo) {
         this.viewList = element;
       }
     });
   }
-  approveButton(regNo){
+  approveButton(regNo) {
     this.approveModal = true;
     this.vehicleList.forEach(element => {
-      if(element.vehicleRegNo == regNo){
+      if (element.vehicleRegNo == regNo) {
         this.viewList = element;
       }
     });
   }
-  cancelButton(regNo){
+  cancelButton(regNo) {
     this.cancelModal = true;
     this.vehicleList.forEach(element => {
-      if(element.vehicleRegNo == regNo){
+      if (element.vehicleRegNo == regNo) {
         this.viewList = element;
       }
     });
   }
 
-  approve(regNo){
-    console.log(regNo)
-    this.vehicleList.forEach(element => {
-      if(element.vehicleRegNo == regNo){
-        element.verificationStatus="Approved"
-      }
-    });
+  approve(regNo) {
+    //console.log(regNo)
     // window.location.reload();
-    /* this.vendorService.updateVehicleStatus(regNo, model).subscribe((updatedStatus) => {
-    alert("vehicle is approved")
+    this.status = 'Approved';
+    this.vendorService.updateVehicleStatus(regNo, this.status, this.vehicleList).subscribe((updatedStatus) => {
+    alert('vehicle is approved');
+    //window.location.reload();
     }, err => {
       console.error('*** VehicleComponent:Error while Approving status');
       console.error(err);
       alert(err);
-    }); */
+    });
   }
-
+  cancel(regNo) {
+    //console.log(regNo)
+    // window.location.reload();
+    this.status = 'Cancelled';
+    this.vendorService.updateVehicleStatus(regNo, this.status, this.vehicleList).subscribe((updatedStatus) => {
+    alert('vehicle is Cancelled');
+    //window.location.reload();
+    }, err => {
+      console.error('*** VehicleComponent:Error while Approving status');
+      console.error(err);
+      alert(err);
+    });
+  }
 }
