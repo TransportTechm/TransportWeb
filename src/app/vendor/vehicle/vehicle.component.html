@@ -60,7 +60,17 @@
                         <td align="center" valign="middle">{{list.vehicleRegNo}}</td>
                         <td align="center" valign="middle">{{list.vehicleTypeId}}</td>
                         <td align="center" valign="middle">{{list.driverId}}</td>
-                        <td align="center" valign="middle">{{list.verificationStatus}}</td>
+                        <td *ngIf="list.verificationStatus == 'Cancelled'">
+                            <span class="label label-danger">Cancelled</span>
+                          </td>
+                          <td *ngIf="list.verificationStatus == 'Approved'">
+                              <span class="label label-success">Approved</span>
+                            </td>
+                            <td *ngIf="list.verificationStatus == 'Pending'">
+                                <span class="label label-warning">Pending</span>
+                              </td>
+
+                        <!-- <td align="center" valign="middle">{{list.verificationStatus}}</td> -->
                       </tr>
                     </tbody>
                   </table>

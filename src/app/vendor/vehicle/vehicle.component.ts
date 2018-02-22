@@ -83,16 +83,15 @@ export class VehicleComponent implements OnInit {
     model.verificationStatus = 'Pending';
     //console.log(model);
     this.vendorService.saveVehicleRegistration(model).subscribe((vehicleRegister) => {
-      alert('Vehicle Registered');
-      // if (vehicleRegister.status == 201) {
-      //   alert('Vehicle Registered');
-      // }
-      console.log(vehicleRegister);
+      //alert('Vehicle Registered');
+      if (vehicleRegister.status == 201) {
+        alert('Vehicle Registered');
+      }
+      //console.log(vehicleRegister)
     }, err => {
-      //console.error('*** VehicleComponent:Error while Registering');
-      //console.error(err);
-      //alert(err);
-      alert('Vehicle Registered');
+      console.error('*** VehicleComponent:Error while Registering');
+      console.error(err);
+      alert(err);
 
     });
   }
@@ -121,9 +120,6 @@ export class VehicleComponent implements OnInit {
 
 private getVehicleList() {
   this.vendorService.getVehicleList().subscribe(vehicleList => {
-    vehicleList.forEach(element => {
-      element.verificationStatus = 'pending';
-    });
     this.vehicleList = vehicleList;
     this.setPage(1);
     //console.log(this.vehicleList);

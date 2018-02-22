@@ -16,8 +16,7 @@ export class ApproveVehicleComponent implements OnInit {
   public approveModal = false;
   public cancelModal = false;
   public status;
-  public showApproveButton;
-  public showCancelButton;
+  public pendingVehicleList;
 
   constructor(private http: Http, private vendorService: VendorService) { }
 
@@ -27,18 +26,8 @@ export class ApproveVehicleComponent implements OnInit {
 
   private getVehicleList() {
     this.vendorService.getVehicleList().subscribe(vehicleList => {
-      // vehicleList.forEach(element => {
-      //   element.verificationStatus="pending";
-      // });
-      this.vehicleList = vehicleList;
-      //console.log(this.vehicleList);
-      // if(this.vehicleList.verificationStatus = 'Approved'){
-      //   this.showApproveButton = false;
-      //   this.showCancelButton = true;
-      // }
-      // if(this.vehicleList.verificationStatus = 'Cancelled'){
-      //   this.showCancelButton = false;
-      // }
+      this.pendingVehicleList = vehicleList.filter((element, index, vehicleList) =>
+        element.verificationStatus === "Pending");
     },
       err => {
         console.error('*** VehicleComponent: Error while getVehicleList', err);
@@ -57,7 +46,7 @@ export class ApproveVehicleComponent implements OnInit {
   }
   approveButton(regNo) {
     this.approveModal = true;
-    this.vehicleList.forEach(element => {
+    this.pendingVehicleList.forEach(element => {
       if (element.vehicleRegNo == regNo) {
         this.viewList = element;
       }
@@ -65,7 +54,7 @@ export class ApproveVehicleComponent implements OnInit {
   }
   cancelButton(regNo) {
     this.cancelModal = true;
-    this.vehicleList.forEach(element => {
+    this.pendingVehicleList.forEach(element => {
       if (element.vehicleRegNo == regNo) {
         this.viewList = element;
       }
@@ -76,7 +65,7 @@ export class ApproveVehicleComponent implements OnInit {
     //console.log(regNo)
     // window.location.reload();
     this.status = 'Approved';
-    this.vendorService.updateVehicleStatus(regNo, this.status, this.vehicleList).subscribe((updatedStatus) => {
+    this.vendorService.updateVehicleStatus(regNo, this.status, this.pendingVehicleList).subscribe((updatedStatus) => {
     alert('vehicle is approved');
     //window.location.reload();
     }, err => {
@@ -89,7 +78,7 @@ export class ApproveVehicleComponent implements OnInit {
     //console.log(regNo)
     // window.location.reload();
     this.status = 'Cancelled';
-    this.vendorService.updateVehicleStatus(regNo, this.status, this.vehicleList).subscribe((updatedStatus) => {
+    this.vendorService.updateVehicleStatus(regNo, this.status, this.pendingVehicleList).subscribe((updatedStatus) => {
     alert('vehicle is Cancelled');
     //window.location.reload();
     }, err => {
