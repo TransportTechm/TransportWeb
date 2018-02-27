@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, NgModule, ViewContainerRef} from '@angular/core';
+import { Component, OnInit, ViewChild, NgModule, ViewContainerRef } from '@angular/core';
 import { Http } from '@angular/http';
 import { ReactiveFormsModule, FormGroup, FormControl, Validators, FormBuilder, FormArray, FormsModule } from '@angular/forms';
 import { RequestBusService } from '../services/request-bus.service';
@@ -28,6 +28,8 @@ export class RequestBusComponent implements OnInit {
   public user_name: string;
   public user_contact: number;
   public departures;
+  public seatCapacity;
+  public availabilty;
 
 
   constructor(private _formBuilder: FormBuilder,
@@ -35,8 +37,8 @@ export class RequestBusComponent implements OnInit {
     private requestBusService: RequestBusService,
     private router: Router,
     public toastr: ToastsManager, vcr: ViewContainerRef) {
-      this.toastr.setRootViewContainerRef(vcr);
-    }
+    this.toastr.setRootViewContainerRef(vcr);
+  }
 
   ngOnInit() {
     const userData = JSON.parse(localStorage.getItem('userData'));
@@ -54,8 +56,8 @@ export class RequestBusComponent implements OnInit {
   private buildForm(): void {
     this.registerForm = this._formBuilder.group({
       'gid': [this.user_empId],
-      'emp_name': [{value: this.user_name, disabled: true}],
-      'gender': [{value: this.user_gender, disabled: true}],
+      'emp_name': [{ value: this.user_name, disabled: true }],
+      'gender': [{ value: this.user_gender, disabled: true }],
       'journeycity': ['', [Validators.required]],
       'journeylocation': ['', [Validators.required]],
       'ContactNumber': [this.user_contact, [Validators.required]],
@@ -166,7 +168,7 @@ export class RequestBusComponent implements OnInit {
   private getRouteList(value) {
     // this.http.get('assets/apis/routes_list.json').subscribe(res => this.routes_list = res.json());
     this.requestBusService.getRoutesList(value).subscribe(routes_list => {
-      //console.log(routes_list);
+      // console.log(routes_list);
       this.routes_list = routes_list;
     },
       err => {
@@ -184,9 +186,11 @@ export class RequestBusComponent implements OnInit {
     this.origin = selectedItem.origin;
     this.destination = selectedItem.destination;
     this.departure_time = selectedItem.departureTime;
+    this.seatCapacity = selectedItem.seatCapacity;
+    //console.log(this.seatCapacity)
   }
   showTimings(routeNo) {
-   // console.log(routeNo);
+    // console.log(routeNo);
     this.routes_list.forEach(element => {
       if (element.routeNo === routeNo) {
         this.departures = element.bpoints;
@@ -204,74 +208,84 @@ export class RequestBusComponent implements OnInit {
       model.destination = this.destination;
       model.departure_time = this.departure_time;
       //console.log(model.journey_type);
-      if (model.journey_type === 'Yearly Journey Ticket') {
-        model.journey_type = 'Year';
-        model.journey_date = null;
-        this.requestBusService.getRegisterCheckYear(model.gid, model.journey_type).subscribe((register) => {
-          if (register.status === 'success' && register.data.length > 0) {
-            if (window.confirm('You are requesting to update route. Once processed, your data will be permanently updated.')) {
-              // put your delete method logic here
-              this.requestBusService.updateBusRegistration(model.gid, register.data[0].id, model).subscribe((newrequestbusWithId) => {
-                // alert('Route Updated successfully!');
-                this.toastr.success('Route Updated successfully!', 'Success!');
-                this.router.navigate(['/employee/viewhistory']);
-              }, err => {
-                console.error('*** RequestBusComponent:Error while Registering');
-                console.error(err);
-                alert(err);
-              });
-            }
-          } else {
-            this.requestBusService.saveBusRegistration(model.gid, model).subscribe((newrequestbusWithId) => {
-              this.toastr.success('Route Saved successfully!', 'Success!');
-              this.router.navigate(['/employee/viewhistory']);
-            }, err => {
-              console.error('*** RequestBusComponent:Error while Registering');
-                console.error(err);
-              alert(err);
-            });
-          }
-        }, err => {
-          console.error('*** RequestBusComponent:Error while Registering');
-          console.error(err);
-          alert(err);
-        }
-        );
 
-      } else {
-        model.journey_type = 'Single';
-        this.requestBusService.getRegisterCheckSingle(model.gid, model.journey_type, model.journey_date).subscribe((register) => {
-          if (register.status === 'success' && register.data.length > 0) {
-            if (window.confirm('You are requesting to update route. Once processed, your data will be permanently updated.')) {
-              // put your delete method logic here
-              this.requestBusService.updateBusRegistration(model.gid, register.data[0].id, model).subscribe((newrequestbusWithId) => {
-                // alert('Route Updated successfully!');
-                this.toastr.success('Route Updated successfully!', 'Success!');
-                this.router.navigate(['/employee/viewhistory']);
-              }, err => {
-                console.error('*** RequestBusComponent:Error while Registering');
-                console.error(err);
-                alert(err);
-              });
-            }
-          } else {
-            this.requestBusService.saveBusRegistration(model.gid, model).subscribe((newrequestbusWithId) => {
-              // alert('Route Saved successfully!');
-              this.toastr.success('Route Saved successfully!', 'Success!');
-              this.router.navigate(['/employee/viewhistory']);
+      this.requestBusService.getSeatAvailabilty(this.route_no).subscribe(result => {
+        this.availabilty = (this.seatCapacity) - (result.data[0].occupiedSeats);
+        //console.log(this.availabilty)
+        if (this.availabilty > 0) {
+
+          if (model.journey_type === 'Yearly Journey Ticket') {
+            model.journey_type = 'Year';
+            model.journey_date = null;
+            this.requestBusService.getRegisterCheckYear(model.gid, model.journey_type).subscribe((register) => {
+              if (register.status === 'success' && register.data.length > 0) {
+                if (window.confirm('You are requesting to update route. Once processed, your data will be permanently updated.')) {
+                  // put your delete method logic here
+                  this.requestBusService.updateBusRegistration(model.gid, register.data[0].id, model).subscribe((newrequestbusWithId) => {
+                    // alert('Route Updated successfully!');
+                    this.toastr.success('Route Updated successfully!', 'Success!');
+                    this.router.navigate(['/employee/viewhistory']);
+                  }, err => {
+                    console.error('*** RequestBusComponent:Error while Registering');
+                    console.error(err);
+                    alert(err);
+                  });
+                }
+              } else {
+                this.requestBusService.saveBusRegistration(model.gid, model).subscribe((newrequestbusWithId) => {
+                  this.toastr.success('Route Saved successfully!', 'Success!');
+                  this.router.navigate(['/employee/viewhistory']);
+                }, err => {
+                  console.error('*** RequestBusComponent:Error while Registering');
+                  console.error(err);
+                  alert(err);
+                });
+              }
             }, err => {
               console.error('*** RequestBusComponent:Error while Registering');
               console.error(err);
               alert(err);
-            });
+            }
+            );
+
+          } else {
+            model.journey_type = 'Single';
+            this.requestBusService.getRegisterCheckSingle(model.gid, model.journey_type, model.journey_date).subscribe((register) => {
+              if (register.status === 'success' && register.data.length > 0) {
+                if (window.confirm('You are requesting to update route. Once processed, your data will be permanently updated.')) {
+                  // put your delete method logic here
+                  this.requestBusService.updateBusRegistration(model.gid, register.data[0].id, model).subscribe((newrequestbusWithId) => {
+                    // alert('Route Updated successfully!');
+                    this.toastr.success('Route Updated successfully!', 'Success!');
+                    this.router.navigate(['/employee/viewhistory']);
+                  }, err => {
+                    console.error('*** RequestBusComponent:Error while Registering');
+                    console.error(err);
+                    alert(err);
+                  });
+                }
+              } else {
+                this.requestBusService.saveBusRegistration(model.gid, model).subscribe((newrequestbusWithId) => {
+                  // alert('Route Saved successfully!');
+                  this.toastr.success('Route Saved successfully!', 'Success!');
+                  this.router.navigate(['/employee/viewhistory']);
+                }, err => {
+                  console.error('*** RequestBusComponent:Error while Registering');
+                  console.error(err);
+                  alert(err);
+                });
+              }
+            }, err => {
+              console.error('*** RequestBusComponent:Error while Registering', err);
+              console.error(err);
+              alert(err);
+            }
+            );
           }
-        }, err => {
-          console.error('*** RequestBusComponent:Error while Registering', err);
-          console.error(err);
-          alert(err);
+        } else {
+          alert('No Seats available');
         }
-        );
-      }
+      });
     }
   }
 }

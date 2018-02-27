@@ -23,6 +23,7 @@ export class VehicleComponent implements OnInit {
   public vehicleList;
   pager: any = {};
   pagedItems: any[];
+  // tslint:disable-next-line:max-line-length
   constructor(private http: Http, private _formBuilder: FormBuilder, private vendorService: VendorService, private pagerService: PagerService) { }
 
   ngOnInit() {
@@ -60,6 +61,7 @@ export class VehicleComponent implements OnInit {
     }
   }
 
+  // tslint:disable-next-line:member-ordering
   public formErrors = {
     'vehicleRegNo': '',
     'vehicleTypeId': '',
@@ -81,13 +83,14 @@ export class VehicleComponent implements OnInit {
 
   public register(model) {
     model.verificationStatus = 'Pending';
-    //console.log(model);
+    // console.log(model);
     this.vendorService.saveVehicleRegistration(model).subscribe((vehicleRegister) => {
-      //alert('Vehicle Registered');
-      if (vehicleRegister.status == 201) {
+      // alert('Vehicle Registered');
+      if (vehicleRegister.status === 201) {
         alert('Vehicle Registered');
+        this.getVehicleList();
       }
-      //console.log(vehicleRegister)
+      // console.log(vehicleRegister)
     }, err => {
       console.error('*** VehicleComponent:Error while Registering');
       console.error(err);
@@ -98,7 +101,7 @@ export class VehicleComponent implements OnInit {
   private getDriverList() {
     this.vendorService.getDriverList().subscribe(driverList => {
       this.driverList = driverList;
-      //console.log(this.driverList);
+      // console.log(this.driverList);
     },
       err => {
         console.error('*** VehicleComponent: Error while getDriverList', err);
@@ -122,7 +125,7 @@ private getVehicleList() {
   this.vendorService.getVehicleList().subscribe(vehicleList => {
     this.vehicleList = vehicleList;
     this.setPage(1);
-    //console.log(this.vehicleList);
+    // console.log(this.vehicleList);
   },
     err => {
       console.error('*** VehicleComponent: Error while getVehicleList', err);
@@ -131,13 +134,13 @@ private getVehicleList() {
   );
 }
 setPage(page: number) {
-  //console.log(this.pager.totalPages);
+  // console.log(this.pager.totalPages);
   if (page < 1 || page > this.pager.totalPages) {
     return;
   }
   // get pager object from service
   this.pager = this.pagerService.getPager(this.vehicleList.length, page);
-  //console.log(this.pager);
+  // console.log(this.pager);
   // get current page of items
   this.pagedItems = this.vehicleList.slice(this.pager.startIndex, this.pager.endIndex + 1);
 }

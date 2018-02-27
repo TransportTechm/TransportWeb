@@ -1,6 +1,7 @@
 <app-nav></app-nav>
 <div class="container">
-  <form [formGroup]="vehicleForm" role="form" name="form" class="form" (ngSubmit)="register(vehicleForm.value)" #f="ngForm" novalidate>
+  <form [formGroup]="vehicleForm" role="form" name="form" class="form" (ngSubmit)="register(vehicleForm.value)" #f="ngForm"
+    novalidate>
     <div class="panel panel-primary">
       <div class="panel-heading">
         <h3 class="panel-title">Vehicle Registration</h3>
@@ -46,7 +47,7 @@
             <div class="table-responsive">
               <div class="panel panel-primary">
                 <div class="panel-heading">
-                   Vehicle Details</div>
+                  Vehicle Details</div>
                 <div class="form-group1">
                   <table class="table table-bordered table-striped">
                     <tbody>
@@ -56,26 +57,28 @@
                         <td align="center" valign="middle">Driver</td>
                         <td align="center" valign="middle">Verification Status</td>
                       </tr>
-                      <tr *ngFor = "let list of pagedItems">
+                      <tr *ngFor="let list of pagedItems">
                         <td align="center" valign="middle">{{list.vehicleRegNo}}</td>
                         <td align="center" valign="middle">{{list.vehicleTypeId}}</td>
                         <td align="center" valign="middle">{{list.driverId}}</td>
                         <td *ngIf="list.verificationStatus == 'Cancelled'">
-                            <span class="label label-danger">Cancelled</span>
-                          </td>
-                          <td *ngIf="list.verificationStatus == 'Approved'">
-                              <span class="label label-success">Approved</span>
-                            </td>
-                            <td *ngIf="list.verificationStatus == 'Pending'">
-                                <span class="label label-warning">Pending</span>
-                              </td>
-
+                          <span class="label label-danger">Cancelled</span>
+                        </td>
+                        <td *ngIf="list.verificationStatus == 'Approved'">
+                          <span class="label label-success">Approved</span>
+                        </td>
+                        <td *ngIf="list.verificationStatus == 'Pending'">
+                          <span class="label label-warning">Pending</span>
+                        </td>
+                        <td *ngIf="list.verificationStatus == null">
+                          <span class="label label-warning"></span>
+                        </td>
                         <!-- <td align="center" valign="middle">{{list.verificationStatus}}</td> -->
                       </tr>
                     </tbody>
                   </table>
                   <div class="aligncenter">
-                    
+
                     <!-- pager -->
                     <ul *ngIf="pager.pages && pager.pages.length" class="pagination pg-purple">
                       <li [ngClass]="{disabled:pager.currentPage === 1}">

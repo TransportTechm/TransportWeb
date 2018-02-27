@@ -39,7 +39,7 @@ export class VendorService {
 
         // Stringify payload
         const bodyString = JSON.stringify(resource);
-        //console.log('bodystring'+ bodyString)
+        // console.log('bodystring'+ bodyString)
         // ... Set content type to JSON
         const headers = new Headers({ 'Content-Type': 'application/json' });
         // Create a request option

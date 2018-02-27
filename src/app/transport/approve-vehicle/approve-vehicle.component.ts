@@ -27,7 +27,7 @@ export class ApproveVehicleComponent implements OnInit {
   private getVehicleList() {
     this.vendorService.getVehicleList().subscribe(vehicleList => {
       this.pendingVehicleList = vehicleList.filter((element, index, vehicleList) =>
-        element.verificationStatus === "Pending");
+        element.verificationStatus === 'Pending');
     },
       err => {
         console.error('*** VehicleComponent: Error while getVehicleList', err);

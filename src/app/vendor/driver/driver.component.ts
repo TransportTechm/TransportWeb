@@ -86,6 +86,7 @@ export class DriverComponent implements OnInit {
     this.vendorService.saveDriverRegistration(model).subscribe((driverRegister) => {
       if (driverRegister.status == 201) {
         alert('Driver Registered');
+        this.getDriverList();
       }
     }, err => {
       console.error('*** DriverComponent:Error while Registering');
