@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { Http } from '@angular/http';
 import { RequestBusService } from '../services/request-bus.service';
 import { Router } from '@angular/router';
+import { ToastsManager } from 'ng2-toastr';
 
 @Component({
   selector: 'app-cancel-request',
@@ -10,7 +11,10 @@ import { Router } from '@angular/router';
 })
 export class CancelRequestComponent implements OnInit {
 
-  constructor(private requestBusService: RequestBusService, private router: Router) { }
+  constructor(private requestBusService: RequestBusService, private router: Router,
+    public toastr: ToastsManager, vcr: ViewContainerRef) {
+    this.toastr.setRootViewContainerRef(vcr);
+   }
   public user_empId: number;
   public journeyActiveList: any[];
   public selectedId: number;
@@ -29,10 +33,13 @@ export class CancelRequestComponent implements OnInit {
   }
   cancelRequest() {
     this.requestBusService.cancelRegistration(this.user_empId, this.selectedId).subscribe(result => {
-      alert('Registration Successfully Cancelled');
-      this.router.navigate(['/employee/viewhistory']);
+      // this.toastr.success('Registration Successfully Cancelled','Success!')
+      // this.router.navigate(['/employee/viewhistory']);
+      this.router.navigate(['/employee/viewhistory']).then(() => {
+        this.toastr.success('Registration Successfully Cancelled', 'Success!');
+      });
     }, err => {
-      console.error('Cancellation failed', err);
+      console.error('**CancelRequestComponent: Cancellation failed', err);
       console.error(err);
       alert(err);
     });

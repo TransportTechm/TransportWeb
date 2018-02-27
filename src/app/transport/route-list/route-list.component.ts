@@ -21,18 +21,18 @@ export class RouteListComponent implements OnInit {
   private getRouteList() {
     // this.http.get('assets/apis/routes_list.json').subscribe(res => this.routes_list = res.json());
     this.transportService.getAllRoutesList().subscribe(routes_list => {
-      //console.log(routes_list);
+      // console.log(routes_list);
       this.routes_list = routes_list;
     },
       err => {
-        console.error('*** RequestBusComponent: Error while getJourneyType', err);
+        console.error('*** RouteListComponent: Error while getRouteList', err);
         console.error(err);
       }
     );
   }
 
   showTimings(routeNo) {
-    //console.log(routeNo);
+    // console.log(routeNo);
     this.routes_list.forEach(element => {
       if (element.routeNo === routeNo) {
         this.departures = element.bpoints;

@@ -8,6 +8,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { EmployeeModule } from './employee/employee.module';
 import { TransportModule } from './transport/transport.module';
 import { VendorModule } from './vendor/vendor.module';
+import { ToastModule } from 'ng2-toastr';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { VendorModule } from './vendor/vendor.module';
     SharedModule,
     EmployeeModule,
     TransportModule,
-    VendorModule
+    VendorModule,
+    ToastModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

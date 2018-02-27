@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, NgModule } from '@angular/core';
+import { Component, OnInit, ViewChild, NgModule, ViewContainerRef } from '@angular/core';
 import { Http } from '@angular/http';
 import { ReactiveFormsModule, FormGroup, FormControl, Validators, FormBuilder, FormArray, FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -7,6 +7,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import * as _ from 'underscore';
 import { PagerService } from '../../shared/services/pager.service';
+import { ToastsManager } from 'ng2-toastr';
 @Component({
   selector: 'app-driver',
   templateUrl: './driver.component.html',
@@ -21,7 +22,10 @@ export class DriverComponent implements OnInit {
   // paged items
   pagedItems: any[];
   // tslint:disable-next-line:max-line-length
-  constructor(private http: Http, private _formBuilder: FormBuilder, private vendorService: VendorService, private pagerService: PagerService) { }
+  constructor(private http: Http, private _formBuilder: FormBuilder, private vendorService: VendorService,
+    private pagerService: PagerService, public toastr: ToastsManager, vcr: ViewContainerRef) {
+    this.toastr.setRootViewContainerRef(vcr);
+  }
 
   ngOnInit() {
     this.buildForm();
@@ -35,8 +39,8 @@ export class DriverComponent implements OnInit {
       'license_number': ['', [Validators.required]]
     });
     this.driverForm.valueChanges
-    .subscribe(data => this.onValueChanged(data));
-  this.onValueChanged(); // (re)set validation messages now
+      .subscribe(data => this.onValueChanged(data));
+    this.onValueChanged(); // (re)set validation messages now
   }
 
   public onValueChanged(data?: any) {
@@ -82,14 +86,16 @@ export class DriverComponent implements OnInit {
   };
 
   public register(model) {
-    //console.log(model);
+    // console.log(model);
     this.vendorService.saveDriverRegistration(model).subscribe((driverRegister) => {
       if (driverRegister.status == 201) {
-        alert('Driver Registered');
+        // alert('Driver Registered');
+        this.driverForm.reset();
+        this.toastr.success('Driver Registered Successfully', 'Success!');
         this.getDriverList();
       }
     }, err => {
-      console.error('*** DriverComponent:Error while Registering');
+      console.error('*** DriverComponent:Error while Registering Driver');
       console.error(err);
       alert(err);
 
@@ -101,22 +107,22 @@ export class DriverComponent implements OnInit {
       this.driverList = driverList;
       // initialize to page 1
       this.setPage(1);
-      //console.log(this.driverList);
+      // console.log(this.driverList);
     },
       err => {
-        console.error('*** RequestBusComponent: Error while getJourneyCity', err);
+        console.error('*** DriverComponent: Error while getDriverList', err);
         console.error(err);
       }
     );
   }
   setPage(page: number) {
-    //console.log(this.pager.totalPages);
+    // console.log(this.pager.totalPages);
     if (page < 1 || page > this.pager.totalPages) {
       return;
     }
     // get pager object from service
     this.pager = this.pagerService.getPager(this.driverList.length, page);
-    //console.log(this.pager);
+    // console.log(this.pager);
     // get current page of items
     this.pagedItems = this.driverList.slice(this.pager.startIndex, this.pager.endIndex + 1);
   }

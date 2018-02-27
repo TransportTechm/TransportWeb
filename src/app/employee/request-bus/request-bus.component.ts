@@ -31,7 +31,6 @@ export class RequestBusComponent implements OnInit {
   public seatCapacity;
   public availabilty;
 
-
   constructor(private _formBuilder: FormBuilder,
     private http: Http,
     private requestBusService: RequestBusService,
@@ -50,7 +49,6 @@ export class RequestBusComponent implements OnInit {
     }
     this.buildForm();
     this.getJourneyCity();
-    // this.toastr.success('You are awesome!', 'Success!');
   }
 
   private buildForm(): void {
@@ -124,13 +122,13 @@ export class RequestBusComponent implements OnInit {
     );
   }
   onSelectCity(value) {
-    //console.log(value);
+    // console.log(value);
     this.getJourneyLocation(value);
   }
   private getJourneyLocation(value) {
     // this.http.get('assets/apis/locations.json').subscribe(res => this.locations_list = res.json());
     this.requestBusService.getJourneyLocation(value).subscribe(locations => {
-      //console.log(locations.locations);
+      // console.log(locations.locations);
       this.locations_list = locations.locations;
     },
       err => {
@@ -140,13 +138,13 @@ export class RequestBusComponent implements OnInit {
     );
   }
   onSelectLocation(value) {
-    //console.log(value);
+    // console.log(value);
     this.getJourneyType(value);
   }
   private getJourneyType(value) {
     // this.http.get('assets/apis/JourneyType.json').subscribe(res => this.journeyType = res.json());
     this.requestBusService.getJourneyType(value).subscribe(JourneyTypes => {
-      //console.log(JourneyTypes.journeyTypes);
+      // console.log(JourneyTypes.journeyTypes);
       this.journeyType = JourneyTypes.journeyTypes;
     },
       err => {
@@ -156,7 +154,7 @@ export class RequestBusComponent implements OnInit {
     );
   }
   onSelectJourneyType(selectedItem: any) {
-    //console.log(selectedItem);
+    // console.log(selectedItem);
     if (selectedItem.name === 'Yearly Journey Ticket') {
       this.showdatepicker = false;
       this.getRouteList(selectedItem.id);
@@ -181,20 +179,20 @@ export class RequestBusComponent implements OnInit {
     this.pick_up_point = pickpoint1;
   }
   onSelect(selectedItem: any) {
-    //console.log(selectedItem);
+    // console.log(selectedItem);
     this.route_no = selectedItem.routeNo;
     this.origin = selectedItem.origin;
     this.destination = selectedItem.destination;
     this.departure_time = selectedItem.departureTime;
     this.seatCapacity = selectedItem.seatCapacity;
-    //console.log(this.seatCapacity)
+    // console.log(this.seatCapacity)
   }
   showTimings(routeNo) {
     // console.log(routeNo);
     this.routes_list.forEach(element => {
       if (element.routeNo === routeNo) {
         this.departures = element.bpoints;
-        //console.log(this.departures);
+        // console.log(this.departures);
       }
     });
   }
@@ -207,11 +205,11 @@ export class RequestBusComponent implements OnInit {
       model.origin = this.origin;
       model.destination = this.destination;
       model.departure_time = this.departure_time;
-      //console.log(model.journey_type);
+      // console.log(model.journey_type);
 
       this.requestBusService.getSeatAvailabilty(this.route_no).subscribe(result => {
         this.availabilty = (this.seatCapacity) - (result.data[0].occupiedSeats);
-        //console.log(this.availabilty)
+        // console.log(this.availabilty)
         if (this.availabilty > 0) {
 
           if (model.journey_type === 'Yearly Journey Ticket') {
@@ -219,28 +217,35 @@ export class RequestBusComponent implements OnInit {
             model.journey_date = null;
             this.requestBusService.getRegisterCheckYear(model.gid, model.journey_type).subscribe((register) => {
               if (register.status === 'success' && register.data.length > 0) {
-                if (window.confirm('You are requesting to update route. Once processed, your data will be permanently updated.')) {
-                  // put your delete method logic here
+                if (window.confirm('You are already enrolled in a Yearly Journey Request. Do you want to update the existing Route?')) {
                   this.requestBusService.updateBusRegistration(model.gid, register.data[0].id, model).subscribe((newrequestbusWithId) => {
                     // alert('Route Updated successfully!');
-                    this.toastr.success('Route Updated successfully!', 'Success!');
-                    this.router.navigate(['/employee/viewhistory']);
+                    // this.toastr.success('Route Updated successfully!', 'Success!');
+                    // this.router.navigate(['/employee/viewhistory']);
+                    this.router.navigate(['/employee/viewhistory']).then(() => {
+                      this.toastr.success('Route Updated successfully!', 'Success!');
+                    });
                   }, err => {
-                    console.error('*** RequestBusComponent:Error while Registering');
+                    console.error('*** RequestBusComponent:Error while Updating');
                     console.error(err);
                     alert(err);
                   });
                 }
               } else {
+                if (window.confirm('Do you want to register to this Route?')) {
                 this.requestBusService.saveBusRegistration(model.gid, model).subscribe((newrequestbusWithId) => {
-                  this.toastr.success('Route Saved successfully!', 'Success!');
-                  this.router.navigate(['/employee/viewhistory']);
+                  // this.toastr.success('Route Saved successfully!', 'Success!');
+                  // this.router.navigate(['/employee/viewhistory']);
+                  this.router.navigate(['/employee/viewhistory']).then(() => {
+                    this.toastr.success('Route Saved successfully!', 'Success!');
+                  });
                 }, err => {
                   console.error('*** RequestBusComponent:Error while Registering');
                   console.error(err);
                   alert(err);
                 });
               }
+            }
             }, err => {
               console.error('*** RequestBusComponent:Error while Registering');
               console.error(err);
@@ -256,25 +261,33 @@ export class RequestBusComponent implements OnInit {
                   // put your delete method logic here
                   this.requestBusService.updateBusRegistration(model.gid, register.data[0].id, model).subscribe((newrequestbusWithId) => {
                     // alert('Route Updated successfully!');
-                    this.toastr.success('Route Updated successfully!', 'Success!');
-                    this.router.navigate(['/employee/viewhistory']);
+                    // this.toastr.success('Route Updated successfully!', 'Success!');
+                    // this.router.navigate(['/employee/viewhistory']);
+                    this.router.navigate(['/employee/viewhistory']).then(() => {
+                      this.toastr.success('Route Updated successfully!', 'Success!');
+                    });
                   }, err => {
-                    console.error('*** RequestBusComponent:Error while Registering');
+                    console.error('*** RequestBusComponent:Error while Updating');
                     console.error(err);
                     alert(err);
                   });
                 }
               } else {
+                if (window.confirm('Do you want to register to this Route?')) {
                 this.requestBusService.saveBusRegistration(model.gid, model).subscribe((newrequestbusWithId) => {
                   // alert('Route Saved successfully!');
-                  this.toastr.success('Route Saved successfully!', 'Success!');
-                  this.router.navigate(['/employee/viewhistory']);
+                  // this.toastr.success('Route Saved successfully!', 'Success!');
+                  // this.router.navigate(['/employee/viewhistory']);
+                  this.router.navigate(['/employee/viewhistory']).then(() => {
+                    this.toastr.success('Route Saved successfully!', 'Success!');
+                  });
                 }, err => {
                   console.error('*** RequestBusComponent:Error while Registering');
                   console.error(err);
                   alert(err);
                 });
               }
+            }
             }, err => {
               console.error('*** RequestBusComponent:Error while Registering', err);
               console.error(err);
@@ -283,7 +296,7 @@ export class RequestBusComponent implements OnInit {
             );
           }
         } else {
-          alert('No Seats available');
+          this.toastr.error('No Seats available for the selected Route', 'Oops!');
         }
       });
     }

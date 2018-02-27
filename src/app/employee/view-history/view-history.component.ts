@@ -24,10 +24,18 @@ export class ViewHistoryComponent implements OnInit {
 
     this.requestBusService.getYearJourneyList(this.user_empId).subscribe(result => {
       this.yearJourneyList = result.data;
+    }, err => {
+      console.error('***ViewHistoryComponent: error retrieving data from getYearJourneyList', err);
+      console.error(err);
+      alert(err);
     });
 
     this.requestBusService.getSingleJourneyList(this.user_empId).subscribe(result => {
       this.singleJourneyList = result.data;
+    }, err => {
+      console.error('***ViewHistoryComponent: error retrieving data from getSingleJourneyList', err);
+      console.error(err);
+      alert(err);
     });
   }
 }
