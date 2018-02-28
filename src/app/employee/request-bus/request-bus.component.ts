@@ -118,6 +118,7 @@ export class RequestBusComponent implements OnInit {
       err => {
         console.error('*** RequestBusComponent: Error while getJourneyCity', err);
         console.error(err);
+        this.toastr.error(err, 'Error!')
       }
     );
   }
@@ -134,6 +135,7 @@ export class RequestBusComponent implements OnInit {
       err => {
         console.error('*** RequestBusComponent: Error while getJourneyLocation', err);
         console.error(err);
+        this.toastr.error(err, 'Error!')
       }
     );
   }
@@ -150,6 +152,7 @@ export class RequestBusComponent implements OnInit {
       err => {
         console.error('*** RequestBusComponent: Error while getJourneyType', err);
         console.error(err);
+        this.toastr.error(err, 'Error!')
       }
     );
   }
@@ -172,6 +175,7 @@ export class RequestBusComponent implements OnInit {
       err => {
         console.error('*** RequestBusComponent: Error while getJourneyType', err);
         console.error(err);
+        this.toastr.error(err, 'Error!')
       }
     );
   }
@@ -220,15 +224,14 @@ export class RequestBusComponent implements OnInit {
                 if (window.confirm('You are already enrolled in a Yearly Journey Request. Do you want to update the existing Route?')) {
                   this.requestBusService.updateBusRegistration(model.gid, register.data[0].id, model).subscribe((newrequestbusWithId) => {
                     // alert('Route Updated successfully!');
-                    // this.toastr.success('Route Updated successfully!', 'Success!');
-                    // this.router.navigate(['/employee/viewhistory']);
-                    this.router.navigate(['/employee/viewhistory']).then(() => {
+                    // this.router.navigate(['/employee/viewhistory']).then(() => {
                       this.toastr.success('Route Updated successfully!', 'Success!');
-                    });
+                    // });
                   }, err => {
                     console.error('*** RequestBusComponent:Error while Updating');
                     console.error(err);
-                    alert(err);
+                    // alert(err);
+                    this.toastr.error(err, 'Error!')
                   });
                 }
               } else {
@@ -236,20 +239,22 @@ export class RequestBusComponent implements OnInit {
                 this.requestBusService.saveBusRegistration(model.gid, model).subscribe((newrequestbusWithId) => {
                   // this.toastr.success('Route Saved successfully!', 'Success!');
                   // this.router.navigate(['/employee/viewhistory']);
-                  this.router.navigate(['/employee/viewhistory']).then(() => {
+                  // this.router.navigate(['/employee/viewhistory']).then(() => {
                     this.toastr.success('Route Saved successfully!', 'Success!');
-                  });
+                  // });
                 }, err => {
                   console.error('*** RequestBusComponent:Error while Registering');
                   console.error(err);
-                  alert(err);
+                  // alert(err);
+                  this.toastr.error(err, 'Error!')
                 });
               }
             }
             }, err => {
               console.error('*** RequestBusComponent:Error while Registering');
               console.error(err);
-              alert(err);
+              // alert(err);
+              this.toastr.error(err, 'Error!')
             }
             );
 
@@ -261,15 +266,14 @@ export class RequestBusComponent implements OnInit {
                   // put your delete method logic here
                   this.requestBusService.updateBusRegistration(model.gid, register.data[0].id, model).subscribe((newrequestbusWithId) => {
                     // alert('Route Updated successfully!');
-                    // this.toastr.success('Route Updated successfully!', 'Success!');
-                    // this.router.navigate(['/employee/viewhistory']);
-                    this.router.navigate(['/employee/viewhistory']).then(() => {
+                    // this.router.navigate(['/employee/viewhistory']).then(() => {
                       this.toastr.success('Route Updated successfully!', 'Success!');
-                    });
+                    // });
                   }, err => {
                     console.error('*** RequestBusComponent:Error while Updating');
                     console.error(err);
-                    alert(err);
+                    // alert(err);
+                    this.toastr.error(err, 'Error!')
                   });
                 }
               } else {
@@ -278,25 +282,27 @@ export class RequestBusComponent implements OnInit {
                   // alert('Route Saved successfully!');
                   // this.toastr.success('Route Saved successfully!', 'Success!');
                   // this.router.navigate(['/employee/viewhistory']);
-                  this.router.navigate(['/employee/viewhistory']).then(() => {
+                  // this.router.navigate(['/employee/viewhistory']).then(() => {
                     this.toastr.success('Route Saved successfully!', 'Success!');
-                  });
+                  // });
                 }, err => {
                   console.error('*** RequestBusComponent:Error while Registering');
                   console.error(err);
-                  alert(err);
+                  // alert(err);
+                  this.toastr.error(err, 'Error!')
                 });
               }
             }
             }, err => {
               console.error('*** RequestBusComponent:Error while Registering', err);
               console.error(err);
-              alert(err);
+              // alert(err);
+              this.toastr.error(err, 'Error!')
             }
             );
           }
         } else {
-          this.toastr.error('No Seats available for the selected Route', 'Oops!');
+          this.toastr.warning('No Seats available for the selected Route', 'Oops!');
         }
       });
     }

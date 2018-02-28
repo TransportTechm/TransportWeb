@@ -97,8 +97,8 @@ export class DriverComponent implements OnInit {
     }, err => {
       console.error('*** DriverComponent:Error while Registering Driver');
       console.error(err);
-      alert(err);
-
+      // alert(err);
+      this.toastr.error(err, 'Error!')
     });
   }
 
@@ -112,6 +112,7 @@ export class DriverComponent implements OnInit {
       err => {
         console.error('*** DriverComponent: Error while getDriverList', err);
         console.error(err);
+        this.toastr.error(err, 'Error!')
       }
     );
   }

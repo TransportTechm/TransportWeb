@@ -36,6 +36,7 @@ export class ApproveVehicleComponent implements OnInit {
       err => {
         console.error('*** VehicleComponent: Error while getVehicleList', err);
         console.error(err);
+        this.toastr.error(err, 'Error!')
       }
     );
   }
@@ -76,7 +77,8 @@ export class ApproveVehicleComponent implements OnInit {
     }, err => {
       console.error('*** ApproveVehicleComponent:Error while Approving status');
       console.error(err);
-      alert(err);
+      // alert(err);
+      this.toastr.error(err, 'Error!')
     });
   }
   cancel(regNo) {
@@ -90,7 +92,8 @@ export class ApproveVehicleComponent implements OnInit {
     }, err => {
       console.error('*** ApproveVehicleComponent:Error while Cancelling status');
       console.error(err);
-      alert(err);
+      // alert(err);
+      this.toastr.error(err, 'Error!')
     });
   }
 }

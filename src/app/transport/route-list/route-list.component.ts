@@ -1,6 +1,7 @@
-import { Component, OnInit, ViewChild, NgModule } from '@angular/core';
+import { Component, OnInit, ViewChild, NgModule, ViewContainerRef } from '@angular/core';
 import { Http } from '@angular/http';
 import { TransportService } from '../services/transport.service';
+import { ToastsManager } from 'ng2-toastr';
 
 @Component({
   selector: 'app-route-list',
@@ -12,7 +13,10 @@ export class RouteListComponent implements OnInit {
   public departureTime_list;
   public departures;
   public destination;
-  constructor(private http: Http, private transportService: TransportService) { }
+  constructor(private http: Http, private transportService: TransportService,
+    public toastr: ToastsManager, vcr: ViewContainerRef) {
+    this.toastr.setRootViewContainerRef(vcr);
+  }
 
   ngOnInit() {
     this.getRouteList();
@@ -27,6 +31,7 @@ export class RouteListComponent implements OnInit {
       err => {
         console.error('*** RouteListComponent: Error while getRouteList', err);
         console.error(err);
+        this.toastr.error(err, 'Error!')
       }
     );
   }

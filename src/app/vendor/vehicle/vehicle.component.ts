@@ -100,8 +100,8 @@ export class VehicleComponent implements OnInit {
     }, err => {
       console.error('*** VehicleComponent:Error while Registering');
       console.error(err);
-      alert(err);
-
+      // alert(err);
+      this.toastr.error(err, 'Error!')
     });
   }
   private getDriverList() {
@@ -112,6 +112,7 @@ export class VehicleComponent implements OnInit {
       err => {
         console.error('*** VehicleComponent: Error while getDriverList', err);
         console.error(err);
+        this.toastr.error(err, 'Error!')
       }
     );
   }
@@ -123,6 +124,7 @@ export class VehicleComponent implements OnInit {
       err => {
         console.error('*** VehicleComponent: Error while getVehicleTypeList', err);
         console.error(err);
+        this.toastr.error(err, 'Error!')
       }
     );
   }
@@ -136,6 +138,7 @@ export class VehicleComponent implements OnInit {
       err => {
         console.error('*** VehicleComponent: Error while getVehicleList', err);
         console.error(err);
+        this.toastr.error(err, 'Error!')
       }
     );
   }

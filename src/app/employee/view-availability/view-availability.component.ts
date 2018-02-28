@@ -1,8 +1,9 @@
-import { Component, OnInit, ViewChild, NgModule } from '@angular/core';
+import { Component, OnInit, ViewChild, NgModule, ViewContainerRef } from '@angular/core';
 import { Http } from '@angular/http';
 import { ReactiveFormsModule, FormGroup, FormControl, Validators, FormBuilder, FormArray, FormsModule } from '@angular/forms';
 import { RequestBusService } from '../services/request-bus.service';
 import { Router } from '@angular/router';
+import { ToastsManager } from 'ng2-toastr';
 
 @Component({
   selector: 'app-view-availability',
@@ -30,7 +31,11 @@ export class ViewAvailabilityComponent implements OnInit {
   public RouteNo;
   public deptTime;
 
-  constructor(private http: Http, private _formBuilder: FormBuilder, private requestBusService: RequestBusService) { }
+  constructor(private http: Http, private _formBuilder: FormBuilder,
+    private requestBusService: RequestBusService,
+    public toastr: ToastsManager, vcr: ViewContainerRef) {
+    this.toastr.setRootViewContainerRef(vcr);
+  }
 
   ngOnInit() {
     this.buildForm();
@@ -54,6 +59,7 @@ export class ViewAvailabilityComponent implements OnInit {
       err => {
         console.error('*** RequestBusComponent: Error while getJourneyCity', err);
         console.error(err);
+        this.toastr.error(err, 'Error!')
       }
     );
   }
@@ -69,6 +75,7 @@ export class ViewAvailabilityComponent implements OnInit {
       err => {
         console.error('*** RequestBusComponent: Error while getJourneyLocation', err);
         console.error(err);
+        this.toastr.error(err, 'Error!')
       }
     );
   }
@@ -79,12 +86,13 @@ export class ViewAvailabilityComponent implements OnInit {
   private getJourneyType(value) {
     // this.http.get('assets/apis/JourneyType.json').subscribe(res => this.journeyType = res.json());
     this.requestBusService.getJourneyType(value).subscribe(JourneyTypes => {
-     // console.log(JourneyTypes.journeyTypes);
+      // console.log(JourneyTypes.journeyTypes);
       this.journeyType = JourneyTypes.journeyTypes;
     },
       err => {
         console.error('*** RequestBusComponent: Error while getJourneyType', err);
         console.error(err);
+        this.toastr.error(err, 'Error!')
       }
     );
   }
@@ -107,6 +115,7 @@ export class ViewAvailabilityComponent implements OnInit {
       err => {
         console.error('*** ViewAvailabilityComponent: Error while getRouteList', err);
         console.error(err);
+        this.toastr.error(err, 'Error!')
       }
     );
   }
@@ -141,7 +150,8 @@ export class ViewAvailabilityComponent implements OnInit {
     }, err => {
       console.error('*** ViewAvailabilityComponent: error while getSeatAvailabilty', err);
       console.error(err);
-      alert(err);
+      // alert(err);
+      this.toastr.error(err, 'Error!')
     });
   }
   cancel() {

@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { Http } from '@angular/http';
 import { RequestBusService } from '../services/request-bus.service';
+import { ToastsManager } from 'ng2-toastr';
 
 @Component({
   selector: 'app-view-history',
@@ -14,7 +15,10 @@ export class ViewHistoryComponent implements OnInit {
   public showActive: boolean;
   public showCancelled: boolean;
 
-  constructor(private http: Http, private requestBusService: RequestBusService) { }
+  constructor(private http: Http, private requestBusService: RequestBusService,
+    public toastr: ToastsManager, vcr: ViewContainerRef) {
+    this.toastr.setRootViewContainerRef(vcr);
+  }
 
   ngOnInit() {
     const userData = JSON.parse(localStorage.getItem('userData'));
@@ -27,7 +31,8 @@ export class ViewHistoryComponent implements OnInit {
     }, err => {
       console.error('***ViewHistoryComponent: error retrieving data from getYearJourneyList', err);
       console.error(err);
-      alert(err);
+      // alert(err);
+      this.toastr.error(err, 'Error!')
     });
 
     this.requestBusService.getSingleJourneyList(this.user_empId).subscribe(result => {
@@ -35,7 +40,8 @@ export class ViewHistoryComponent implements OnInit {
     }, err => {
       console.error('***ViewHistoryComponent: error retrieving data from getSingleJourneyList', err);
       console.error(err);
-      alert(err);
+      // alert(err);
+      this.toastr.error(err, 'Error!')
     });
   }
 }
