@@ -59,7 +59,7 @@ export class ViewAvailabilityComponent implements OnInit {
       err => {
         console.error('*** RequestBusComponent: Error while getJourneyCity', err);
         console.error(err);
-        this.toastr.error(err, 'Error!')
+        this.toastr.error(err, 'Error!');
       }
     );
   }
@@ -75,7 +75,7 @@ export class ViewAvailabilityComponent implements OnInit {
       err => {
         console.error('*** RequestBusComponent: Error while getJourneyLocation', err);
         console.error(err);
-        this.toastr.error(err, 'Error!')
+        this.toastr.error(err, 'Error!');
       }
     );
   }
@@ -92,7 +92,7 @@ export class ViewAvailabilityComponent implements OnInit {
       err => {
         console.error('*** RequestBusComponent: Error while getJourneyType', err);
         console.error(err);
-        this.toastr.error(err, 'Error!')
+        this.toastr.error(err, 'Error!');
       }
     );
   }
@@ -115,7 +115,7 @@ export class ViewAvailabilityComponent implements OnInit {
       err => {
         console.error('*** ViewAvailabilityComponent: Error while getRouteList', err);
         console.error(err);
-        this.toastr.error(err, 'Error!')
+        this.toastr.error(err, 'Error!');
       }
     );
   }
@@ -151,7 +151,7 @@ export class ViewAvailabilityComponent implements OnInit {
       console.error('*** ViewAvailabilityComponent: error while getSeatAvailabilty', err);
       console.error(err);
       // alert(err);
-      this.toastr.error(err, 'Error!')
+      this.toastr.error(err, 'Error!');
     });
   }
   cancel() {

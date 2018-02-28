@@ -31,7 +31,7 @@ export class RouteListComponent implements OnInit {
       err => {
         console.error('*** RouteListComponent: Error while getRouteList', err);
         console.error(err);
-        this.toastr.error(err, 'Error!')
+        this.toastr.error(err, 'Error!');
       }
     );
   }

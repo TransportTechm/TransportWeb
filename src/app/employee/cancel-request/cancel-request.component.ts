@@ -42,7 +42,7 @@ export class CancelRequestComponent implements OnInit {
       console.error('**CancelRequestComponent: Cancellation failed', err);
       console.error(err);
       // alert(err);
-      this.toastr.error(err, 'Error!')
+      this.toastr.error(err, 'Error!');
     });
   }
 }

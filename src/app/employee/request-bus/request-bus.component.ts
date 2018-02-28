@@ -118,7 +118,7 @@ export class RequestBusComponent implements OnInit {
       err => {
         console.error('*** RequestBusComponent: Error while getJourneyCity', err);
         console.error(err);
-        this.toastr.error(err, 'Error!')
+        this.toastr.error(err, 'Error!');
       }
     );
   }
@@ -135,7 +135,7 @@ export class RequestBusComponent implements OnInit {
       err => {
         console.error('*** RequestBusComponent: Error while getJourneyLocation', err);
         console.error(err);
-        this.toastr.error(err, 'Error!')
+        this.toastr.error(err, 'Error!');
       }
     );
   }
@@ -152,7 +152,7 @@ export class RequestBusComponent implements OnInit {
       err => {
         console.error('*** RequestBusComponent: Error while getJourneyType', err);
         console.error(err);
-        this.toastr.error(err, 'Error!')
+        this.toastr.error(err, 'Error!');
       }
     );
   }
@@ -175,7 +175,7 @@ export class RequestBusComponent implements OnInit {
       err => {
         console.error('*** RequestBusComponent: Error while getJourneyType', err);
         console.error(err);
-        this.toastr.error(err, 'Error!')
+        this.toastr.error(err, 'Error!');
       }
     );
   }
@@ -231,7 +231,7 @@ export class RequestBusComponent implements OnInit {
                     console.error('*** RequestBusComponent:Error while Updating');
                     console.error(err);
                     // alert(err);
-                    this.toastr.error(err, 'Error!')
+                    this.toastr.error(err, 'Error!');
                   });
                 }
               } else {
@@ -246,7 +246,7 @@ export class RequestBusComponent implements OnInit {
                   console.error('*** RequestBusComponent:Error while Registering');
                   console.error(err);
                   // alert(err);
-                  this.toastr.error(err, 'Error!')
+                  this.toastr.error(err, 'Error!');
                 });
               }
             }
@@ -254,7 +254,7 @@ export class RequestBusComponent implements OnInit {
               console.error('*** RequestBusComponent:Error while Registering');
               console.error(err);
               // alert(err);
-              this.toastr.error(err, 'Error!')
+              this.toastr.error(err, 'Error!');
             }
             );
 
@@ -273,7 +273,7 @@ export class RequestBusComponent implements OnInit {
                     console.error('*** RequestBusComponent:Error while Updating');
                     console.error(err);
                     // alert(err);
-                    this.toastr.error(err, 'Error!')
+                    this.toastr.error(err, 'Error!');
                   });
                 }
               } else {
@@ -289,7 +289,7 @@ export class RequestBusComponent implements OnInit {
                   console.error('*** RequestBusComponent:Error while Registering');
                   console.error(err);
                   // alert(err);
-                  this.toastr.error(err, 'Error!')
+                  this.toastr.error(err, 'Error!');
                 });
               }
             }
@@ -297,7 +297,7 @@ export class RequestBusComponent implements OnInit {
               console.error('*** RequestBusComponent:Error while Registering', err);
               console.error(err);
               // alert(err);
-              this.toastr.error(err, 'Error!')
+              this.toastr.error(err, 'Error!');
             }
             );
           }

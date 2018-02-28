@@ -32,7 +32,7 @@ export class ViewHistoryComponent implements OnInit {
       console.error('***ViewHistoryComponent: error retrieving data from getYearJourneyList', err);
       console.error(err);
       // alert(err);
-      this.toastr.error(err, 'Error!')
+      this.toastr.error(err, 'Error!');
     });
 
     this.requestBusService.getSingleJourneyList(this.user_empId).subscribe(result => {
@@ -41,7 +41,7 @@ export class ViewHistoryComponent implements OnInit {
       console.error('***ViewHistoryComponent: error retrieving data from getSingleJourneyList', err);
       console.error(err);
       // alert(err);
-      this.toastr.error(err, 'Error!')
+      this.toastr.error(err, 'Error!');
     });
   }
 }
