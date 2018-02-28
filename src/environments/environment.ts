@@ -5,7 +5,7 @@
 
 export const environment = {
   production: false,
-  employeeServiceUrl: 'https://employeeservicetechm.cfapps.io/employee/1.0/',
+  employeeServiceUrl: 'https://employeeservice-techm-test.cfapps.io/employee/1.0/',
   transportServiceUrl: 'https://zuul-gateway-one.cfapps.io/api/transport/transport/1.0/',
   vendorServiceUrl: 'https://zuulgateway.cfapps.io/api/vendor/1.0/'
 
