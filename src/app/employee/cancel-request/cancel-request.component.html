@@ -34,7 +34,9 @@
         </table>
       </div>
       <div class="centeralign">
-      <button type="button" class="btn btn-danger" (click)="cancelRequest()">Cancel Request</button>
+          <!-- <p-confirmDialog header="Confirmation" icon="fa fa-question-circle" width="425"></p-confirmDialog> 
+          <button type="button" class="btn btn-danger" (click)="cancelRequest()" pButton icon="fa-check" label="Confirm">Cancel Request</button> -->
+      <button type="button" class="btn btn-danger" (click)="cancelRequest()" [disabled]="enableCancelButton">Cancel Request</button>
     </div>
     </div>
   </div>

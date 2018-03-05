@@ -3,6 +3,8 @@ import { Http } from '@angular/http';
 import { RequestBusService } from '../services/request-bus.service';
 import { Router } from '@angular/router';
 import { ToastsManager } from 'ng2-toastr';
+import { ConfirmationService } from 'primeng/primeng';
+
 
 @Component({
   selector: 'app-cancel-request',
@@ -12,12 +14,15 @@ import { ToastsManager } from 'ng2-toastr';
 export class CancelRequestComponent implements OnInit {
 
   constructor(private requestBusService: RequestBusService, private router: Router,
-    public toastr: ToastsManager, vcr: ViewContainerRef) {
+    public toastr: ToastsManager, vcr: ViewContainerRef,
+    private confirmationService: ConfirmationService
+    ) {
     this.toastr.setRootViewContainerRef(vcr);
-   }
+  }
   public user_empId: number;
   public journeyActiveList: any[];
   public selectedId: number;
+  public enableCancelButton = true;
 
   ngOnInit() {
     const userData = JSON.parse(localStorage.getItem('userData'));
@@ -26,12 +31,28 @@ export class CancelRequestComponent implements OnInit {
     }
     this.requestBusService.getActiveList(this.user_empId).subscribe(result => {
       this.journeyActiveList = result.data;
-    });
+    }, err => {
+      console.error('**CancelRequestComponent: Error with getActiveList', err);
+      console.error(err);
+      // alert(err);
+      this.toastr.error(err, 'Error!');
+    }
+    );
   }
   onSelect(selectedItemId: any) {
     this.selectedId = selectedItemId;
+    this.enableCancelButton = false;
   }
   cancelRequest() {
+    /* console.log('Before Confirm Box')
+    this.confirmationService.confirm({
+      message: 'Are you sure that you want to perform this action?',
+      accept: () => {
+        console.log('OK')
+        //Actual logic to perform a confirmation
+      }
+    }); */
+
     this.requestBusService.cancelRegistration(this.user_empId, this.selectedId).subscribe(result => {
       // this.toastr.success('Registration Successfully Cancelled','Success!')
       // this.router.navigate(['/employee/viewhistory']);
@@ -44,5 +65,6 @@ export class CancelRequestComponent implements OnInit {
       // alert(err);
       this.toastr.error(err, 'Error!');
     });
+
   }
 }

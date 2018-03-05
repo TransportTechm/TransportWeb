@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-
 import { SharedRoutingModule } from './shared-routing.module';
 import { Error404Component } from './error404/error404.component';
 import { NavComponent } from './nav/nav.component';
@@ -11,6 +10,7 @@ import { AuthGuard } from './guard/auth.guard';
 import { LoginService } from './services/login/login.service';
 import {ToastModule} from 'ng2-toastr/ng2-toastr';
 import { PagerService } from './services/pager.service';
+import { ConfirmationService, ConfirmDialogModule } from 'primeng/primeng';
 
 @NgModule({
   imports: [
@@ -19,6 +19,7 @@ import { PagerService } from './services/pager.service';
     ReactiveFormsModule,
     SharedRoutingModule,
     HttpModule,
+    ConfirmDialogModule,
     ToastModule.forRoot()
   ],
   declarations: [
@@ -37,6 +38,6 @@ import { PagerService } from './services/pager.service';
     NavComponent,
     StartComponent
   ],
-  providers: [AuthGuard, LoginService, PagerService]
+  providers: [AuthGuard, LoginService, PagerService, ConfirmationService]
 })
 export class SharedModule { }

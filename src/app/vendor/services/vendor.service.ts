@@ -6,6 +6,7 @@ import { environment } from '../../../environments/environment';
 @Injectable()
 export class VendorService {
   private vendorServiceUrl: string;
+  public bodyMsg;
 
   constructor(private http: Http) {
     this.vendorServiceUrl = environment.vendorServiceUrl;
@@ -66,7 +67,9 @@ export class VendorService {
   }
 
   private handleError(error: Response | any) {
-    const errMsg = (error.message) ? error.message :
+    this.bodyMsg = JSON.parse(error['_body']).message;
+    console.log(this.bodyMsg)
+    const errMsg = (this.bodyMsg) ? this.bodyMsg :
       error.status ? `${error.status} - ${error.statusText}` : 'Server error';
     return Observable.throw(errMsg);
   }

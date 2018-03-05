@@ -30,6 +30,7 @@ export class RequestBusComponent implements OnInit {
   public departures;
   public seatCapacity;
   public availabilty;
+  public today;
 
   constructor(private _formBuilder: FormBuilder,
     private http: Http,
@@ -49,6 +50,7 @@ export class RequestBusComponent implements OnInit {
     }
     this.buildForm();
     this.getJourneyCity();
+    this.today = new Date();
   }
 
   private buildForm(): void {
@@ -215,7 +217,6 @@ export class RequestBusComponent implements OnInit {
         this.availabilty = (this.seatCapacity) - (result.data[0].occupiedSeats);
         // console.log(this.availabilty)
         if (this.availabilty > 0) {
-
           if (model.journey_type === 'Yearly Journey Ticket') {
             model.journey_type = 'Year';
             model.journey_date = null;
@@ -224,9 +225,9 @@ export class RequestBusComponent implements OnInit {
                 if (window.confirm('You are already enrolled in a Yearly Journey Request. Do you want to update the existing Route?')) {
                   this.requestBusService.updateBusRegistration(model.gid, register.data[0].id, model).subscribe((newrequestbusWithId) => {
                     // alert('Route Updated successfully!');
-                    // this.router.navigate(['/employee/viewhistory']).then(() => {
+                    this.router.navigate(['/employee/viewhistory']).then(() => {
                       this.toastr.success('Route Updated successfully!', 'Success!');
-                    // });
+                    });
                   }, err => {
                     console.error('*** RequestBusComponent:Error while Updating');
                     console.error(err);
@@ -237,11 +238,9 @@ export class RequestBusComponent implements OnInit {
               } else {
                 if (window.confirm('Do you want to register to this Route?')) {
                 this.requestBusService.saveBusRegistration(model.gid, model).subscribe((newrequestbusWithId) => {
-                  // this.toastr.success('Route Saved successfully!', 'Success!');
-                  // this.router.navigate(['/employee/viewhistory']);
-                  // this.router.navigate(['/employee/viewhistory']).then(() => {
+                  this.router.navigate(['/employee/viewhistory']).then(() => {
                     this.toastr.success('Route Saved successfully!', 'Success!');
-                  // });
+                  });
                 }, err => {
                   console.error('*** RequestBusComponent:Error while Registering');
                   console.error(err);
@@ -266,9 +265,9 @@ export class RequestBusComponent implements OnInit {
                   // put your delete method logic here
                   this.requestBusService.updateBusRegistration(model.gid, register.data[0].id, model).subscribe((newrequestbusWithId) => {
                     // alert('Route Updated successfully!');
-                    // this.router.navigate(['/employee/viewhistory']).then(() => {
+                    this.router.navigate(['/employee/viewhistory']).then(() => {
                       this.toastr.success('Route Updated successfully!', 'Success!');
-                    // });
+                    });
                   }, err => {
                     console.error('*** RequestBusComponent:Error while Updating');
                     console.error(err);
@@ -280,11 +279,9 @@ export class RequestBusComponent implements OnInit {
                 if (window.confirm('Do you want to register to this Route?')) {
                 this.requestBusService.saveBusRegistration(model.gid, model).subscribe((newrequestbusWithId) => {
                   // alert('Route Saved successfully!');
-                  // this.toastr.success('Route Saved successfully!', 'Success!');
-                  // this.router.navigate(['/employee/viewhistory']);
-                  // this.router.navigate(['/employee/viewhistory']).then(() => {
+                  this.router.navigate(['/employee/viewhistory']).then(() => {
                     this.toastr.success('Route Saved successfully!', 'Success!');
-                  // });
+                  });
                 }, err => {
                   console.error('*** RequestBusComponent:Error while Registering');
                   console.error(err);
