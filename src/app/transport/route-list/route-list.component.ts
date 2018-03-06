@@ -62,14 +62,15 @@ export class RouteListComponent implements OnInit {
     str += row + '\r\n';
 
     for (var i = 0; i < array.length; i++) {
+      for(var j = 0; j < array[i][index].length; j++){
       var line = '';
       for (var index in array[i]) {
         // if (line != '') line += ','
         if(index === 'bpoints'){
-          for(var j = 0; j < array[i][index].length; j++){
+          // for(var j = 0; j < array[i][index].length; j++){
             if (line != '') line += ','
           line += array[i][index][j].name;
-          }
+          // }
         }
         else{
           if (line != '') line += ','
@@ -78,6 +79,7 @@ export class RouteListComponent implements OnInit {
       }
       str += line + '\r\n';
     }
+  }
     return str;
   }
 
@@ -93,6 +95,4 @@ export class RouteListComponent implements OnInit {
     a.click();
   }
   
-
-
 }
