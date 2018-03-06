@@ -44,18 +44,7 @@ export class CancelRequestComponent implements OnInit {
     this.enableCancelButton = false;
   }
   cancelRequest() {
-    /* console.log('Before Confirm Box')
-    this.confirmationService.confirm({
-      message: 'Are you sure that you want to perform this action?',
-      accept: () => {
-        console.log('OK')
-        //Actual logic to perform a confirmation
-      }
-    }); */
-
     this.requestBusService.cancelRegistration(this.user_empId, this.selectedId).subscribe(result => {
-      // this.toastr.success('Registration Successfully Cancelled','Success!')
-      // this.router.navigate(['/employee/viewhistory']);
       this.router.navigate(['/employee/viewhistory']).then(() => {
         this.toastr.success('Registration Successfully Cancelled', 'Success!');
       });

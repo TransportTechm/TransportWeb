@@ -49,7 +49,6 @@ export class RouteListComponent implements OnInit {
   }
 
   ConvertToCSV(routes_list) {
-    console.log(this.routes_list)
     var array = typeof this.routes_list != 'object' ? JSON.parse(this.routes_list) : this.routes_list;
     var str = '';
     var row = "";
